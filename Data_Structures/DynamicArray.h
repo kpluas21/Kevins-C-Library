@@ -1,4 +1,21 @@
 //My implementation of a dynamic array for several data types. This data structure works similarly to std::vector in C++. 
+/**
+ * This structure uses mostly void pointers and regular arrays. It handles ints, chars, doubles and floats. Strings are to be implemented soonish...
+ * Everything you need should be in this one header file. Simply include it and call the _init function. Make sure to include what type you are gonna use the array for.
+ * This was not tested for every outcome, for instance, if one should init an array of chars while labeling it as a float. Its up to YOU to know what you're doing. 
+ * 
+ * CURRENT FUNCTIONS : 
+ *
+ * 
+ */
+//TODO: FUNCTIONS TO BE ADDED
+/**
+ * 1) appends : Adds an element to the end of the array, resizing if necessary 
+ * 2) find : Attempts to find the given input, outputting the index if found, -1 otherwise
+ * 3) get : Returns the element given the index as input. 
+ * 4) remove : Removes an element from the array , everything will have to be stitched together
+ * 5) resize : Resizes the array, increasing or decreasing the amount of memory assigned to the void pointer
+ */
 
 #include<stdio.h>
 #include<stdlib.h>
@@ -69,6 +86,10 @@ DynamicArray* DynamicArray_init(DataType type, void *data, size_t size) {
     case DOUBLE:
         da->data = malloc(da->capacity * sizeof(double));
         memcpy(da->data, data, size * sizeof(double));
+    case FLOAT:
+        da->data = malloc(da->capacity * sizeof(float));
+        memcpy(da->data, data, size * sizeof(float));
+        break;
     default:
         printf("Error: Invalid DataType\n");
         return NULL;
@@ -83,7 +104,8 @@ DynamicArray* DynamicArray_init(DataType type, void *data, size_t size) {
 }
 
 /**
- * @brief Displays the meta info about our dynamic array
+ * @brief Displays the meta info about our dynamic array such as size, capacity, type, and contents so long as the size does
+ * not exceed 1000.
  * 
  * @param array 
  */
@@ -91,6 +113,9 @@ void DynamicArray_debug_info(DynamicArray *array) {
     printf("Data type of the elements stored (DataType) : %d\n", array->type);
     printf("Number of elements currently in our array (size) : %ld\n", array->size);
     printf("Max number of elements that can be currently stored (capacity) : %ld\n", array->capacity);
+    if(array->size >= 1000) {
+        return;
+    }
     printf("Elements currently stored (data) : \n");
     DynamicArray_print(array);
 }
@@ -123,16 +148,7 @@ void DynamicArray_print(DynamicArray *array) {
     }
 }
 
-//TODO: FUNCTIONS TO BE ADDED
-/**
- * 1) appends : Adds an element to the end of the array, resizing if necessary 
- * 2) find : Attempts to find the given input, outputting the index if found, -1 otherwise
- * 3) get : Returns the element given the index as input. 
- * 4) remove : Removes an element from the array , everything will have to be stitched together
- * 5) resize : Resizes the array, increasing or decreasing the amount of memory assigned to the void pointer
- */
-
-
+//TODO : This takes a single void pointer as input. Are we able to append JUST one or can we append everything in the pointer?
 /**
  * @brief Adds the given element to the end of the array, automatically resizing the array if necessary.
  * 
@@ -173,7 +189,13 @@ void DynamicArray_append(DynamicArray *array, void* elem) {
     return;
 }
 
-
+/**
+ * @brief Attempts to resize the array by doubling the current capacity and realloc'ing 
+ * the pointer
+ * 
+ * @param array 
+ * @return DynamicArray* A pointer to the struct with the newly realloc'd data pointer. 
+ */
 DynamicArray* DynamicArray_resize(DynamicArray *array) {
     array->capacity *= 2; //Double the capacity;
 
@@ -200,4 +222,15 @@ DynamicArray* DynamicArray_resize(DynamicArray *array) {
     }
 
     return array;
+}
+
+/**
+ * @brief Frees up all memory used by the array including the struct itself. This should be used 
+ * instead of simply freeing thr struct as the latter will cause memory leaks
+ * 
+ * @param array 
+ */
+void DynamicArray_delete(DynamicArray *array) {
+    free(array->data);
+    free(array);
 }

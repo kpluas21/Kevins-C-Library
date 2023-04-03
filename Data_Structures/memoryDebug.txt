@@ -1,0 +1,18 @@
+==86033== Memcheck, a memory error detector
+==86033== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==86033== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==86033== Command: ./a.out -s
+==86033== Parent PID: 59751
+==86033== 
+==86033== Warning: set address range perms: large range [0x40daf040, 0x54daf040) (undefined)
+==86033== Warning: set address range perms: large range [0x18dae028, 0x2cdae058) (noaccess)
+==86033== Warning: set address range perms: large range [0x2cdaf028, 0x54daf058) (noaccess)
+==86033== 
+==86033== HEAP SUMMARY:
+==86033==     in use at exit: 0 bytes in 0 blocks
+==86033==   total heap usage: 29 allocs, 29 frees, 1,342,178,338 bytes allocated
+==86033== 
+==86033== All heap blocks were freed -- no leaks are possible
+==86033== 
+==86033== For lists of detected and suppressed errors, rerun with: -s
+==86033== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

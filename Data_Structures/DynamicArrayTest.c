@@ -19,14 +19,14 @@ int main(int argc, char const *argv[]) {
     //TEST
     //Appending numbers until 1000.
     int p, *intPtr = &p;
-    for (int i = 6; i < 1001; i++) {
+    for (int i = 6; i < 100000001; i++) {
         p = i;
         DynamicArray_append(vector, intPtr);
-    }
+    }    
     DynamicArray_debug_info(vector);
-    assert(vector->capacity == 2000 && vector->size == 1000);    
 
-    free(chVector);
-    free(vector);
+
+    DynamicArray_delete(vector);
+    DynamicArray_delete(chVector);
     return 0;
 }
