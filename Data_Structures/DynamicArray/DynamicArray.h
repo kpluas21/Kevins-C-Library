@@ -11,10 +11,18 @@
  * This structure uses mostly void pointers and regular arrays. It handles ints, chars, doubles and floats. Strings are to be implemented soonish...
  * Everything you need should be in this one header file. Simply include it and call the _init function. Make sure to include what type you are gonna use the array for.
  * This was not tested for every outcome, for instance, if one should init an array of chars while labeling it as a float. Its up to YOU to know what you're doing. 
+ * IMPLEMENTED FUNCTIONS
+ * _init
+ * _append
+ * _print
+ * _debug_info
+ * _delete
+ * _resize
+ * 
+ * 
  */
 //TODO: FUNCTIONS TO BE ADDED
 /**
- * 1) appends : Adds an element to the end of the array, resizing if necessary 
  * 2) find : Attempts to find the given input, outputting the index if found, -1 otherwise
  * 3) get : Returns the element given the index as input. 
  * 4) remove : Removes an element from the array , everything will have to be stitched together
@@ -65,6 +73,9 @@ void DynamicArray_append(DynamicArray *array, void *elem);
 void DynamicArray_print(DynamicArray *array);
 void DynamicArray_debug_info(DynamicArray *array);
 void DynamicArray_delete(DynamicArray *array);
+
+int DynamicArray_find(DynamicArray *array, void *elem);
+
 
 DynamicArray *DynamicArray_init(DataType type, void *data, size_t size);
 DynamicArray *DynamicArray_resize(DynamicArray *array);
@@ -130,9 +141,11 @@ DynamicArray* DynamicArray_init(DataType type, void *data, size_t size) {
  * @param array 
  */
 void DynamicArray_debug_info(DynamicArray *array) {
+
     printf("Data type of the elements stored (DataType) : %d\n", array->type);
-    printf("Number of elements currently in our array (size) : %ld\n", array->size);
-    printf("Max number of elements that can be currently stored (capacity) : %ld\n", array->capacity);
+
+    printf("Number of elements currently in our array (size) : %zu\n", array->size);
+    printf("Max number of elements that can be currently stored (capacity) : %zu\n", array->capacity);
     if(array->size >= 1000) {
         return;
     }
@@ -161,6 +174,24 @@ void DynamicArray_print(DynamicArray *array) {
             printf("%c, ", dest[i]);
         }
         printf("%c]\n", dest[array->size - 1]);
+        return;
+    }
+    case FLOAT: {
+        float *dest = (float*) array->data;
+        printf("[");
+        for (size_t i = 0; i < array->size - 1; i++) {
+            printf("%2.3f, ", dest[i]);
+        }
+        printf("%2.3f]\n", dest[array->size - 1]);
+        return;
+    }
+    case DOUBLE: {
+        double *dest = (double*) array->data;
+        printf("[");
+        for (size_t i = 0; i < array->size - 1; i++) {
+            printf("%.6f ", dest[i]);
+        }
+        printf("%.6f]\n", dest[array->size - 1]);
         return;
     }
     default:
@@ -255,7 +286,7 @@ DynamicArray* DynamicArray_resize(DynamicArray *array) {
 
 /**
  * @brief Frees up all memory used by the array including the struct itself. This should be used 
- * instead of simply freeing thr struct as the latter will cause memory leaks
+ * instead of simply freeing the struct as the latter will cause memory leaks
  * 
  * @param array 
  */
@@ -263,3 +294,46 @@ void DynamicArray_delete(DynamicArray *array) {
     free(array->data);
     free(array);
 }
+
+/**
+ * @brief Linearly searches through the array to find the given input, returning the index if found, 
+ * -1 otherwise
+ * 
+ * @param array  
+ * @param ptr A void pointer pointing to the data needing to be searched for.
+ * @return int The index where the element is located at.
+ */
+int DynamicArray_find(DynamicArray *array, void *elem) {
+    switch(array->type) {
+    case INT: {
+        int *dest = array->data;
+        int *elemToFind = (int*) elem;
+        for (size_t i = 0; i < array->size; i++) {
+            if(dest[i] == *elemToFind) {
+                return i;
+            }
+        }
+        break;
+        
+    }
+    case CHAR:
+    case FLOAT:
+    case DOUBLE:
+    default:
+        break;
+    }
+    return -1;
+}
+
+/**
+ * @brief A template for the case switches when deciding what type to use
+ * 
+ * switch(array->type) {
+ * case INT:
+ * case CHAR:
+ * case FLOAT:
+ * case DOUBLE:
+ * default:
+ * }
+ * 
+ */
