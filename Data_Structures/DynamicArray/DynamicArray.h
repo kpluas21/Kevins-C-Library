@@ -1,3 +1,5 @@
+#ifndef DYNAMIC_ARRAY_H
+#define DYNAMIC_ARRAY_H
 /**
  * @file DynamicArray.h
  * @author Kevin Pluas (kpluas21@gmail.com)
@@ -11,6 +13,11 @@
  * This structure uses mostly void pointers and regular arrays. It handles ints, chars, doubles and floats. Strings are to be implemented soonish...
  * Everything you need should be in this one header file. Simply include it and call the _init function. Make sure to include what type you are gonna use the array for.
  * This was not tested for every outcome, for instance, if one should init an array of chars while labeling it as a float. Its up to YOU to know what you're doing. 
+ * 
+ * Because this was created using LOTS of void pointers, expect to see and use a lot of casting, again, it should work if you're casting appropriately. 
+ * 
+ * DynamicArrays are zero-based and are designed with fast insertion in mind. Appending should occur in constant time unless capacity was reached in which case it will 
+ * automatically resize and attempt to append the element again.
  * IMPLEMENTED FUNCTIONS
  * _init
  * _append
@@ -18,15 +25,17 @@
  * _debug_info
  * _delete
  * _resize
+ * _find (Needs some work but its kinda functional?)
+ * _get
  * 
  * 
  */
 //TODO: FUNCTIONS TO BE ADDED
 /**
+ * 
  * 2) find : Attempts to find the given input, outputting the index if found, -1 otherwise
- * 3) get : Returns the element given the index as input. 
  * 4) remove : Removes an element from the array , everything will have to be stitched together
- * 5) resize : Resizes the array, increasing or decreasing the amount of memory assigned to the void pointer
+ * 5) empty : Removes all elements from the array, reducing the size to 0. MAY NOT change the capacity.
  */
 
 #include<stdio.h>
@@ -35,7 +44,10 @@
 
 /**
  * BEGIN TYPEDEF DECLARATIONS 
+ * 
+ * 
  */
+
 /**
  * @enum DataType
  * @brief Constants used to label the data type of the elements in our dynamic array
@@ -67,20 +79,31 @@ typedef struct DynamicArray {
 
 /**
  * BEGIN FUNCTION DECLARATIONS
+ * 
+ * 
  */
 
 void DynamicArray_append(DynamicArray *array, void *elem);
 void DynamicArray_print(DynamicArray *array);
 void DynamicArray_debug_info(DynamicArray *array);
 void DynamicArray_delete(DynamicArray *array);
+void DynamicArray_remove(DynamicArray *array);
 
 int DynamicArray_find(DynamicArray *array, void *elem);
 
+void DynamicArray_get(DynamicArray *array, size_t index, void *result);
 
 DynamicArray *DynamicArray_init(DataType type, void *data, size_t size);
 DynamicArray *DynamicArray_resize(DynamicArray *array);
 /**
  * END FUNCTION DECLARATIONS
+ */
+
+
+/**
+ * BEGIN FUNCTION DEFINITIONS
+ * 
+ * 
  */
 
 /**
@@ -138,7 +161,7 @@ DynamicArray* DynamicArray_init(DataType type, void *data, size_t size) {
  * @brief Displays the meta info about our dynamic array such as size, capacity, type, and contents so long as the size does
  * not exceed 1000.
  * 
- * @param array 
+ * @param array The DynamicArray pointer
  */
 void DynamicArray_debug_info(DynamicArray *array) {
 
@@ -203,7 +226,7 @@ void DynamicArray_print(DynamicArray *array) {
 /**
  * @brief Adds the given element to the end of the array, automatically resizing the array if necessary.
  * 
- * @param array The dynamic array
+ * @param array The DynamicArray pointer
  * @param elem The element to be added
  */
 void DynamicArray_append(DynamicArray *array, void* elem) {
@@ -253,7 +276,7 @@ void DynamicArray_append(DynamicArray *array, void* elem) {
  * @brief Attempts to resize the array by doubling the current capacity and realloc'ing 
  * the pointer
  * 
- * @param array 
+ * @param array The DynamicArray pointer
  * @return DynamicArray* A pointer to the struct with the newly realloc'd data pointer. 
  */
 DynamicArray* DynamicArray_resize(DynamicArray *array) {
@@ -288,7 +311,7 @@ DynamicArray* DynamicArray_resize(DynamicArray *array) {
  * @brief Frees up all memory used by the array including the struct itself. This should be used 
  * instead of simply freeing the struct as the latter will cause memory leaks
  * 
- * @param array 
+ * @param array The DynamicArray pointer
  */
 void DynamicArray_delete(DynamicArray *array) {
     free(array->data);
@@ -299,7 +322,7 @@ void DynamicArray_delete(DynamicArray *array) {
  * @brief Linearly searches through the array to find the given input, returning the index if found, 
  * -1 otherwise
  * 
- * @param array  
+ * @param array The DynamicArray pointer
  * @param ptr A void pointer pointing to the data needing to be searched for.
  * @return int The index where the element is located at.
  */
@@ -316,9 +339,38 @@ int DynamicArray_find(DynamicArray *array, void *elem) {
         break;
         
     }
-    case CHAR:
-    case FLOAT:
-    case DOUBLE:
+    case CHAR: {
+        char *dest = array->data;
+        char *elemToFind = (char*) elem;
+        for (size_t i = 0; i < array->size; i++) {
+            if(dest[i] == *elemToFind) {
+                return i;
+            }
+        }
+        break;
+    }
+    //TODO: Regular comparisons between floating point values won't work! 
+    //I'll need to implement an episilon. 
+    case FLOAT: {
+        float *dest = array->data;
+        float *elemToFind = (float*) elem;
+        for (size_t i = 0; i < array->size; i++) {
+            if(dest[i] == *elemToFind) {
+                return i;
+            }
+        }
+        break;
+    }
+    case DOUBLE: {
+        double *dest = array->data;
+        double *elemToFind = (double*) elem;
+        for (size_t i = 0; i < array->size; i++) {
+            if(dest[i] == *elemToFind) {
+                return i;
+            }
+        }
+        break;
+    }
     default:
         break;
     }
@@ -326,14 +378,50 @@ int DynamicArray_find(DynamicArray *array, void *elem) {
 }
 
 /**
- * @brief A template for the case switches when deciding what type to use
+ * @brief Returns the element specified by the provided index. SHOULD run in O(1) time. You must
+ * provide a pointer to store the result of get. 
  * 
- * switch(array->type) {
- * case INT:
- * case CHAR:
- * case FLOAT:
- * case DOUBLE:
- * default:
- * }
+ * @param array The DynamicArray pointer
+ * @param index 
+ * @param result A reference pointer to store our result. 
+ * @return Nothing. However, result will either contain the element requested or be NULL if 
+ * an invalid index was provided.
+ */
+void DynamicArray_get(DynamicArray *array, size_t index, void *result) {
+    if(index >= array->size) {
+        printf("Error: Out-of-bounds index provided : %zu\n", index);
+        result = NULL;
+        return;
+    }
+    switch (array->type) {
+    case INT: {
+        int *dest = array->data;
+        *(int*)result = dest[index];
+        return;
+    }
+    case CHAR: {
+        char *dest = array->data;
+        *(char*)result = dest[index];
+        return;
+    }
+    case FLOAT: {
+        float *dest = array->data;
+        *(float*)result = dest[index];
+        return;
+    }
+    case DOUBLE: {
+        double *dest = array->data;
+        *(double*)result = dest[index];
+        return;
+    }
+    default:
+        return;
+    }
+}
+/**
+ * END FUNCTION DEFINITIONS
+ * 
  * 
  */
+
+#endif //DYNAMIC_ARRAY_H

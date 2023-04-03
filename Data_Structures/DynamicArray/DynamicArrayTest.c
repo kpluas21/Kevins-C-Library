@@ -94,17 +94,26 @@ int main(void) {
     DynamicArray_debug_info(fltVector);
     
     p = 0;
+    ch = 'Q';
     printf("The number 0 was found at index %d in vector.\n", DynamicArray_find(vector, intPtr));
+    printf("The letter q was found at index %d in chVector.\n", DynamicArray_find(chVector, chPtr));
     
+    /*TODO: Unit testing for floating point values in _find
+    *
+    *
+    */
 
-    // //TEST
-    // //Appending numbers until 1000.
-    // int p, *intPtr = &p;
-    // for (int i = 6; i < 100000001; i++) {
-    //     p = i;
-    //     DynamicArray_append(vector, intPtr);
-    // }    
-    // DynamicArray_debug_info(vector);
+    //Testing the _get functions
+    DynamicArray_get(vector, 15, intPtr);
+    DynamicArray_get(chVector, 15, chPtr);
+    DynamicArray_get(fltVector, 15, fltPtr);
+    DynamicArray_get(dbVector, 15, dbPtr);
+
+    printf("The element at index 15 of vector is %d.\n", *intPtr);
+    printf("The element at index 15 of chVector is %c.\n", *chPtr);
+    printf("The element at index 15 of fltVector is %2.3f.\n", *fltPtr);
+    printf("The element at index 15 of dbVector is %.6f.\n", *dbPtr);
+
 
     printf("All vectors of all types successfully initialized and all tests passed!\n");
     DynamicArray_delete(vector);
