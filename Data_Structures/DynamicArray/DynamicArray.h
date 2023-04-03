@@ -1,12 +1,16 @@
-//My implementation of a dynamic array for several data types. This data structure works similarly to std::vector in C++. 
 /**
+ * @file DynamicArray.h
+ * @author Kevin Pluas (kpluas21@gmail.com)
+ * @brief Implementation of variable length arrays in C capable of storing 1 of 4 different data types.
+ * @version 0.1
+ * @date 2023-04-02
+ * 
+ * @copyright Copyright (c) 2023
+ * 
+ *
  * This structure uses mostly void pointers and regular arrays. It handles ints, chars, doubles and floats. Strings are to be implemented soonish...
  * Everything you need should be in this one header file. Simply include it and call the _init function. Make sure to include what type you are gonna use the array for.
  * This was not tested for every outcome, for instance, if one should init an array of chars while labeling it as a float. Its up to YOU to know what you're doing. 
- * 
- * CURRENT FUNCTIONS : 
- *
- * 
  */
 //TODO: FUNCTIONS TO BE ADDED
 /**
@@ -21,6 +25,9 @@
 #include<stdlib.h>
 #include<string.h>
 
+/**
+ * BEGIN TYPEDEF DECLARATIONS 
+ */
 /**
  * @enum DataType
  * @brief Constants used to label the data type of the elements in our dynamic array
@@ -45,13 +52,25 @@ typedef struct DynamicArray {
     size_t capacity;
     void *data;  
 }DynamicArray;
+/**
+ * END TYPEDEF DECLARATIONS
+ */
+
+
+/**
+ * BEGIN FUNCTION DECLARATIONS
+ */
 
 void DynamicArray_append(DynamicArray *array, void *elem);
 void DynamicArray_print(DynamicArray *array);
 void DynamicArray_debug_info(DynamicArray *array);
+void DynamicArray_delete(DynamicArray *array);
+
 DynamicArray *DynamicArray_init(DataType type, void *data, size_t size);
 DynamicArray *DynamicArray_resize(DynamicArray *array);
-
+/**
+ * END FUNCTION DECLARATIONS
+ */
 
 /**
  * @brief Initializes our dynamic array. This is done by malloc first acquiring the capacity which 
@@ -86,6 +105,7 @@ DynamicArray* DynamicArray_init(DataType type, void *data, size_t size) {
     case DOUBLE:
         da->data = malloc(da->capacity * sizeof(double));
         memcpy(da->data, data, size * sizeof(double));
+        break;
     case FLOAT:
         da->data = malloc(da->capacity * sizeof(float));
         memcpy(da->data, data, size * sizeof(float));
@@ -127,7 +147,7 @@ void DynamicArray_print(DynamicArray *array) {
     case INT: {
         int *dest = (int*) array->data;
         printf("[");
-        for(int i = 0; i < array->size - 1; i++) {
+        for(size_t i = 0; i < array->size - 1; i++) {
             printf("%d, ", dest[i]);
             
         }
@@ -137,7 +157,7 @@ void DynamicArray_print(DynamicArray *array) {
     case CHAR: {
         char *dest = (char*) array->data;
         printf("[");
-        for (int i = 0; i < array->size - 1; i++) {
+        for (size_t i = 0; i < array->size - 1; i++) {
             printf("%c, ", dest[i]);
         }
         printf("%c]\n", dest[array->size - 1]);
@@ -178,11 +198,20 @@ void DynamicArray_append(DynamicArray *array, void* elem) {
         array->size++;
         break;
     }
+    case DOUBLE: {
+        double *dbElem = (double*) elem;
+        double *dest = array->data;
+        dest[array->size] = dbElem[0];
+        array->size++;
         break;
-    case DOUBLE:
+    }
+    case FLOAT: {
+        float *fltElem = (float*) elem;
+        float *dest = array->data;
+        dest[array->size] = fltElem[0];
+        array->size++;
         break;
-    case FLOAT:
-        break;
+    }
     case STRING:
         break;
     }
