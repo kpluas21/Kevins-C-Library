@@ -87,7 +87,7 @@ void DynamicArray_append(DynamicArray *array, void *elem);
 void DynamicArray_print(DynamicArray *array);
 void DynamicArray_debug_info(DynamicArray *array);
 void DynamicArray_delete(DynamicArray *array);
-void DynamicArray_remove(DynamicArray *array);
+void DynamicArray_remove(DynamicArray *array, size_t index);
 
 int DynamicArray_find(DynamicArray *array, void *elem);
 
@@ -241,28 +241,28 @@ void DynamicArray_append(DynamicArray *array, void* elem) {
     case INT: {
         int *intElem = (int*) elem;
         int *dest = array->data;
-        dest[array->size] = intElem[0];
+        dest[array->size] = *intElem;
         array->size++;
         break;
     }
     case CHAR: {
         char *charElem = (char*) elem;
         char *dest = array->data;
-        dest[array->size] = charElem[0];
+        dest[array->size] = *charElem;
         array->size++;
         break;
     }
     case DOUBLE: {
         double *dbElem = (double*) elem;
         double *dest = array->data;
-        dest[array->size] = dbElem[0];
+        dest[array->size] = *dbElem;
         array->size++;
         break;
     }
     case FLOAT: {
         float *fltElem = (float*) elem;
         float *dest = array->data;
-        dest[array->size] = fltElem[0];
+        dest[array->size] = *fltElem;
         array->size++;
         break;
     }
@@ -412,6 +412,57 @@ void DynamicArray_get(DynamicArray *array, size_t index, void *result) {
     case DOUBLE: {
         double *dest = array->data;
         *(double*)result = dest[index];
+        return;
+    }
+    default:
+        return;
+    }
+}
+
+/**
+ * @brief Removes from the array a single element. Reduces the size of the array by 1 and 
+ * closes the gap by shifting every element over by 1. The capacity remains unchanged after
+ * this operation.
+ * 
+ * @param array The DynamicArray pointer
+ * @param index The index of the element
+ */
+void DynamicArray_remove(DynamicArray *array, size_t index) {
+    if(index >= array->size) {
+        printf("Error: Invalid index provided : %zu\n", index);
+        return;
+    }
+    switch (array->type) {
+    case INT: {
+        int *dest = array->data;
+        for (size_t i = index; i < array->size - 1; i++) {
+            dest[i] = dest[i + 1];
+        }
+        array->size--;
+        return;
+    }
+    case CHAR: {
+        char *dest = array->data;
+        for (size_t i = index; i < array->size - 1; i++) {
+            dest[i] = dest[i + 1];
+        }
+        array->size--;
+        return;
+    }
+    case FLOAT: {
+        float *dest = array->data;
+        for (size_t i = index; i < array->size - 1; i++) {
+            dest[i] = dest[i + 1];
+        }
+        array->size--;
+        return;
+    }
+    case DOUBLE: {
+        double *dest = array->data;
+        for (size_t i = index; i < array->size - 1; i++) {
+            dest[i] = dest[i + 1];
+        }
+        array->size--;
         return;
     }
     default:

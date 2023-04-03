@@ -114,6 +114,12 @@ int main(void) {
     printf("The element at index 15 of fltVector is %2.3f.\n", *fltPtr);
     printf("The element at index 15 of dbVector is %.6f.\n", *dbPtr);
 
+    DynamicArray_get(vector, 32, intPtr);
+
+    //Testing the _remove function
+    DynamicArray_remove(vector, 5);
+    DynamicArray_debug_info(vector);
+    printf("%d\n", *intPtr);
 
     printf("All vectors of all types successfully initialized and all tests passed!\n");
     DynamicArray_delete(vector);
