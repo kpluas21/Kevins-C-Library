@@ -27,17 +27,18 @@
  * _resize
  * _find (Needs some work but its kinda functional?)
  * _get
+ * _find
+ * _empty
  * 
  * 
  */
 //TODO: FUNCTIONS TO BE ADDED
-/**
- * 
- * 2) find : Attempts to find the given input, outputting the index if found, -1 otherwise
- * 4) remove : Removes an element from the array , everything will have to be stitched together
- * 5) empty : Removes all elements from the array, reducing the size to 0. MAY NOT change the capacity.
+/** * 
+ * 1) remove : Removes an element from the array , everything will have to be stitched together
+ * 2) insert : Attempts to insert an element at the given index, shifting all other elements over, resizing the array if necessary
+ * 3) sort : Sorts the elements of the array either in ascending or descending order. 
  */
- #include<stdio.h>
+#include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
 #include<math.h>
@@ -88,12 +89,11 @@ void DynamicArray_print(DynamicArray *array);
 void DynamicArray_debug_info(DynamicArray *array);
 void DynamicArray_delete(DynamicArray *array);
 void DynamicArray_remove(DynamicArray *array, size_t index);
-
 void DynamicArray_empty(DynamicArray *array);
-
-int DynamicArray_find(DynamicArray *array, void *elem);
-
 void DynamicArray_get(DynamicArray *array, size_t index, void *result);
+void DynamicArray_sort(DynamicArray *array, int mode);
+
+size_t DynamicArray_find(DynamicArray *array, void *elem);
 
 DynamicArray *DynamicArray_init(DataType type, void *data, size_t size);
 DynamicArray *DynamicArray_resize(DynamicArray *array);
@@ -338,7 +338,10 @@ void DynamicArray_delete(DynamicArray *array) {
  * @param ptr A void pointer pointing to the data needing to be searched for.
  * @return int The index where the element is located at.
  */
-int DynamicArray_find(DynamicArray *array, void *elem) {
+size_t DynamicArray_find(DynamicArray *array, void *elem) {
+    float fltEpsilon = 0.001;
+    double dbEpsilon = 0.000001;
+
     switch(array->type) {
     case INT: {
         int *dest = array->data;
@@ -367,7 +370,7 @@ int DynamicArray_find(DynamicArray *array, void *elem) {
         for (size_t i = 0; i < array->size; i++) {
             //DEBUG: Print the elements of the comparison
             // printf("%.6f =? %.6f\n", dest[i], *elemToFind);
-            if(fabs(dest[i] - *elemToFind) < 0.001) {
+            if(fabs(dest[i] - *elemToFind) < fltEpsilon) {
                 return i;
             }
         }
@@ -377,7 +380,7 @@ int DynamicArray_find(DynamicArray *array, void *elem) {
         double *dest = array->data;
         double *elemToFind = (double*) elem;
         for (size_t i = 0; i < array->size; i++) {
-            if(fabs(dest[i] - *elemToFind) < 0.000001) {
+            if(fabs(dest[i] - *elemToFind) < dbEpsilon) {
                 return i;
             }
         }
@@ -429,6 +432,17 @@ void DynamicArray_get(DynamicArray *array, size_t index, void *result) {
     default:
         return;
     }
+}
+
+/**
+ * @brief Attempts to sort the contents of the array in either ascending or descending order depending on
+ * the mode provided.
+ * 
+ * @param array The DynamicArray pointer
+ * @param mode 1 : Descending, anything else if ascending.
+ */
+inline void DynamicArray_sort(DynamicArray *array, int mode) {
+    //We will try to use merge sort 
 }
 
 /**
@@ -492,8 +506,10 @@ void DynamicArray_remove(DynamicArray *array, size_t index) {
  * @param array The DynamicArray pointer
  */
 void DynamicArray_empty(DynamicArray *array) {
+    free(array->data);
+
     switch (array->type) {
-    case INT: {
+    case INT: { 
         array->data = calloc(array->capacity, sizeof(int));
         break;
     }

@@ -17,6 +17,10 @@
 
 double rand_from(double min, double max);
 
+void DynamicArrayTest_print_all_debug(DynamicArray **arrayOfVectors);
+
+void DynamicArrayTest_empty_all(DynamicArray **arrayOfVectors);
+
 /**
  * @brief Our main test function.
  * I'll try to split testing into several parts. Each part will involve the four different data types : int, char, double & float.
@@ -59,15 +63,22 @@ int main(void) {
     assert(fltVector->size == 5 && fltVector->capacity == 10);
 
 
+    //You COULD call print debug on each vector OR just make a pointer to pointers :)
+    DynamicArray **arrayOfVectors = malloc(4 * sizeof(DynamicArray*));
+    arrayOfVectors[0] = vector;
+    arrayOfVectors[1] = chVector;
+    arrayOfVectors[2] = fltVector;
+    arrayOfVectors[3] = dbVector;
+
+    DynamicArrayTest_print_all_debug(arrayOfVectors);
+
+    DynamicArrayTest_empty_all(arrayOfVectors);
+    
+    DynamicArrayTest_print_all_debug(arrayOfVectors);
+
+
     //INITIAL STATS
-    DynamicArray_debug_info(vector);
-    DynamicArray_debug_info(chVector);
-    DynamicArray_debug_info(fltVector);
-    DynamicArray_debug_info(dbVector);
 
-    DynamicArray_empty(vector);
-
-    DynamicArray_debug_info(vector);
 
     // //APPENDING TEST
     // //Pointers to hold our values
@@ -92,10 +103,6 @@ int main(void) {
     // }
 
     // //STATS AFTER APPENDS
-    // DynamicArray_debug_info(vector);
-    // DynamicArray_debug_info(chVector);
-    // DynamicArray_debug_info(fltVector);
-    // DynamicArray_debug_info(dbVector);
 
     
     // p = 0;
@@ -145,6 +152,7 @@ int main(void) {
     DynamicArray_delete(chVector);
     DynamicArray_delete(dbVector);
     DynamicArray_delete(fltVector);
+    free(arrayOfVectors);
     return 0;
 }
 
@@ -152,4 +160,18 @@ double rand_from(double min, double max) {
     double range = max - min;
     double div = RAND_MAX / range;
     return min + (rand() / div);
+}
+
+void DynamicArrayTest_print_all_debug(DynamicArray **arrayOfVectors) {
+    for (size_t i = 0; i < 4; i++) {
+        DynamicArray_debug_info(arrayOfVectors[i]);
+    }
+    
+}
+
+void DynamicArrayTest_empty_all(DynamicArray **arrayOfVectors) {
+    for (size_t i = 0; i < 4; i++) {
+        DynamicArray_empty(arrayOfVectors[i]);
+    }
+    
 }
