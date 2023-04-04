@@ -37,11 +37,11 @@
  * 4) remove : Removes an element from the array , everything will have to be stitched together
  * 5) empty : Removes all elements from the array, reducing the size to 0. MAY NOT change the capacity.
  */
-
-#include<stdio.h>
+ #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-
+#include<math.h>
+ 
 /**
  * BEGIN TYPEDEF DECLARATIONS 
  * 
@@ -55,8 +55,8 @@
 typedef enum DataType {
     INT,
     CHAR,
-    DOUBLE,
     FLOAT,
+    DOUBLE,
     STRING,
 
 }DataType;
@@ -88,6 +88,8 @@ void DynamicArray_print(DynamicArray *array);
 void DynamicArray_debug_info(DynamicArray *array);
 void DynamicArray_delete(DynamicArray *array);
 void DynamicArray_remove(DynamicArray *array, size_t index);
+
+void DynamicArray_empty(DynamicArray *array);
 
 int DynamicArray_find(DynamicArray *array, void *elem);
 
@@ -179,6 +181,11 @@ void DynamicArray_debug_info(DynamicArray *array) {
 /// @brief Pretty prints the contents of our array
 /// @param array Our dynamic array ptr
 void DynamicArray_print(DynamicArray *array) {
+    //Empty array
+    if(array->size == 0) {
+        puts("[ ]\n");
+        return;
+    }
     switch (array->type) {
     case INT: {
         int *dest = (int*) array->data;
@@ -321,6 +328,11 @@ void DynamicArray_delete(DynamicArray *array) {
 /**
  * @brief Linearly searches through the array to find the given input, returning the index if found, 
  * -1 otherwise
+ * Caution must be used when comparing floating-point values because of general imprecision. Use 
+ * an episilon for some "good enough" results. You may need to change the epsilon to suit your needs.
+ * @note Epsilon Values :
+ * Float : 0.001
+ * Double: 0.000001
  * 
  * @param array The DynamicArray pointer
  * @param ptr A void pointer pointing to the data needing to be searched for.
@@ -349,13 +361,13 @@ int DynamicArray_find(DynamicArray *array, void *elem) {
         }
         break;
     }
-    //TODO: Regular comparisons between floating point values won't work! 
-    //I'll need to implement an episilon. 
     case FLOAT: {
         float *dest = array->data;
         float *elemToFind = (float*) elem;
         for (size_t i = 0; i < array->size; i++) {
-            if(dest[i] == *elemToFind) {
+            //DEBUG: Print the elements of the comparison
+            // printf("%.6f =? %.6f\n", dest[i], *elemToFind);
+            if(fabs(dest[i] - *elemToFind) < 0.001) {
                 return i;
             }
         }
@@ -365,7 +377,7 @@ int DynamicArray_find(DynamicArray *array, void *elem) {
         double *dest = array->data;
         double *elemToFind = (double*) elem;
         for (size_t i = 0; i < array->size; i++) {
-            if(dest[i] == *elemToFind) {
+            if(fabs(dest[i] - *elemToFind) < 0.000001) {
                 return i;
             }
         }
@@ -428,6 +440,9 @@ void DynamicArray_get(DynamicArray *array, size_t index, void *result) {
  * @param index The index of the element
  */
 void DynamicArray_remove(DynamicArray *array, size_t index) {
+    //TODO: I don't think this is working as intended? If you iterate through
+    //the entire array, calling this function on each elem, you'll effectively cut it 
+    //in half. It takes away every other elem. 
     if(index >= array->size) {
         printf("Error: Invalid index provided : %zu\n", index);
         return;
@@ -468,6 +483,39 @@ void DynamicArray_remove(DynamicArray *array, size_t index) {
     default:
         return;
     }
+}
+
+/**
+ * @brief Clears out the entire array, reducing the size to 0. Does not change the 
+ * capacity in any way.
+ * 
+ * @param array The DynamicArray pointer
+ */
+void DynamicArray_empty(DynamicArray *array) {
+    switch (array->type) {
+    case INT: {
+        array->data = calloc(array->capacity, sizeof(int));
+        break;
+    }
+    case CHAR: {
+        array->data = calloc(array->capacity, sizeof(char));
+        break;
+    }
+    case FLOAT: {
+        array->data = calloc(array->capacity, sizeof(float)); 
+        break;
+    }
+    case DOUBLE: {
+        array->data = calloc(array->capacity, sizeof(double));
+        break;
+    }
+    
+    default:
+        break;
+    }
+    array->size = 0;
+    return;
+
 }
 /**
  * END FUNCTION DEFINITIONS
