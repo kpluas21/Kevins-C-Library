@@ -1,5 +1,5 @@
 PROGRAM = DynamicArrayTest
-FILES.c = DynamicArrayTest.c
+FILES.c = DynamicArrayTest.c DynamicArray.c
 FILES.h = DynamicArray.h
 FILES.o = ${FILES.c:.c=.o}
 
