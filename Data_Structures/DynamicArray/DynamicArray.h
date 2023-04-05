@@ -29,6 +29,16 @@
 
 #include<stddef.h>
 
+/**
+ * @brief Global epsilons to be used when comparing floating-point values. If you need to change
+ * how precise the comparisons should be, change it here.
+ * Used in the following functions
+ * _find()
+ * _cmp()
+ * 
+ */
+static float fltEpsilon = 0.001;
+static double dbEpsilon = 0.000001;
 
 /**
  * @enum DataType
@@ -56,19 +66,17 @@ typedef struct DynamicArray {
 }DynamicArray;
 
 /**
- * @brief Initializes our dynamic array. This is done by malloc first acquiring the capacity which 
- *        is the initial size of the data multiplied by 2 to give it enough space for expansion.
- * 
+ * @brief Initializes our dynamic array. Returns NULL if unsuccessful. 
  * @param type The data type for our elements
  * @param data The initial data to be stored in the array
  * @param size The number of initial elements 
- * @return DynamicArray* : A pointer to our DynamicArray struct containing everything we need
+ * @return DynamicArray* : A pointer to a DynamicArray struct.
  */
 DynamicArray *DynamicArray_init(DataType type, void *data, size_t size);
 
 //TODO : This takes a single void pointer as input. Are we able to append JUST one or can we append everything in the pointer?
 /**
- * @brief Adds the given element to the end of the array, automatically resizing the array if necessary.
+ * @brief Appends the given element to the end of the array, automatically resizing the array if necessary.
  * 
  * @param array The DynamicArray pointer
  * @param elem The element to be added
@@ -113,6 +121,27 @@ void DynamicArray_remove(DynamicArray *array, size_t index);
  * @param array The DynamicArray pointer
  */
 void DynamicArray_empty(DynamicArray *array);
+
+/**
+ * @brief Compares two elements. 
+ * 
+ * @param type The datatype of the elements
+ * @param x The first element
+ * @param y The second element
+ * @return int 0 if elements are equal, <0 if x is less than y, 
+ *         >0 if x is greater than y;
+ */
+int DynamicArray_cmp(DataType type, void *elem1, void *elem2);
+
+/**
+ * @brief A helper function to deal with floating-point value comparisons
+ * 
+ * @param type Data type of the elements.
+ * @param x The first element
+ * @param y The seconds element
+ * @return int 
+ */
+int DynamicArray_helper_nearlyEqual(DataType type, void *x, void *y);
 
 /**
  * @brief Retrieves the element at the specified index and stores it 

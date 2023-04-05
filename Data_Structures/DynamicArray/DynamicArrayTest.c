@@ -13,12 +13,11 @@
 #include<assert.h>
 #include<time.h>
 #include<stdlib.h>
+#include<time.h>
 #include"DynamicArray.h"
 
 double rand_from(double min, double max);
-
 void DynamicArrayTest_print_all_debug(DynamicArray **arrayOfVectors);
-
 void DynamicArrayTest_empty_all(DynamicArray **arrayOfVectors);
 
 /**
@@ -38,6 +37,18 @@ int main(void) {
 
     DynamicArray *vector = DynamicArray_init(INT, intArray, 5);
     DynamicArray_print(vector);
+    int num = 1000000000;
+    //Benchmarking 
+    clock_t start = clock();
+    for(int i = 6; i < num; i++) {
+        DynamicArray_append(vector, &i);
+    }
+    clock_t end = clock();
+    double time_spent = (double)(end - start) / CLOCKS_PER_SEC;
+
+    printf("%d elements appended in %f seconds\n", num, time_spent);
+    
+    DynamicArray_delete(vector);
     return 0;
 }
 

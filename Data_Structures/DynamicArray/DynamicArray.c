@@ -123,7 +123,7 @@ void DynamicArray_print(DynamicArray *array) {
 }
 
 
-void DynamicArray_append(DynamicArray *array, void* elem) {
+inline void DynamicArray_append(DynamicArray *array, void* elem) {
     if(array->size == array->capacity) {
         array = DynamicArray_resize(array);
         if(array == NULL) {
@@ -167,7 +167,7 @@ void DynamicArray_append(DynamicArray *array, void* elem) {
 }
 
 
-DynamicArray* DynamicArray_resize(DynamicArray *array) {
+inline DynamicArray* DynamicArray_resize(DynamicArray *array) {
     array->capacity *= 2; //Double the capacity;
 
     switch (array->type) {
@@ -205,9 +205,6 @@ void DynamicArray_delete(DynamicArray *array) {
 
 
 size_t DynamicArray_find(DynamicArray *array, void *elem) {
-    float fltEpsilon = 0.001;
-    double dbEpsilon = 0.000001;
-
     switch(array->type) {
     case INT: {
         int *dest = array->data;
@@ -379,6 +376,59 @@ void DynamicArray_empty(DynamicArray *array) {
     array->size = 0;
     return;
 
+}
+
+int DynamicArray_cmp(DataType type, void *elem1, void *elem2) {
+    //We will have to use epsilons here again
+    switch (type) {
+    case INT: {
+        int *x = (int*) elem1;
+        int *y = (int*) elem2;
+
+        return *x - *y;
+    }
+    case CHAR: {
+        char *x = (char*) elem1;
+        char *y = (char*) elem2;
+
+        return *x - *y;
+    }
+    case FLOAT: {
+        float *x = (float*) elem1;
+        float *y = (double*) elem2;
+
+        if(fabs(*x - *y) < fltEpsilon) {
+            return 0;
+        }
+        return *x - *y;
+    }
+    case DOUBLE:
+        /* code */
+        break;
+    
+    default:
+        break;
+    }
+}
+
+int DynamicArray_helper_nearlyEqual(DataType type, void *x, void *y) {
+    switch (type) {
+    case FLOAT: {
+        const float absX = fabs(*(float*)x);
+        const float absY = fabs(*(float*)y);
+        const float diff = fabs(absX - absY);
+
+        if( *(float*)x == *(float*)y) {
+            return 0;
+        }
+    }
+    case DOUBLE:
+        /* code */
+        break;
+    
+    default:
+        break;
+    }
 }
 /**
  * END FUNCTION DEFINITIONS
