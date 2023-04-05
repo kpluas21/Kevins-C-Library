@@ -15,21 +15,13 @@
 #include<string.h>
 #include<math.h>
 
-/**
- * @brief Initializes our dynamic array. This is done by malloc first acquiring the capacity which 
- *        is the initial size of the data multiplied by 2 to give it enough space for expansion.
- * 
- * @param type The data type for our elements
- * @param data The initial data to be stored in the array
- * @param size The number of initial elements 
- * @return DynamicArray* : A pointer to our DynamicArray struct containing everything we need
- */
-int DynamicArray_init(DynamicArray *array, DataType type, void *data, size_t size) {
-    array = malloc(sizeof(DynamicArray));
+
+DynamicArray *DynamicArray_init(DataType type, void *data, size_t size) {
+    DynamicArray *array = malloc(sizeof(DynamicArray));
 
     if(array == NULL) {
         printf("Error: Unable to allocate memory for DynamicArray struct\n");
-        return -1;
+        return NULL;
     }
 
     array->size = size;
@@ -55,23 +47,18 @@ int DynamicArray_init(DynamicArray *array, DataType type, void *data, size_t siz
         break;
     default:
         printf("Error: Invalid DataType\n");
-        return -1;
+        return NULL;
     }
     
     if(array->data == NULL) {
         printf("Error: Unable to allocate memory for DynamicArray:data\n");
-        return -1;
+        return NULL;
     }
 
-    return 0;
+    return array;
 }
 
-/**
- * @brief Displays the meta info about our dynamic array such as size, capacity, type, and contents so long as the size does
- * not exceed 1000.
- * 
- * @param array The DynamicArray pointer
- */
+
 void DynamicArray_debug_info(DynamicArray *array) {
 
     printf("Data type of the elements stored (DataType) : %d\n", array->type);
@@ -85,8 +72,7 @@ void DynamicArray_debug_info(DynamicArray *array) {
     DynamicArray_print(array);
 }
 
-/// @brief Pretty prints the contents of our array
-/// @param array Our dynamic array ptr
+
 void DynamicArray_print(DynamicArray *array) {
     //Empty array
     if(array->size == 0) {
@@ -136,13 +122,7 @@ void DynamicArray_print(DynamicArray *array) {
     }
 }
 
-//TODO : This takes a single void pointer as input. Are we able to append JUST one or can we append everything in the pointer?
-/**
- * @brief Adds the given element to the end of the array, automatically resizing the array if necessary.
- * 
- * @param array The DynamicArray pointer
- * @param elem The element to be added
- */
+
 void DynamicArray_append(DynamicArray *array, void* elem) {
     if(array->size == array->capacity) {
         array = DynamicArray_resize(array);
@@ -186,13 +166,7 @@ void DynamicArray_append(DynamicArray *array, void* elem) {
     return;
 }
 
-/**
- * @brief Attempts to resize the array by doubling the current capacity and realloc'ing 
- * the pointer
- * 
- * @param array The DynamicArray pointer
- * @return DynamicArray* A pointer to the struct with the newly realloc'd data pointer. 
- */
+
 DynamicArray* DynamicArray_resize(DynamicArray *array) {
     array->capacity *= 2; //Double the capacity;
 
@@ -221,30 +195,15 @@ DynamicArray* DynamicArray_resize(DynamicArray *array) {
     return array;
 }
 
-/**
- * @brief Frees up all memory used by the array including the struct itself. This should be used 
- * instead of simply freeing the struct as the latter will cause memory leaks
- * 
- * @param array The DynamicArray pointer
- */
+
 void DynamicArray_delete(DynamicArray *array) {
-    free(array->data);
+    if(array) {
+        free(array->data);
+    }
     free(array);
 }
 
-/**
- * @brief Linearly searches through the array to find the given input, returning the index if found, 
- * -1 otherwise
- * Caution must be used when comparing floating-point values because of general imprecision. Use 
- * an episilon for some "good enough" results. You may need to change the epsilon to suit your needs.
- * @note Epsilon Values :
- * Float : 0.001
- * Double: 0.000001
- * 
- * @param array The DynamicArray pointer
- * @param ptr A void pointer pointing to the data needing to be searched for.
- * @return int The index where the element is located at.
- */
+
 size_t DynamicArray_find(DynamicArray *array, void *elem) {
     float fltEpsilon = 0.001;
     double dbEpsilon = 0.000001;
@@ -299,16 +258,7 @@ size_t DynamicArray_find(DynamicArray *array, void *elem) {
     return -1;
 }
 
-/**
- * @brief Returns the element specified by the provided index. SHOULD run in O(1) time. You must
- * provide a pointer to store the result of get. 
- * 
- * @param array The DynamicArray pointer
- * @param index 
- * @param result A reference pointer to store our result. 
- * @return Nothing. However, result will either contain the element requested or be NULL if 
- * an invalid index was provided.
- */
+
 void DynamicArray_get(DynamicArray *array, size_t index, void *result) {
     if(index >= array->size) {
         printf("Error: Out-of-bounds index provided : %zu\n", index);
@@ -341,23 +291,12 @@ void DynamicArray_get(DynamicArray *array, size_t index, void *result) {
     }
 }
 
-/**
- * @brief Attempts to sort the contents of the array in either ascending or descending order depending on
- * the mode provided.
- * 
- * @param array The DynamicArray pointer
- * @param mode 1 : Descending, anything else if ascending.
- */
+
 // inline void DynamicArray_sort(DynamicArray *array, int mode) {
 //     //TODO: Implement merge sort here somehow...
 // }
 
-/**
- * @brief Returns 0 if the array is empty. 1 otherwise.
- * 
- * @param array The DynamicArray pointer
- * @return int 0 if empty, 1 otherwise.
- */
+
 inline int DynamicArray_isEmpty(DynamicArray *array) {
     if(array->size == 0) {
         return 0;
@@ -365,14 +304,7 @@ inline int DynamicArray_isEmpty(DynamicArray *array) {
     return 1;
 }
 
-/**
- * @brief Removes from the array a single element. Reduces the size of the array by 1 and 
- * closes the gap by shifting every element over by 1. The capacity remains unchanged after
- * this operation.
- * 
- * @param array The DynamicArray pointer
- * @param index The index of the element
- */
+
 void DynamicArray_remove(DynamicArray *array, size_t index) {
     //TODO: I don't think this is working as intended? If you iterate through
     //the entire array, calling this function on each elem, you'll effectively cut it 
@@ -419,12 +351,7 @@ void DynamicArray_remove(DynamicArray *array, size_t index) {
     }
 }
 
-/**
- * @brief Clears out the entire array, reducing the size to 0. Does not change the 
- * capacity in any way.
- * 
- * @param array The DynamicArray pointer
- */
+
 void DynamicArray_empty(DynamicArray *array) {
     free(array->data);
 

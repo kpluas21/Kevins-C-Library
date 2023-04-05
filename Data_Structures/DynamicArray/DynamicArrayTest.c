@@ -34,7 +34,10 @@ void DynamicArrayTest_empty_all(DynamicArray **arrayOfVectors);
  * 
  */
 int main(void) {
+    int intArray[] = {1, 2, 3, 4, 5};
 
+    DynamicArray *vector = DynamicArray_init(INT, intArray, 5);
+    DynamicArray_print(vector);
     return 0;
 }
 
