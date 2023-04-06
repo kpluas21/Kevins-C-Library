@@ -37,8 +37,8 @@
  * _cmp()
  * 
  */
-static float fltEpsilon = 0.001;
-static double dbEpsilon = 0.000001;
+static float fltEpsilon;
+static double dbEpsilon;
 
 /**
  * @enum DataType
@@ -123,25 +123,25 @@ void DynamicArray_remove(DynamicArray *array, size_t index);
 void DynamicArray_empty(DynamicArray *array);
 
 /**
- * @brief Compares two elements. 
+ * @brief Compares two elements in the array. Mostly used by other 
+ * functions in this library
  * 
  * @param type The datatype of the elements
- * @param x The first element
- * @param y The second element
+ * @param elem1 The first element
+ * @param elem2 The second element
  * @return int 0 if elements are equal, <0 if x is less than y, 
  *         >0 if x is greater than y;
  */
 int DynamicArray_cmp(DataType type, void *elem1, void *elem2);
 
 /**
- * @brief A helper function to deal with floating-point value comparisons
+ * @brief Swaps the contents of two elements.
  * 
- * @param type Data type of the elements.
- * @param x The first element
- * @param y The seconds element
- * @return int 
+ * @param type The data type of the elements
+ * @param elem1 The first element
+ * @param elem2 The second element
  */
-int DynamicArray_helper_nearlyEqual(DataType type, void *x, void *y);
+void DynamicArray_swap(DataType type, void *elem1, void *elem2);
 
 /**
  * @brief Retrieves the element at the specified index and stores it 
@@ -157,7 +157,7 @@ void DynamicArray_get(DynamicArray *array, size_t index, void *result);
 
 /**
  * @brief Attempts to sort the contents of the array in either ascending or descending order depending on
- * the mode provided.
+ * the mode provided. Uses selection sort.
  * 
  * @param array The DynamicArray pointer
  * @param mode 1 : Descending, anything else if ascending.
@@ -171,6 +171,9 @@ void DynamicArray_sort(DynamicArray *array, int mode);
  * @return int 0 if empty, 1 otherwise.
  */
 int DynamicArray_isEmpty(DynamicArray *array);
+
+
+
 /**
  * @brief Linearly searches through the array to find the given input, returning the index if found, 
  * -1 otherwise
