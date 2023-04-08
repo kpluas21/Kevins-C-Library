@@ -29,16 +29,6 @@
 
 #include<stddef.h>
 
-/**
- * @brief Global epsilons to be used when comparing floating-point values. If you need to change
- * how precise the comparisons should be, change it here.
- * Used in the following functions
- * _find()
- * _cmp()
- * 
- */
-static float fltEpsilon;
-static double dbEpsilon;
 
 /**
  * @enum DataType
@@ -165,14 +155,23 @@ void DynamicArray_get(DynamicArray *array, size_t index, void *result);
 void DynamicArray_sort(DynamicArray *array, int mode);
 
 /**
- * @brief Returns 0 if the array is empty. 1 otherwise.
+ * @brief Returns 0 if the array is empty. Otherwise, returns a nonzero value.
  * 
  * @param array The DynamicArray pointer
- * @return int 0 if empty, 1 otherwise.
+ * @return int 0 if empty, otherwise the size of the array.
  */
 int DynamicArray_isEmpty(DynamicArray *array);
 
-
+/**
+ * @brief Inserts an element at the chosen index. This effectively shifts all 
+ * existing elements over. Automatically reallocates memory if needed.
+ * 
+ * @param array The DynamicArray pointer
+ * @param elem The element to be inserted
+ * @param index The location where the element is to be inserted
+ * @return int Returns 0 if successful, <0 if error encountered.
+ */
+int DynamicArray_insert(DynamicArray *array, void *elem, size_t index);
 
 /**
  * @brief Linearly searches through the array to find the given input, returning the index if found, 

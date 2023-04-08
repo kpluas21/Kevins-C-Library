@@ -15,6 +15,16 @@
 #include<string.h>
 #include<math.h>
 
+/**
+ * @brief Global epsilons to be used when comparing floating-point values. If you need to change
+ * how precise the comparisons should be, change it here.
+ * Used in the following functions
+ * _find()
+ * _cmp()
+ * 
+ */
+#define FLTEPSILON 0.001
+#define DBEPSILON 0.000001
 
 DynamicArray *DynamicArray_init(DataType type, void *data, size_t size) {
     DynamicArray *array = malloc(sizeof(DynamicArray));
@@ -26,7 +36,7 @@ DynamicArray *DynamicArray_init(DataType type, void *data, size_t size) {
 
     array->size = size;
     array->type = type;
-    array->capacity = size * 2;
+    array->capacity = (size == 0) ? 1 : size * 2;
 
     switch (type) {
     case INT:
@@ -205,9 +215,6 @@ void DynamicArray_delete(DynamicArray *array) {
 
 
 size_t DynamicArray_find(DynamicArray *array, void *elem) {
-    fltEpsilon = 0.001;
-    dbEpsilon = 0.000001;
-
     switch(array->type) {
     case INT: {
         int *dest = array->data;
@@ -236,7 +243,7 @@ size_t DynamicArray_find(DynamicArray *array, void *elem) {
         for (size_t i = 0; i < array->size; i++) {
             //DEBUG: Print the elements of the comparison
             // printf("%.6f =? %.6f\n", dest[i], *elemToFind);
-            if(fabs(dest[i] - *elemToFind) < fltEpsilon) {
+            if(fabs(dest[i] - *elemToFind) < FLTEPSILON) {
                 return i;
             }
         }
@@ -246,7 +253,7 @@ size_t DynamicArray_find(DynamicArray *array, void *elem) {
         double *dest = array->data;
         double *elemToFind = (double*) elem;
         for (size_t i = 0; i < array->size; i++) {
-            if(fabs(dest[i] - *elemToFind) < dbEpsilon) {
+            if(fabs(dest[i] - *elemToFind) < DBEPSILON) {
                 return i;
             }
         }
@@ -258,6 +265,77 @@ size_t DynamicArray_find(DynamicArray *array, void *elem) {
     return -1;
 }
 
+//There are three scenarios when inserting
+//1) At the beginning of the array
+//2) At the middle
+//3) At the end
+int DynamicArray_insert(DynamicArray *array, void *elem, size_t index) {
+    if(array->size == array->capacity) {
+        array = DynamicArray_resize(array);
+    }
+    if(index >= array->capacity || index > array->size) {
+        printf("Error: Index %zu out of bounds\nArray Size = %zu\nArray Capacity = %zu\n",
+         index, array->size, array->capacity);
+         return -1;
+    }
+
+    if(array == NULL) {
+        printf("Error: Unable to insert element\n");
+        return -1;
+    }
+
+    switch(array->type) {
+    case INT: {
+        if(index == array->size) {
+            *((int*)array->data + index) = *(int*)elem;
+            break;
+        }
+        for (size_t i = array->size; i > index; i--) {
+            *((int*)array->data + i) = *((int*)array->data + i - 1);
+        }
+        *((int*)array->data + index) = *(int*)elem;
+        break;
+    }
+    case CHAR: {
+        if(index == array->size) {
+            *((char*)array->data + index) = *(char*)elem;
+            break;
+        }
+        for (size_t i = array->size; i > index; i--) {
+            *((char*)array->data + i) = *((char*)array->data + i - 1);
+        }
+        *((char*)array->data + index) = *(char*)elem;
+        break;
+    }
+    case FLOAT: {
+        if(index == array->size) {
+            *((float*)array->data + index) = *(float*)elem;
+            break;
+        }
+        for (size_t i = array->size; i > index; i--) {
+            *((float*)array->data + i) = *((float*)array->data + i - 1);
+        }
+        *((float*)array->data + index) = *(float*)elem;
+        break;
+    }
+    case DOUBLE: {
+        if(index == array->size) {
+            *((double*)array->data + index) = *(double*)elem;
+            break;
+        }
+        for (size_t i = array->size; i > index; i--) {
+            *((double*)array->data + i) = *((double*)array->data + i - 1);
+        }
+        *((double*)array->data + index) = *(double*)elem;
+        break;
+    }
+    default:
+        break;
+    }
+
+    array->size++;
+    return 0;
+}
 
 void DynamicArray_get(DynamicArray *array, size_t index, void *result) {
     if(index >= array->size) {
@@ -292,16 +370,13 @@ void DynamicArray_get(DynamicArray *array, size_t index, void *result) {
 }
 
 
-inline void DynamicArray_sort(DynamicArray *array, int mode) {
-
-}
+// inline void DynamicArray_sort(DynamicArray *array, int mode) {
+//     //TODO: IMPLEMENT THIS
+// }
 
 
 inline int DynamicArray_isEmpty(DynamicArray *array) {
-    if(array->size == 0) {
-        return 0;
-    }
-    return 1;
+    return array->size;
 }
 
 
@@ -381,80 +456,77 @@ void DynamicArray_empty(DynamicArray *array) {
 
 }
 
-int DynamicArray_cmp(DataType type, void *elem1, void *elem2) {
-    fltEpsilon = 0.001;
-    dbEpsilon = 0.000001;
+// int DynamicArray_cmp(DataType type, void *elem1, void *elem2) {
+//     //We will have to use epsilons here again
+//     switch (type) {
+//     case INT: {
+//         int *l = (int*) elem1;
+//         int *r = (int*) elem2;
 
-    //We will have to use epsilons here again
-    switch (type) {
-    case INT: {
-        int *l = (int*) elem1;
-        int *r = (int*) elem2;
+//         return *l - *r;
+//     }
+//     case CHAR: {
+//         char *l = (char*) elem1;
+//         char *r = (char*) elem2;
 
-        return *l - *r;
-    }
-    case CHAR: {
-        char *l = (char*) elem1;
-        char *r = (char*) elem2;
+//         return *l - *r;
+//     }
+//     case FLOAT: {
+//         float *l = (float*) elem1;
+//         float *r = (float*) elem2;
 
-        return *l - *r;
-    }
-    case FLOAT: {
-        float *l = (float*) elem1;
-        float *r = (float*) elem2;
+//         //Nearly equal
+//         if(fabs(*l - *r) < FLTEPSILON) {
+//             return 0;
+//         }
 
-        //Nearly equal
-        if(fabs(*l - *r) < fltEpsilon) {
-            return 0;
-        }
+//         else if(*l > *r) {
+//             return 1;
+//         }
+//         //
+//         return -1;
+//     }
+//     case DOUBLE: {
+//         double *l = (double*) elem1;
+//         double *r = (double*) elem2;
+//         break;
+//         //Nearly equal
+//         if(fabs(*l - *r) < DBEPSILON) {
+//             return 0;
+//         }
 
-        else if(*l > *r) {
-            return 1;
-        }
-        //
-        return -1;
-    }
-    case DOUBLE: {
-        double *l = (double*) elem1;
-        double *r = (double*) elem2;
-        break;
-        //Nearly equal
-        if(fabs(*l - *r) < dbEpsilon) {
-            return 0;
-        }
+//         else if(*l > *r) {
+//             return 1;
+//         }
+//         //
+//         return -1;
+//     }
+//     default:
+//         return 0;
+//     }
 
-        else if(*l > *r) {
-            return 1;
-        }
-        //
-        return -1;
-    }
-    default:
-        return 0;
-    }
+//     //It should not reach here !!!
+//     return 0;
 
-    //It should not reach here !!!
-    return 0;
+// }
 
-}
-
-void DynamicArray_swap(DataType type, void *elem1, void *elem2) {
-    switch(type) {
-    case INT: {
-        int *l, *r, *temp;
+// void DynamicArray_swap(DataType type, void *elem1, void *elem2) {
+//     switch(type) {
+//     case INT: {
+//         int *l, *r, *temp;
         
-    }
-        break;
-    case CHAR:
-        break;
-    case FLOAT:
-        break;
-    case DOUBLE:
-        break;
-    default:
-        break;
-    }
-}
+//     }
+//         break;
+//     case CHAR:
+//         break;
+//     case FLOAT:
+//         break;
+//     case DOUBLE:
+//         break;
+//     default:
+//         break;
+//     }
+// }
 
 
 /**

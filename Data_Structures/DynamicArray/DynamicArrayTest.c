@@ -33,20 +33,20 @@ void DynamicArrayTest_empty_all(DynamicArray **arrayOfVectors);
  * 
  */
 int main(void) {
-    int intArray[] = {1, 2, 3, 4, 5};
+    int intArray[5] = {1, 2, 3, 4, 5};
 
     DynamicArray *vector = DynamicArray_init(INT, intArray, 5);
     DynamicArray_print(vector);
-    int num = 1000000000;
-    //Benchmarking 
-    clock_t start = clock();
-    for(int i = 6; i < num; i++) {
-        DynamicArray_append(vector, &i);
-    }
-    clock_t end = clock();
-    double time_spent = (double)(end - start) / CLOCKS_PER_SEC;
+    DynamicArray_debug_info(vector);
 
-    printf("%d elements appended in %f seconds\n", num, time_spent);
+    int l = 11;
+    int r = 22;
+    int e = 33;
+
+    DynamicArray_insert(vector, &l, 0);
+    DynamicArray_insert(vector, &r, 5);
+    DynamicArray_insert(vector, &e, vector->size);
+    DynamicArray_print(vector);
     
     DynamicArray_delete(vector);
     return 0;
