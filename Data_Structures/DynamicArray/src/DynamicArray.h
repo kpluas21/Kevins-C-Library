@@ -52,7 +52,7 @@ typedef struct DynamicArray {
     DataType type;
     size_t size;
     size_t capacity;
-    void *data;  
+    void *data;
 }DynamicArray;
 
 /**
@@ -90,10 +90,11 @@ void DynamicArray_debug_info(DynamicArray *array);
 
 /**
  * @brief Frees up all memory used by the array including the struct itself.
- * 
- * @param array The DynamicArray pointer
+ * Pass a reference to the DynamicArray pointer, that way everything will be 
+ * NULL'd safely.
+ * @param array A pointer to a DynamicArray pointer
  */
-void DynamicArray_delete(DynamicArray *array);
+void DynamicArray_delete(DynamicArray **array);
 
 /**
  * @brief Removes from the array a single element. Reduces the size of the array by 1 and 
@@ -165,6 +166,7 @@ int DynamicArray_isEmpty(DynamicArray *array);
 /**
  * @brief Inserts an element at the chosen index. This effectively shifts all 
  * existing elements over. Automatically reallocates memory if needed.
+ * If index equals size, it will basically act as _append() would. 
  * 
  * @param array The DynamicArray pointer
  * @param elem The element to be inserted

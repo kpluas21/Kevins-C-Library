@@ -1,22 +1,23 @@
 PROGRAM = DynamicArrayTest
-FILES.c = DynamicArrayTest.c DynamicArray.c
-FILES.h = DynamicArray.h
+FILES.c = test/DynamicArrayTest.c src/DynamicArray.c test/unity.c
+FILES.h = DynamicArray.h test/unity.h test/unity_internals.h
 FILES.o = ${FILES.c:.c=.o}
 
 CC = gcc
 SFLAGS = -std=c99
 GFLAGS = -g
 OFLAGS = -O3
+DFLAGS = -I/src
 WFLAG1  = -Wall
 WFLAG2  = -Wextra
 WFLAG3  = -Werror
 WFLAG4  = -Wstrict-prototypes
 WFLAG5  = -Wmissing-prototypes
-WFLAGS  = ${WFLAG1} ${WFLAG2} ${WFLAG3} ${WFLAG4} ${WFLAG5}
+WFLAGS  = ${WFLAG1} ${WFLAG2} ${WFLAG3} ${WFLAG4} ${WFLAG5} 
 UFLAGS  = # Set on command line only
 
-CFLAGS  = ${SFLAGS} ${GFLAGS} ${OFLAGS} ${WFLAGS} ${UFLAGS}
-LDFLAGS =
+CFLAGS  = ${SFLAGS} ${GFLAGS} ${OFLAGS} ${WFLAGS} ${UFLAGS} ${DFLAGS}
+LDFLAGS = -lm
 LDLIBS  =
 
 all:    ${PROGRAM}

@@ -2,7 +2,7 @@
  * @file DynamicArray.c
  * @author your name (you@domain.com)
  * @brief Implementation of DynamicArray
- * @version 0.1
+ * @version 0.0.2
  * @date 2023-04-04
  * 
  * @copyright Copyright (c) 2023
@@ -206,11 +206,17 @@ inline DynamicArray* DynamicArray_resize(DynamicArray *array) {
 }
 
 
-void DynamicArray_delete(DynamicArray *array) {
-    if(array) {
-        free(array->data);
+void DynamicArray_delete(DynamicArray **array) {
+    if(array == NULL || *array == NULL) {
+        return;
     }
-    free(array);
+    if((*array)->data != NULL) {
+        free((*array)->data);
+        (*array)->data = NULL;
+    }
+    free(*array);
+    (*array) = NULL;
+    
 }
 
 
