@@ -1,2 +1,2 @@
-# C-Data-Structures
-My implementation of popular data structures in C with a minimal application footprint.
+# Kevin's C Library
+My implementation of popular data structures and programs in C. More information on the programs can be found in their respective folders.
