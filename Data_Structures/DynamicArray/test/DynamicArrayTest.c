@@ -31,16 +31,26 @@ void test_DynamicArray_init(void);
 void test_DynamicArray_delete(void);
 void test_DynamicArray_get(void);
 void test_DynamicArray_insert(void);
+void test_DynamicArray_find(void);
+void test_DynamicArray_empty(void);
+
+//setUp() will initilize these objs before every test
+static DynamicArray *intVector;
+static DynamicArray *charVector;
+static DynamicArray *floatVector;
+static DynamicArray *doubleVector;
+//tearDown() _delete's them after every test.
 
 /**
  * @brief Our main test function.
-
  */
 int main(void) {
     UNITY_BEGIN();
     RUN_TEST(test_DynamicArray_init);
     RUN_TEST(test_DynamicArray_delete);
     RUN_TEST(test_DynamicArray_get);
+    RUN_TEST(test_DynamicArray_find);
+    RUN_TEST(test_DynamicArray_empty);
     return UNITY_END();
 }
 
@@ -71,20 +81,6 @@ void DynamicArrayTest_empty_all(DynamicArray **arrayOfVectors) {
 void setUp(void) {
     srand((unsigned int)time(NULL));
 
-}
-
-void tearDown(void) {
-
-}
-
-/**
- * @brief Testing the initialization of vectors for all the datatypes.
- * Checks for the correct size and capacity
- * 
- */
-void test_DynamicArray_init(void) {
-
-
     int intArray[5] = {1,2,3,4,5};
     char charArray[5] = {'a', 'b', 'c', 'd', 'e'};
     float floatArray[5];
@@ -97,11 +93,26 @@ void test_DynamicArray_init(void) {
     }
     
 
-    DynamicArray *intVector = DynamicArray_init(INT, intArray, 5);
-    DynamicArray *charVector = DynamicArray_init(CHAR, charArray, 5);
-    DynamicArray *floatVector = DynamicArray_init(FLOAT, floatArray, 5);
-    DynamicArray *doubleVector = DynamicArray_init(DOUBLE, doubleArray, 5);
+    intVector = DynamicArray_init(INT, intArray, 5);
+    charVector = DynamicArray_init(CHAR, charArray, 5);
+    floatVector = DynamicArray_init(FLOAT, floatArray, 5);
+    doubleVector = DynamicArray_init(DOUBLE, doubleArray, 5);
 
+}
+
+void tearDown(void) {
+    DynamicArray_delete(&intVector);
+    DynamicArray_delete(&charVector);
+    DynamicArray_delete(&floatVector);
+    DynamicArray_delete(&doubleVector);
+}
+
+/**
+ * @brief Testing the initialization of vectors for all the datatypes.
+ * Checks for the correct size and capacity
+ * 
+ */
+void test_DynamicArray_init(void) {
     TEST_ASSERT_EQUAL_INT(5, intVector->size);
     TEST_ASSERT_EQUAL_INT(5, charVector->size);
     TEST_ASSERT_EQUAL_INT(5, floatVector->size);
@@ -111,11 +122,6 @@ void test_DynamicArray_init(void) {
     TEST_ASSERT_EQUAL_INT(10, charVector->capacity);
     TEST_ASSERT_EQUAL_INT(10, floatVector->capacity);
     TEST_ASSERT_EQUAL_INT(10, doubleVector->capacity);
-
-    DynamicArray_delete(&intVector);
-    DynamicArray_delete(&charVector);
-    DynamicArray_delete(&floatVector);
-    DynamicArray_delete(&doubleVector);
 }
 
 /**
@@ -124,23 +130,6 @@ void test_DynamicArray_init(void) {
  * Also tests double deletes
  */
 void test_DynamicArray_delete(void) {
-    int intArray[5] = {1,2,3,4,5};
-    char charArray[5] = {'a', 'b', 'c', 'd', 'e'};
-    float floatArray[5];
-    double doubleArray[5];
-
-    for (size_t i = 0; i < 5; i++)
-    {
-        floatArray[i] = generate_rand_float(3.14);
-        doubleArray[i] = generate_double_inRange(0.00, 1.00);
-    }
-    
-
-    DynamicArray *intVector = DynamicArray_init(INT, intArray, 5);
-    DynamicArray *charVector = DynamicArray_init(CHAR, charArray, 5);
-    DynamicArray *floatVector = DynamicArray_init(FLOAT, floatArray, 5);
-    DynamicArray *doubleVector = DynamicArray_init(DOUBLE, doubleArray, 5);
-
     DynamicArray_delete(&intVector);
     DynamicArray_delete(&charVector);
     DynamicArray_delete(&floatVector);
@@ -153,29 +142,49 @@ void test_DynamicArray_delete(void) {
 }
 
 void test_DynamicArray_get(void) {
-    int intArray[5] = {1,2,3,4,5};
-    char charArray[5] = {'a', 'b', 'c', 'd', 'e'};
-    // float floatArray[5];
-    // double doubleArray[5];
-
-    // for (size_t i = 0; i < 5; i++)
-    // {
-    //     floatArray[i] = generate_rand_float(3.14);
-    //     doubleArray[i] = generate_double_inRange(0.00, 1.00);
-    // }
-    
-
-    DynamicArray *intVector = DynamicArray_init(INT, intArray, 5);
-    DynamicArray *charVector = DynamicArray_init(CHAR, charArray, 5);
-    // DynamicArray *floatVector = DynamicArray_init(FLOAT, floatArray, 5);
-    // DynamicArray *doubleVector = DynamicArray_init(DOUBLE, doubleArray, 5);
+    float f = 3.14;
+    double d = 5.3892;
+    DynamicArray_insert(floatVector, &f, 4);
+    DynamicArray_insert(doubleVector, &d, 4);
 
     TEST_ASSERT_EQUAL(3, *(int*)DynamicArray_get(intVector, 2));
     TEST_ASSERT_EQUAL('c', *(char*)DynamicArray_get(charVector, 2));
+    TEST_ASSERT_EQUAL(3.14, *(float*)DynamicArray_get(floatVector, 4));
+    TEST_ASSERT_EQUAL(5.3892, *(double*)DynamicArray_get(doubleVector, 4));
 
+    //Incorrect input
+    TEST_ASSERT_NULL(DynamicArray_get(intVector, -1));
+    TEST_ASSERT_NULL(DynamicArray_get(intVector, intVector->size));
+
+    //Testing false positives
+    TEST_ASSERT_NOT_EQUAL('b', *(char*)DynamicArray_get(charVector, 0));
 
 }
 
-void test_DynamicArray_insert(void)
-{
+
+
+void test_DynamicArray_insert(void) {
+
+}
+
+void test_DynamicArray_find(void) {
+
+}
+
+void test_DynamicArray_empty(void) {
+    DynamicArray_empty(intVector);
+    DynamicArray_empty(charVector);
+    DynamicArray_empty(floatVector);
+    DynamicArray_empty(doubleVector);
+
+    TEST_ASSERT_EQUAL_INT(0 , DynamicArray_isEmpty(intVector));
+    TEST_ASSERT_EQUAL_INT(0 , DynamicArray_isEmpty(charVector));
+    TEST_ASSERT_EQUAL_INT(0 , DynamicArray_isEmpty(floatVector));
+    TEST_ASSERT_EQUAL_INT(0 , DynamicArray_isEmpty(doubleVector));
+
+    //Testing for NULL on an empty array 
+    TEST_ASSERT_NULL((int*)DynamicArray_get(intVector, 2));
+    TEST_ASSERT_NULL((char*)DynamicArray_get(charVector, 2));
+    TEST_ASSERT_NULL((float*)DynamicArray_get(floatVector, 2));
+    TEST_ASSERT_NULL((double*)DynamicArray_get(doubleVector, 2));
 }

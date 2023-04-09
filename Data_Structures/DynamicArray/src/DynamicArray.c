@@ -147,6 +147,8 @@ inline void DynamicArray_append(DynamicArray *array, void* elem) {
         int *dest = array->data;
         dest[array->size] = *intElem;
         array->size++;
+
+        // *((int*)array->size + array->size) = *(int*)elem;
         break;
     }
     case CHAR: {
@@ -345,7 +347,7 @@ int DynamicArray_insert(DynamicArray *array, void *elem, size_t index) {
 
 void *DynamicArray_get(DynamicArray *array, size_t index) {
     if(index >= array->size) {
-        printf("Error: Out-of-bounds index provided : %zu\n", index);
+        fprintf(stderr, "Error: Out-of-bounds index provided : %zu\n", index);
         return NULL;
     }
 
@@ -391,7 +393,7 @@ void DynamicArray_remove(DynamicArray *array, size_t index) {
     //the entire array, calling this function on each elem, you'll effectively cut it 
     //in half. It takes away every other elem. 
     if(index >= array->size) {
-        printf("Error: Invalid index provided : %zu\n", index);
+        fprintf(stderr, "Error: Invalid index provided : %zu\n", index);
         return;
     }
     switch (array->type) {

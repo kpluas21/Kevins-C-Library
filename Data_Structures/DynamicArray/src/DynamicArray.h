@@ -23,7 +23,6 @@
 //TODO: FUNCTIONS TO BE ADDED
 /** * 
  * 1) remove : Removes an element from the array , everything will have to be stitched together
- * 2) insert : Attempts to insert an element at the given index, shifting all other elements over, resizing the array if necessary
  * 3) sort : Sorts the elements of the array either in ascending or descending order. 
  */
 
@@ -176,7 +175,7 @@ int DynamicArray_insert(DynamicArray *array, void *elem, size_t index);
  * @brief Linearly searches through the array to find the given input, returning the index if found, 
  * -1 otherwise
  * Caution must be used when comparing floating-point values because of general imprecision. Use 
- * an episilon for some "good enough" results. You may need to change the epsilon to suit your needs.
+ * an epsilon for some "good enough" results. You may need to change the epsilon to suit your needs.
  * @note Epsilon Values :
  * Float : 0.001
  * Double: 0.000001
