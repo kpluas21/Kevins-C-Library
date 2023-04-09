@@ -135,14 +135,11 @@ int DynamicArray_cmp(DataType type, void *elem1, void *elem2);
 void DynamicArray_swap(DataType type, void *elem1, void *elem2);
 
 /**
- * @brief Retrieves the element at the specified index and stores it 
- *  in the inputted void pointer. 
+ * @brief Retrieves the element at the specified index.
  * 
  * @param array The DynamicArray pointer
  * @param index Index of the element
- * @param result A reference pointer to store our result. 
- * @return Nothing. However, result will either contain the element requested or be NULL if 
- * an invalid index was provided.
+ * @return void* A void pointer that points to the result of this function call.
  */
 void *DynamicArray_get(DynamicArray *array, size_t index);
 
