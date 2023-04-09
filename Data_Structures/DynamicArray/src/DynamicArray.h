@@ -42,6 +42,16 @@ typedef enum DataType {
 
 }DataType;
 
+typedef enum ErrorCode {
+    SUCCESS = 0, 
+    OUT_OF_MEMORY,
+    INVALID_ARGUMENT, 
+    INVALID_DATATYPE,
+    OUT_OF_BOUNDS_INDEX,
+    UNKNOWN_ERROR,
+
+}ErrorCode;
+
 /**
  * @struct DynamicArray
  * @brief Our main struct that contains all the data and metainfo about our dynamic array
@@ -194,6 +204,15 @@ size_t DynamicArray_find(DynamicArray *array, void *elem);
  * @return DynamicArray* A pointer to the struct with the newly realloc'd data pointer. 
  */
 DynamicArray *DynamicArray_resize(DynamicArray *array);
+
+
+/**
+ * @brief Outputs error messages
+ * 
+ * @param error The ErrorCode int
+ * @return const char* A string detailing the error and where it occured
+ */
+const char* DynamicArray_error(ErrorCode error, const char* function);
 
 
 #endif //DYNAMIC_ARRAY_H

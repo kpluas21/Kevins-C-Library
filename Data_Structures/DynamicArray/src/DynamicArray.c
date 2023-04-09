@@ -30,7 +30,7 @@ DynamicArray *DynamicArray_init(DataType type, void *data, size_t size) {
     DynamicArray *array = malloc(sizeof(DynamicArray));
 
     if(array == NULL) {
-        printf("Error: Unable to allocate memory for DynamicArray struct\n");
+        fprintf(stderr, "Error: In function: %s: Unable to allocate memory for DynamicArray struct\n", __func__);
         return NULL;
     }
 
@@ -200,13 +200,12 @@ inline DynamicArray* DynamicArray_resize(DynamicArray *array) {
     }
 
     if(array->data == NULL) {
-        printf("Error: Unable to resize DynamicArray.data\n");
+        fprintf(stderr, "Error: In function: %s: Unable to resize DynamicArray.data\n", __func__);
         return NULL;
     }
 
     return array;
 }
-
 
 void DynamicArray_delete(DynamicArray **array) {
     if(array == NULL || *array == NULL) {
@@ -225,21 +224,16 @@ void DynamicArray_delete(DynamicArray **array) {
 size_t DynamicArray_find(DynamicArray *array, void *elem) {
     switch(array->type) {
     case INT: {
-        int *dest = array->data;
-        int *elemToFind = (int*) elem;
         for (size_t i = 0; i < array->size; i++) {
-            if(dest[i] == *elemToFind) {
+            if( *((int*)array->data + i) == *(int*)elem) {
                 return i;
             }
         }
         break;
-        
     }
     case CHAR: {
-        char *dest = array->data;
-        char *elemToFind = (char*) elem;
         for (size_t i = 0; i < array->size; i++) {
-            if(dest[i] == *elemToFind) {
+            if( *((char*)array->data + i) == *(char*)elem) {
                 return i;
             }
         }
@@ -282,16 +276,10 @@ int DynamicArray_insert(DynamicArray *array, void *elem, size_t index) {
         array = DynamicArray_resize(array);
     }
     if(index >= array->capacity || index > array->size) {
-        printf("Error: Index %zu out of bounds\nArray Size = %zu\nArray Capacity = %zu\n",
-         index, array->size, array->capacity);
+        printf("Error: In function %s : Index %zu out of bounds\nArray Size = %zu\nArray Capacity = %zu\n",
+         __func__, index, array->size, array->capacity);
          return -1;
     }
-
-    if(array == NULL) {
-        printf("Error: Unable to insert element\n");
-        return -1;
-    }
-
     switch(array->type) {
     case INT: {
         if(index == array->size) {
@@ -347,7 +335,7 @@ int DynamicArray_insert(DynamicArray *array, void *elem, size_t index) {
 
 void *DynamicArray_get(DynamicArray *array, size_t index) {
     if(index >= array->size) {
-        fprintf(stderr, "Error: Out-of-bounds index provided : %zu\n", index);
+        fprintf(stderr, "Error: In function: %s: Out-of-bounds index provided : %zu\n", __func__, index);
         return NULL;
     }
 
@@ -393,7 +381,7 @@ void DynamicArray_remove(DynamicArray *array, size_t index) {
     //the entire array, calling this function on each elem, you'll effectively cut it 
     //in half. It takes away every other elem. 
     if(index >= array->size) {
-        fprintf(stderr, "Error: Invalid index provided : %zu\n", index);
+        fprintf(stderr, "Error: In function: %s: Invalid index provided : %zu\n", __func__, index);
         return;
     }
     switch (array->type) {
@@ -463,6 +451,33 @@ void DynamicArray_empty(DynamicArray *array) {
     return;
 
 }
+
+const char *DynamicArray_error(ErrorCode error, const char* function) {
+    char errorMsg[256];
+
+    switch (error) {
+    case SUCCESS:
+        break;
+    case OUT_OF_MEMORY:
+        snprintf(errorMsg, sizeof(errorMsg), "%s Error: Unable to allocate memory.\n", function);
+        break;
+    case INVALID_ARGUMENT:
+        snprintf(errorMsg, sizeof(errorMsg), "%s Error: Invalid argument provided.\n", function);
+        break;
+    case INVALID_DATATYPE:
+        snprintf(errorMsg, sizeof(errorMsg), "%s Error: Invalid DataType provided.\n", function);
+        break;
+    case OUT_OF_BOUNDS_INDEX:
+        snprintf(errorMsg, sizeof(errorMsg), "%s Error: Index provided is out of bounds of the array.\n", function);
+        break;
+    default:
+        snprintf(errorMsg, sizeof(errorMsg), "%s Error: Unknown Error encountered!\n", function);
+        break;
+    }
+
+    return errorMsg;
+}
+
 
 // int DynamicArray_cmp(DataType type, void *elem1, void *elem2) {
 //     //We will have to use epsilons here again

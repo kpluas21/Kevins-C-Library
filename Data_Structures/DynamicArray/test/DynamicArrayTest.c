@@ -168,7 +168,23 @@ void test_DynamicArray_insert(void) {
 }
 
 void test_DynamicArray_find(void) {
+    for (size_t i = 1; i < 6; i++) {
+        TEST_ASSERT_EQUAL_INT(i - 1, DynamicArray_find(intVector, &i));
+    }
 
+    for (size_t i = 'a'; i < 'f'; i++) {
+        TEST_ASSERT_EQUAL(i - 'a', DynamicArray_find(charVector, &i));
+    }
+    
+    DynamicArray_print(floatVector);
+    DynamicArray_print(doubleVector);
+
+    //Testing value not found
+    int i = 32;
+    TEST_ASSERT_EQUAL(-1, DynamicArray_find(intVector, &i));
+    
+    char c = 't';
+    TEST_ASSERT_EQUAL_INT(-1, DynamicArray_find(charVector, &c));
 }
 
 void test_DynamicArray_empty(void) {
