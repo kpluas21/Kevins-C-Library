@@ -33,6 +33,7 @@ void test_DynamicArray_get(void);
 void test_DynamicArray_insert(void);
 void test_DynamicArray_find(void);
 void test_DynamicArray_empty(void);
+void test_DynamicArray_print(void);
 
 //setUp() will initilize these objs before every test
 static DynamicArray *intVector;
@@ -47,6 +48,7 @@ static DynamicArray *doubleVector;
 int main(void) {
     UNITY_BEGIN();
     RUN_TEST(test_DynamicArray_init);
+    RUN_TEST(test_DynamicArray_print);
     RUN_TEST(test_DynamicArray_delete);
     RUN_TEST(test_DynamicArray_get);
     RUN_TEST(test_DynamicArray_find);
@@ -176,9 +178,6 @@ void test_DynamicArray_find(void) {
         TEST_ASSERT_EQUAL(i - 'a', DynamicArray_find(charVector, &i));
     }
     
-    DynamicArray_print(floatVector);
-    DynamicArray_print(doubleVector);
-
     //Testing value not found
     int i = 32;
     TEST_ASSERT_EQUAL(-1, DynamicArray_find(intVector, &i));
@@ -203,4 +202,11 @@ void test_DynamicArray_empty(void) {
     TEST_ASSERT_NULL((char*)DynamicArray_get(charVector, 2));
     TEST_ASSERT_NULL((float*)DynamicArray_get(floatVector, 2));
     TEST_ASSERT_NULL((double*)DynamicArray_get(doubleVector, 2));
+}
+
+void test_DynamicArray_print(void) {
+    DynamicArray_print(intVector);
+    DynamicArray_print(charVector);
+    DynamicArray_print(floatVector);
+    DynamicArray_print(doubleVector);
 }

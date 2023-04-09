@@ -143,38 +143,25 @@ inline void DynamicArray_append(DynamicArray *array, void* elem) {
     }
     switch (array->type) {
     case INT: {
-        int *intElem = (int*) elem;
-        int *dest = array->data;
-        dest[array->size] = *intElem;
-        array->size++;
-
-        // *((int*)array->size + array->size) = *(int*)elem;
+        *((int*)array->size + array->size) = *(int*)elem;
         break;
     }
     case CHAR: {
-        char *charElem = (char*) elem;
-        char *dest = array->data;
-        dest[array->size] = *charElem;
-        array->size++;
+        *((char*)array->size + array->size) = *(char*)elem;
         break;
     }
     case DOUBLE: {
-        double *dbElem = (double*) elem;
-        double *dest = array->data;
-        dest[array->size] = *dbElem;
-        array->size++;
+        *((double*)array->size + array->size) = *(double*)elem;
         break;
     }
     case FLOAT: {
-        float *fltElem = (float*) elem;
-        float *dest = array->data;
-        dest[array->size] = *fltElem;
-        array->size++;
+        *((float*)array->size + array->size) = *(float*)elem;
         break;
     }
     case STRING:
         break;
     }
+    array->size++;
     return;
 }
 
@@ -240,28 +227,24 @@ size_t DynamicArray_find(DynamicArray *array, void *elem) {
         break;
     }
     case FLOAT: {
-        float *dest = array->data;
-        float *elemToFind = (float*) elem;
         for (size_t i = 0; i < array->size; i++) {
-            //DEBUG: Print the elements of the comparison
-            // printf("%.6f =? %.6f\n", dest[i], *elemToFind);
-            if(fabs(dest[i] - *elemToFind) < FLTEPSILON) {
+            if(fabs((*(float*)array->data + i) - (*(float*)elem)) < FLTEPSILON) {
                 return i;
             }
         }
+        
         break;
     }
     case DOUBLE: {
-        double *dest = array->data;
-        double *elemToFind = (double*) elem;
         for (size_t i = 0; i < array->size; i++) {
-            if(fabs(dest[i] - *elemToFind) < DBEPSILON) {
+            if(fabs((*(double*)array->data + i) - (*(double*)elem)) < DBEPSILON) {
                 return i;
             }
         }
         break;
     }
     default:
+        //TODO:DATATYPE ERROR HERE
         break;
     }
     return -1;
@@ -377,9 +360,8 @@ inline int DynamicArray_isEmpty(DynamicArray *array) {
 
 
 void DynamicArray_remove(DynamicArray *array, size_t index) {
-    //TODO: I don't think this is working as intended? If you iterate through
-    //the entire array, calling this function on each elem, you'll effectively cut it 
-    //in half. It takes away every other elem. 
+    //TODO: This acts funky when calling it more than a single time in a row
+    //Probably needs a complete do over
     if(index >= array->size) {
         fprintf(stderr, "Error: In function: %s: Invalid index provided : %zu\n", __func__, index);
         return;
@@ -453,25 +435,25 @@ void DynamicArray_empty(DynamicArray *array) {
 }
 
 const char *DynamicArray_error(ErrorCode error, const char* function) {
-    char errorMsg[256];
+    char *errorMsg = malloc(256);
 
     switch (error) {
     case SUCCESS:
         break;
     case OUT_OF_MEMORY:
-        snprintf(errorMsg, sizeof(errorMsg), "%s Error: Unable to allocate memory.\n", function);
+        snprintf(errorMsg, 256, "%s Error: Unable to allocate memory.\n", function);
         break;
     case INVALID_ARGUMENT:
-        snprintf(errorMsg, sizeof(errorMsg), "%s Error: Invalid argument provided.\n", function);
+        snprintf(errorMsg, 256, "%s Error: Invalid argument provided.\n", function);
         break;
     case INVALID_DATATYPE:
-        snprintf(errorMsg, sizeof(errorMsg), "%s Error: Invalid DataType provided.\n", function);
+        snprintf(errorMsg, 256, "%s Error: Invalid DataType provided.\n", function);
         break;
     case OUT_OF_BOUNDS_INDEX:
-        snprintf(errorMsg, sizeof(errorMsg), "%s Error: Index provided is out of bounds of the array.\n", function);
+        snprintf(errorMsg, 256, "%s Error: Index provided is out of bounds of the array.\n", function);
         break;
     default:
-        snprintf(errorMsg, sizeof(errorMsg), "%s Error: Unknown Error encountered!\n", function);
+        snprintf(errorMsg, 256, "%s Error: Unknown Error encountered!\n", function);
         break;
     }
 
