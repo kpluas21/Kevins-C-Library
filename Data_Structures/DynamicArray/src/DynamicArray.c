@@ -216,7 +216,7 @@ void DynamicArray_delete(DynamicArray **array) {
     }
     free(*array);
     (*array) = NULL;
-    
+
 }
 
 
@@ -343,36 +343,36 @@ int DynamicArray_insert(DynamicArray *array, void *elem, size_t index) {
     return 0;
 }
 
-void DynamicArray_get(DynamicArray *array, size_t index, void *result) {
+void *DynamicArray_get(DynamicArray *array, size_t index) {
     if(index >= array->size) {
         printf("Error: Out-of-bounds index provided : %zu\n", index);
-        result = NULL;
-        return;
+        return NULL;
     }
+
+    void *result = NULL;
+
     switch (array->type) {
     case INT: {
-        int *dest = array->data;
-        *(int*)result = dest[index];
-        return;
+        result = ((int*)array->data + index);
+        break;
     }
     case CHAR: {
-        char *dest = array->data;
-        *(char*)result = dest[index];
-        return;
+        result = ((char*)array->data + index);
+        break;
     }
     case FLOAT: {
-        float *dest = array->data;
-        *(float*)result = dest[index];
-        return;
+        result = ((float*)array->data + index);
+        break;
     }
     case DOUBLE: {
-        double *dest = array->data;
-        *(double*)result = dest[index];
-        return;
+        result = ((double*)array->data + index);
+        break;
     }
     default:
-        return;
+        return NULL;
     }
+
+    return result;
 }
 
 

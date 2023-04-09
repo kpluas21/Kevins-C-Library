@@ -29,6 +29,8 @@ void tearDown(void);
 
 void test_DynamicArray_init(void);
 void test_DynamicArray_delete(void);
+void test_DynamicArray_get(void);
+void test_DynamicArray_insert(void);
 
 /**
  * @brief Our main test function.
@@ -38,6 +40,7 @@ int main(void) {
     UNITY_BEGIN();
     RUN_TEST(test_DynamicArray_init);
     RUN_TEST(test_DynamicArray_delete);
+    RUN_TEST(test_DynamicArray_get);
     return UNITY_END();
 }
 
@@ -103,10 +106,12 @@ void test_DynamicArray_init(void) {
     TEST_ASSERT_EQUAL_INT(5, charVector->size);
     TEST_ASSERT_EQUAL_INT(5, floatVector->size);
     TEST_ASSERT_EQUAL_INT(5, doubleVector->size);
+
     TEST_ASSERT_EQUAL_INT(10, intVector->capacity);
     TEST_ASSERT_EQUAL_INT(10, charVector->capacity);
     TEST_ASSERT_EQUAL_INT(10, floatVector->capacity);
     TEST_ASSERT_EQUAL_INT(10, doubleVector->capacity);
+
     DynamicArray_delete(&intVector);
     DynamicArray_delete(&charVector);
     DynamicArray_delete(&floatVector);
@@ -145,4 +150,32 @@ void test_DynamicArray_delete(void) {
     TEST_ASSERT_NULL(charVector);
     TEST_ASSERT_NULL(floatVector);
     TEST_ASSERT_NULL(doubleVector);
+}
+
+void test_DynamicArray_get(void) {
+    int intArray[5] = {1,2,3,4,5};
+    char charArray[5] = {'a', 'b', 'c', 'd', 'e'};
+    // float floatArray[5];
+    // double doubleArray[5];
+
+    // for (size_t i = 0; i < 5; i++)
+    // {
+    //     floatArray[i] = generate_rand_float(3.14);
+    //     doubleArray[i] = generate_double_inRange(0.00, 1.00);
+    // }
+    
+
+    DynamicArray *intVector = DynamicArray_init(INT, intArray, 5);
+    DynamicArray *charVector = DynamicArray_init(CHAR, charArray, 5);
+    // DynamicArray *floatVector = DynamicArray_init(FLOAT, floatArray, 5);
+    // DynamicArray *doubleVector = DynamicArray_init(DOUBLE, doubleArray, 5);
+
+    TEST_ASSERT_EQUAL(3, *(int*)DynamicArray_get(intVector, 2));
+    TEST_ASSERT_EQUAL('c', *(char*)DynamicArray_get(charVector, 2));
+
+
+}
+
+void test_DynamicArray_insert(void)
+{
 }

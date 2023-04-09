@@ -20,10 +20,10 @@ From there, call the functions as needed, passing the pointer to your array. Mor
     DynamicArray_find(array, elemToFindPtr);
     DynamicArray_get(array, index);
     DynamicArray_print(array);
-As shown, you'll be using pointers quite a bit so make sure to call the provided delete function when you're done.
+As shown, you'll be using pointers quite a bit so make sure to call the provided delete function when you're done. Make sure you pass a reference to the pointer you've been working with. This will ensure that everything, including the pointer, is free'd and null'd safely!
 
 	    //....
-	    DynamicArray_delete(array);
+	    DynamicArray_delete(&array);
 	    return 0;
     }
 

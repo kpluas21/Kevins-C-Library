@@ -144,7 +144,7 @@ void DynamicArray_swap(DataType type, void *elem1, void *elem2);
  * @return Nothing. However, result will either contain the element requested or be NULL if 
  * an invalid index was provided.
  */
-void DynamicArray_get(DynamicArray *array, size_t index, void *result);
+void *DynamicArray_get(DynamicArray *array, size_t index);
 
 /**
  * @brief Attempts to sort the contents of the array in either ascending or descending order depending on
