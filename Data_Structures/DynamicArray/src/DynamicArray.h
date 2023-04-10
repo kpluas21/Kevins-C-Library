@@ -57,10 +57,10 @@ typedef enum ErrorCode {
  * @var DynamicArray::type
  */
 typedef struct DynamicArray {
-    DataType type;
-    size_t size;
-    size_t capacity;
-    void *data;
+    DataType     type;
+    size_t       size;
+    size_t   capacity;
+    void        *data;
 }DynamicArray;
 
 /**
