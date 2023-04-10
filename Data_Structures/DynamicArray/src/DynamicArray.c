@@ -349,9 +349,22 @@ void *DynamicArray_get(DynamicArray *array, size_t index) {
 }
 
 
-// inline void DynamicArray_sort(DynamicArray *array, int mode) {
-//     //TODO: IMPLEMENT THIS
-// }
+inline void DynamicArray_sort(DynamicArray *array, int mode) {
+    switch(array->type) {
+    case INT: {
+
+        break;
+    }
+    case CHAR:
+        break;
+    case FLOAT:
+        break;
+    case DOUBLE:
+        break;
+    default:
+        break;
+    }
+}
 
 
 inline int DynamicArray_isEmpty(DynamicArray *array) {
@@ -461,77 +474,77 @@ const char *DynamicArray_error(ErrorCode error, const char* function) {
 }
 
 
-// int DynamicArray_cmp(DataType type, void *elem1, void *elem2) {
-//     //We will have to use epsilons here again
-//     switch (type) {
-//     case INT: {
-//         int *l = (int*) elem1;
-//         int *r = (int*) elem2;
+int DynamicArray_cmp(DataType type, void *elem1, void *elem2) {
+    //We will have to use epsilons here again
+    switch (type) {
+    case INT: {
+        return *(int*)elem1 - *(int*)elem2;
+    }
+    case CHAR: {
+        return *(char*)elem1 - *(char*)elem2;
 
-//         return *l - *r;
-//     }
-//     case CHAR: {
-//         char *l = (char*) elem1;
-//         char *r = (char*) elem2;
+    }
+    case FLOAT: {
+        //Nearly equal as dictated by the epsilon
+        if(fabs((*(float*)elem1) - (*(float*)elem2)) < FLTEPSILON) {
+            return 0;
+        }
+        else if(*(float*)elem1 > *(float*)elem2) {
+            return 1;
+        }
+        return -1;
+    }
+    case DOUBLE: {
+        //Nearly equal as dictated by the epsilon
+        if(fabs((*(double*)elem1) - (*(double*)elem2)) < DBEPSILON) {
+            return 0;
+        }
+        else if(*(double*)elem1 > *(double*)elem2) {
+            return 1;
+        }
+        return -1;
+    }
+    default:
+        return 0;
+    }
 
-//         return *l - *r;
-//     }
-//     case FLOAT: {
-//         float *l = (float*) elem1;
-//         float *r = (float*) elem2;
+    //It should not reach here !!!
+    return 0;
 
-//         //Nearly equal
-//         if(fabs(*l - *r) < FLTEPSILON) {
-//             return 0;
-//         }
+}
 
-//         else if(*l > *r) {
-//             return 1;
-//         }
-//         //
-//         return -1;
-//     }
-//     case DOUBLE: {
-//         double *l = (double*) elem1;
-//         double *r = (double*) elem2;
-//         break;
-//         //Nearly equal
-//         if(fabs(*l - *r) < DBEPSILON) {
-//             return 0;
-//         }
+void DynamicArray_swap(DataType type, void *elem1, void *elem2) {
+    void *temp = malloc(sizeof(double));
 
-//         else if(*l > *r) {
-//             return 1;
-//         }
-//         //
-//         return -1;
-//     }
-//     default:
-//         return 0;
-//     }
-
-//     //It should not reach here !!!
-//     return 0;
-
-// }
-
-// void DynamicArray_swap(DataType type, void *elem1, void *elem2) {
-//     switch(type) {
-//     case INT: {
-//         int *l, *r, *temp;
-        
-//     }
-//         break;
-//     case CHAR:
-//         break;
-//     case FLOAT:
-//         break;
-//     case DOUBLE:
-//         break;
-//     default:
-//         break;
-//     }
-// }
+    switch(type) {
+    case INT: {
+        *(int*)temp = *(int*)elem1;
+        *(int*)elem1 = *(int*)elem2;
+        *(int*)elem2 = *(int*)temp;
+    }
+        break;
+    case CHAR: {
+        *(char*)temp = *(char*)elem1;
+        *(char*)elem1 = *(char*)elem2;
+        *(char*)elem2 = *(char*)temp;
+    }
+        break;
+    case FLOAT: {
+        *(float*)temp = *(float*)elem1;
+        *(float*)elem1 = *(float*)elem2;
+        *(float*)elem2 = *(float*)temp;
+    }
+        break;
+    case DOUBLE: {
+        *(double*)temp = *(double*)elem1;
+        *(double*)elem1 = *(double*)elem2;
+        *(double*)elem2 = *(double*)temp;
+    }
+        break;
+    default:
+        break;
+    }
+}
 
 
 /**
