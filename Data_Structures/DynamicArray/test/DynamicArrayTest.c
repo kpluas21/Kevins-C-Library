@@ -36,6 +36,7 @@ void test_DynamicArray_empty(void);
 void test_DynamicArray_print(void);
 void test_DynamicArray_swap(void);
 void test_DynamicArray_cmp(void);
+void test_DynamicArray_sort(void);
 
 //setUp() will initilize these objs before every test
 static DynamicArray *intVector;
@@ -56,6 +57,7 @@ int main(void) {
     RUN_TEST(test_DynamicArray_find);
     RUN_TEST(test_DynamicArray_empty);
     RUN_TEST(test_DynamicArray_swap);
+    RUN_TEST(test_DynamicArray_sort);
     return UNITY_END();
 }
 
@@ -220,5 +222,31 @@ void test_DynamicArray_swap(void) {
 }
 
 void test_DynamicArray_cmp(void) {
+    
+}
+
+void test_DynamicArray_sort(void) {
+    int randInt;
+    double randDouble;
+    //First, we empty the arrays and fill them with random numbers.
+    DynamicArray_empty(intVector);
+    DynamicArray_empty(doubleVector);
+    for (int i = 0; i < 1001; i++)
+    {
+        randDouble = generate_double_inRange(0.0, 1.0);
+        randInt = rand() % 1000;
+        DynamicArray_append(intVector, &randInt);
+        DynamicArray_append(doubleVector, &randDouble);
+    }
+    puts("Before _sort: \n");
+    DynamicArray_print(intVector);
+    DynamicArray_print(doubleVector);
+
+    DynamicArray_sort(intVector);
+    DynamicArray_sort(doubleVector);
+    
+    puts("After _sort: \n");
+    DynamicArray_print(intVector);
+    DynamicArray_print(doubleVector);
     
 }

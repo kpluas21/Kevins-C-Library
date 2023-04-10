@@ -143,19 +143,19 @@ inline void DynamicArray_append(DynamicArray *array, void* elem) {
     }
     switch (array->type) {
     case INT: {
-        *((int*)array->size + array->size) = *(int*)elem;
+        *((int*)array->data + array->size) = *(int*)elem;
         break;
     }
     case CHAR: {
-        *((char*)array->size + array->size) = *(char*)elem;
+        *((char*)array->data + array->size) = *(char*)elem;
         break;
     }
     case DOUBLE: {
-        *((double*)array->size + array->size) = *(double*)elem;
+        *((double*)array->data + array->size) = *(double*)elem;
         break;
     }
     case FLOAT: {
-        *((float*)array->size + array->size) = *(float*)elem;
+        *((float*)array->data + array->size) = *(float*)elem;
         break;
     }
     case STRING:
@@ -349,18 +349,81 @@ void *DynamicArray_get(DynamicArray *array, size_t index) {
 }
 
 
-inline void DynamicArray_sort(DynamicArray *array, int mode) {
+inline void DynamicArray_sort(DynamicArray *array) {
+    size_t j;
     switch(array->type) {
     case INT: {
-
+        for (size_t i = 0; i < array->size - 1; i++)
+        {
+            size_t min = i;
+            for (j = i; j < array->size; j++)
+            {
+                if(DynamicArray_cmp(INT, ((int*)array->data + j), ((int*)array->data + min)) < 0) {
+                    min = j;
+                }
+            }
+            if(min != i) {
+                DynamicArray_swap(INT, (int*)array->data + i, (int*)array->data + min);
+            }
+            
+        }
+        
         break;
     }
-    case CHAR:
+    case CHAR: {
+        for (size_t i = 0; i < array->size - 1; i++)
+        {
+            size_t min = i;
+            for (j = i; j < array->size; j++)
+            {
+                if(DynamicArray_cmp(CHAR, ((char*)array->data + j), ((char*)array->data + min)) < 0) {
+                    min = j;
+                }
+            }
+            if(min != i) {
+                DynamicArray_swap(CHAR, (char*)array->data + i, (char*)array->data + min);
+            }
+            
+        }
+        
         break;
-    case FLOAT:
+    }
+    case FLOAT: {
+        for (size_t i = 0; i < array->size - 1; i++)
+        {
+            size_t min = i;
+            for (j = i; j < array->size; j++)
+            {
+                if(DynamicArray_cmp(FLOAT, ((float*)array->data + j), ((float*)array->data + min)) < 0) {
+                    min = j;
+                }
+            }
+            if(min != i) {
+                DynamicArray_swap(FLOAT, (float*)array->data + i, (float*)array->data + min);
+            }
+            
+        }
+        
         break;
-    case DOUBLE:
+    }
+    case DOUBLE: {
+        for (size_t i = 0; i < array->size - 1; i++)
+        {
+            size_t min = i;
+            for (j = i; j < array->size; j++)
+            {
+                if(DynamicArray_cmp(DOUBLE, ((double*)array->data + j), ((double*)array->data + min)) < 0) {
+                    min = j;
+                }
+            }
+            if(min != i) {
+                DynamicArray_swap(DOUBLE, (double*)array->data + i, (double*)array->data + min);
+            }
+            
+        }
+        
         break;
+    }
     default:
         break;
     }
@@ -373,8 +436,7 @@ inline int DynamicArray_isEmpty(DynamicArray *array) {
 
 
 void DynamicArray_remove(DynamicArray *array, size_t index) {
-    //TODO: This acts funky when calling it more than a single time in a row
-    //Probably needs a complete do over
+
     if(index >= array->size) {
         fprintf(stderr, "Error: In function: %s: Invalid index provided : %zu\n", __func__, index);
         return;

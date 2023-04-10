@@ -23,7 +23,6 @@
 //TODO: FUNCTIONS TO BE ADDED
 /** * 
  * 1) remove : Removes an element from the array , everything will have to be stitched together
- * 3) sort : Sorts the elements of the array either in ascending or descending order. 
  */
 
 #include<stddef.h>
@@ -159,7 +158,7 @@ void *DynamicArray_get(DynamicArray *array, size_t index);
  * @param array The DynamicArray pointer
  * @param mode 1 : Descending, anything else if ascending.
  */
-void DynamicArray_sort(DynamicArray *array, int mode);
+void DynamicArray_sort(DynamicArray *array);
 
 /**
  * @brief Returns 0 if the array is empty. Otherwise, returns a nonzero value.
