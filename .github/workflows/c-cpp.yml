@@ -10,6 +10,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: make DynamicArrayTest
-      run: cd Data_Structures/DynamicArray/ && make -f DynamicArrayTestmake.mk
-    - name: make test
-      run: make -f DynamicArrayTestmake.mk test
+      run: cd Data_Structures/DynamicArray/ && make -f DynamicArrayTestmake.mk && make -f DynamicArrayTestmake.mk test
