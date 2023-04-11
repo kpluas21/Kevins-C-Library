@@ -35,3 +35,8 @@ RM_FR  = rm -fr
 
 clean:
 	${RM_FR} ${FILES.o} ${PROGRAM} ${DEBRIS}
+
+TEST = ./DynamicArrayTest
+
+test:
+	${TEST}
