@@ -1,6 +1,6 @@
-PROGRAM = DynamicArrayTest
-FILES.c = test/DynamicArrayTest.c src/DynamicArray.c ../lib/unity.c
-FILES.h = DynamicArray.h ../lib/unity.h ../lib/unity_internals.h
+PROGRAM = LinkCTest
+FILES.c = test/LinkCTest.c src/LinkC.c ../lib/unity.c
+FILES.h = LinkC.h ../lib/unity.h ../lib/unity_internals.h
 FILES.o = ${FILES.c:.c=.o}
 
 CC = gcc

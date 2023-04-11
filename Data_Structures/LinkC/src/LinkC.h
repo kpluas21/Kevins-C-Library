@@ -7,6 +7,9 @@
  * 
  * @copyright Copyright (c) 2023
  * 
+ * 
+ * @note The nodes are capable of storing ANY types of data, however I wanted to keep
+ * it simple and only allow one type for the entire list. 
  */
 
 #include<stddef.h>
@@ -23,6 +26,9 @@ typedef enum DataType {
     STRING,
 
 }DataType;
+
+//Forward declaration
+typedef struct LinkCNode LinkCNode;
 
 /**
  * @struct LinkC
@@ -79,6 +85,13 @@ void LinkC_append(LinkC *list, void *data);
  * @return The index where the data can be found, -1 otherwise.
  */
 int LinkC_find(LinkC *list, void *data);
+
+/**
+ * @brief Prints the contents of our linked list
+ * 
+ * @param list Our LinkC pointer
+ */
+void LinkC_print(LinkC *list);
 
 /**
  * @brief Frees up all the memory used by our list.

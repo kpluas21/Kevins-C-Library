@@ -2,7 +2,7 @@
  * @file DynamicArrayTest.c
  * @author Kevin Pluas (kpluas21@gmail.com)
  * @brief Unit testing for DynamicArray.h
- * @version 0.1
+ * @version 0.0.3
  * @date 2023-04-02
  * 
  * @copyright Copyright (c) 2023
@@ -16,7 +16,7 @@
 #include<time.h>
 
 #include"../src/DynamicArray.h"
-#include"unity.h"
+#include"../../lib/unity.h"
 
 double generate_double_inRange(double min, double max);
 float generate_rand_float(float max);
