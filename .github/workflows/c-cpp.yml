@@ -9,6 +9,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - name: What directory is this? Where the h*ck is my makefile?
+      run: ls
     - name: make DynamicArray
       run: make -f DynamicArrayTestmake.mk
     - name: make check
