@@ -10,8 +10,8 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Setup tests for DynamicArray
-      working-directory: Data-Structures/DynamicArray/
+      working-directory: Data_Structures/DynamicArray/
       run: make -f DynamicArrayTestmake.mk
     - name: Run tests for DynamicArray
-      working-directory: Data-Structures/DynamicArray/
+      working-directory: Data_Structures/DynamicArray/
       run: ./DynamicArrayTest
