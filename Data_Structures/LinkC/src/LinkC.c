@@ -74,29 +74,113 @@ LinkC *LinkC_init(DataType type, void *data) {
     return list;
 }
 
-// void LinkC_append(LinkC *list, void *data) {
+void LinkC_append(LinkC *list, void *data) {
+    LinkCNode *current = list->tail;
+    size_t numBytes;
 
-// }
+    //At this point, the next node does not exist.
+    LinkCNode *newNode = malloc(sizeof(LinkCNode));
+    if(newNode == NULL) {
+        fprintf(stderr, "%s Error: Unable to initialize newNode\n", __func__);
+        return;
+    }
 
-//
+    newNode->data = NULL;
+
+    switch (list->type) {
+    case INT: {
+        newNode->data = malloc(sizeof(int));
+        numBytes = sizeof(int);
+        break;
+    }
+    case CHAR: {
+        newNode->data = malloc(sizeof(char));
+        numBytes = sizeof(char);
+        break;
+    }
+    case FLOAT: {
+        newNode->data = malloc(sizeof(float));
+        numBytes = sizeof(float);
+        break;
+    }
+    case DOUBLE: {
+        newNode->data = malloc(sizeof(double));
+        numBytes = sizeof(double);
+        break;
+    }
+    case STRING: {
+        newNode->data = malloc(strlen((char*)data) + 1);
+        numBytes = strlen((char*)data) + 1;
+        break;
+    }
+    default:
+        break;
+    }
+
+    if(newNode->data == NULL) {
+        fprintf(stderr, "%s Error: Unable to initialize newNode->data\n", __func__);
+        free(newNode);
+        return;
+    }
+
+    memcpy(newNode->data, data, numBytes);
+
+    list->tail = newNode;
+    current->next = newNode;
+    newNode->prev = current;
+    newNode->next = NULL;
+    list->size++;
+}
+
+
 void LinkC_print(LinkC *list) {
     LinkCNode *current = list->head;
 
     switch (list->type) {
     case INT: {
-
+        while(current != NULL) {
+            printf("[%d]", *(int*)current->data);
+            printf("->");
+            current = current->next;
+        }
+        puts("|");
+        break;
     }
     case CHAR: {
-
+        while(current != NULL) {
+            printf("[%c]", *(char*)current->data);
+            printf("->");
+            current = current->next;
+        }
+        puts("|");
+        break;
     }
     case FLOAT: {
-
+        while(current != NULL) {
+            printf("[%2.3f]", *(float*)current->data);
+            printf("->");
+            current = current->next;
+        }
+        puts("|");
+        break;
     }
     case DOUBLE: {
-
+        while(current != NULL) {
+            printf("[%0.6f]", *(double*)current->data);
+            printf("->");
+            current = current->next;
+        }
+        puts("|");
+        break;
     }
     case STRING: {
-
+        while(current != NULL) {
+            printf("[%s]", *(char**)current->data);
+            printf("->");
+            current = current->next;
+        }
+        puts("|");
+        break;
     }
     default:
         break;

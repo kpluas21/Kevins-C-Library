@@ -87,8 +87,9 @@ void LinkC_append(LinkC *list, void *data);
 int LinkC_find(LinkC *list, void *data);
 
 /**
- * @brief Prints the contents of our linked list
- * 
+ * @brief Prints a visual representation of our linked list. You probably shouldn't use 
+ * this for really large lists...
+ * @note [elem1]->[elem2]->...[elemN]->|
  * @param list Our LinkC pointer
  */
 void LinkC_print(LinkC *list);

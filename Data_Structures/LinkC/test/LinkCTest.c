@@ -20,6 +20,8 @@
 
 void test_LinkC_init(void);
 void test_LinkC_delete(void);
+void test_LinkC_append(void);
+void test_LinkC_print(void);
 
 void setUp(void);
 void tearDown(void);
@@ -36,10 +38,13 @@ static LinkC *stringList;
 
 
 int main(void) {
+    UNITY_BEGIN();
     RUN_TEST(test_LinkC_init);
     RUN_TEST(test_LinkC_delete);
+    RUN_TEST(test_LinkC_append);
+    RUN_TEST(test_LinkC_print);
 
-    return 0;
+    return UNITY_END();
 }
 
 void setUp(void) {
@@ -85,4 +90,32 @@ void tearDown(void) {
     LinkC_delete(&floatList);
     LinkC_delete(&doubleList);
     LinkC_delete(&stringList);
+}
+
+void test_LinkC_append(void) {
+    int i = 2;
+    char c = 'b';
+    float f = 5.43;
+    double d = 0.66531;
+    const char* s = "Valerie Ramirez";
+    LinkC_append(intList, &i); 
+    LinkC_append(charList, &c); 
+    LinkC_append(floatList, &f); 
+    LinkC_append(doubleList, &d); 
+    LinkC_append(stringList, &s); 
+
+    TEST_ASSERT_NOT_NULL(intList->head->next->data);
+    TEST_ASSERT_NOT_NULL(charList->head->next->data);
+    TEST_ASSERT_NOT_NULL(floatList->head->next->data);
+    TEST_ASSERT_NOT_NULL(doubleList->head->next->data);
+    TEST_ASSERT_NOT_NULL(stringList->head->next->data);
+    
+}
+
+void test_LinkC_print(void) {
+    LinkC_print(intList);
+    LinkC_print(charList);
+    LinkC_print(floatList);
+    LinkC_print(doubleList);
+    LinkC_print(stringList);
 }
