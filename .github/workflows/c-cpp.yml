@@ -12,7 +12,7 @@ jobs:
     - name: What directory is this? Where the h*ck is my makefile?
       run: ls
     - name: make DynamicArray
-      run: make -f DynamicArrayTestmake.mk
+      run: make -f Data_Structure/DynamicArray/DynamicArrayTestmake.mk
     - name: make check
       run: make check
     - name: make distcheck
