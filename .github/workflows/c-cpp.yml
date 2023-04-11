@@ -9,10 +9,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Change Directory
-      run: cd Data_Structures/DynamicArray/
     - name: make DynamicArrayTest
-      run: make -f DynamicArrayTestmake.mk
+      run: cd Data_Structures/DynamicArray/ && make -f DynamicArrayTestmake.mk
     - name: make check
       run: make check
     - name: make distcheck
