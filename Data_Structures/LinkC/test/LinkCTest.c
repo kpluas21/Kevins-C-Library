@@ -23,6 +23,8 @@ void test_LinkC_delete(void);
 void test_LinkC_append(void);
 void test_LinkC_print(void);
 
+void test_LinkC_find(void);
+
 void setUp(void);
 void tearDown(void);
 
@@ -43,6 +45,7 @@ int main(void) {
     RUN_TEST(test_LinkC_delete);
     RUN_TEST(test_LinkC_append);
     RUN_TEST(test_LinkC_print);
+    RUN_TEST(test_LinkC_find);
 
     return UNITY_END();
 }
@@ -118,4 +121,19 @@ void test_LinkC_print(void) {
     LinkC_print(floatList);
     LinkC_print(doubleList);
     LinkC_print(stringList);
+}
+
+void test_LinkC_find(void) {
+    int i = 5;
+    char a = 'a';
+    float f = 3.14;
+    double d = 0.073902;
+    const char* s = "Kevin Pluas";
+
+
+    TEST_ASSERT_EQUAL_INT(0, LinkC_find(intList, &i));
+    TEST_ASSERT_EQUAL_INT(0, LinkC_find(charList, &a));
+    TEST_ASSERT_EQUAL_INT(0, LinkC_find(floatList, &f));
+    TEST_ASSERT_EQUAL_INT(0, LinkC_find(doubleList, &d));
+    TEST_ASSERT_EQUAL_INT(0, LinkC_find(stringList, &s));
 }

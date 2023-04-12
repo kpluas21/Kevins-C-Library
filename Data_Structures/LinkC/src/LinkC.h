@@ -72,14 +72,14 @@ LinkC *LinkC_init(DataType type, void *data);
 /**
  * @brief Appends an element to the end of the linked list. 
  * 
- * @param list 
- * @param data 
+ * @param list Our LinkC pointer
+ * @param data The data to append to our list
  */
 void LinkC_append(LinkC *list, void *data);
 
 /**
- * @brief Attempts to search for the given data in the linked list.
- * 
+ * @brief Linearly searches for the given data in the linked list.
+ * @note Worst case running time : O(n)
  * @param list Our LinkC pointer
  * @param data The data to search for
  * @return The index where the data can be found, -1 otherwise.
@@ -88,7 +88,8 @@ int LinkC_find(LinkC *list, void *data);
 
 /**
  * @brief Prints a visual representation of our linked list. You probably shouldn't use 
- * this for really large lists...
+ * this for really large lists. For that I'd recommend implementing your own
+ * print function.
  * @note [elem1]->[elem2]->...[elemN]->|
  * @param list Our LinkC pointer
  */

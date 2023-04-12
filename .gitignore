@@ -54,3 +54,4 @@ dkms.conf
 .vscode/settings.json
 Data_Structures/DynamicArray/DynamicArrayTest
 .vscode/c_cpp_properties.json
+Data_Structures/LinkC/LinkCTest

@@ -16,6 +16,9 @@
 
 #include"LinkC.h"
 
+#define FLOAT_EPSILON 0.001
+#define DOUBLE_EPSILON 0.000001
+
 LinkC *LinkC_init(DataType type, void *data) {
     LinkC *list = malloc(sizeof(LinkC));
     if(list == NULL) {
@@ -186,6 +189,68 @@ void LinkC_print(LinkC *list) {
         break;
     }
 
+}
+
+int LinkC_find(LinkC *list, void *data) {
+    LinkCNode *current = list->head;
+    int index = 0;
+
+    switch(list->type) {
+    case INT: {
+        while(current != NULL) {
+            if(*(int*)current->data == *(int*)data) {
+                return index;
+            }
+            current = current->next;
+            index++;
+        }
+        break;
+    }
+    case CHAR: {
+        while(current != NULL) {
+            if(*(char*)current->data == *(char*)data) {
+                return index;
+            }
+            current = current->next;
+            index++;
+        }
+        break;
+    }
+    case FLOAT: {
+        while(current != NULL) {
+            if(fabs( (*(float*)current->data) - (*(float*)data) ) < FLOAT_EPSILON) {
+                return index;
+            }
+            current = current->next;
+            index++;
+        }
+        break;
+    }
+    case DOUBLE: {
+        while(current != NULL) {
+            if(fabs( (*(double*)current->data) - (*(double*)data) ) < DOUBLE_EPSILON) {
+                return index;
+            }
+            current = current->next;
+            index++;
+        }
+        break;
+    }
+    case STRING: {
+        while(current != NULL) {
+            if(strcmp(*(char**)current->data, *(char**)data) == 0) {
+                return index;
+            }
+            current = current->next;
+            index++;
+        }
+        break;
+    }
+    default:
+        break;
+    }
+
+    return -1;
 }
 
 void LinkC_delete(LinkC **list) {
