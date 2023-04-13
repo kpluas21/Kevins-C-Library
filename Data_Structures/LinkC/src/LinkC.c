@@ -118,3 +118,27 @@ void LinkC_delete(LinkC **list) {
     (*list) = NULL;
     
 }
+
+void LinkC_insert_at_index(LinkC *list, void *data, int index) {
+    LinkCNode *current = list->head;
+
+    LinkCNode *newNode = malloc(sizeof(LinkCNode));
+    if(newNode == NULL) {
+        return;
+    }
+
+    newNode->data = malloc(list->dataSize);
+    if(newNode->data == NULL) {
+        free(newNode);
+        return;
+    }
+
+    int currentIndex = 0;
+    while(current != NULL) {
+        if(currentIndex == index) {
+            
+        }
+    }
+
+
+}
