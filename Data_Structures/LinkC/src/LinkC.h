@@ -80,3 +80,5 @@ void *LinkC_get(LinkC *list, int indexOfElem);
 int LinkC_find(LinkC *list, void *data);
 
 void LinkC_delete(LinkC **list);
+
+void LinkC_insert_at_index(LinkC *list, void *data, int index);
