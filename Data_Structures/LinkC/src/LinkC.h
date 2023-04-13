@@ -40,8 +40,8 @@ typedef struct LinkCNode LinkCNode;
  * 
  */
 typedef struct LinkC {
-    DataType   type;
-    size_t     size;
+    size_t     dataSize;
+    size_t     alloc_Data;   
     LinkCNode *head;
     LinkCNode *tail;
 }LinkC;
@@ -60,44 +60,23 @@ typedef struct LinkCNode {
     void      *data;
 }LinkCNode;
 
-/**
- * @brief Initializes our linked list.
- * 
- * @param type The data type of the elements in the list
- * @param data The first element to be appended to the list
- * @return A pointer to the LinkC struct. 
- */
-LinkC *LinkC_init(DataType type, void *data);
 
 /**
- * @brief Appends an element to the end of the linked list. 
+ * @brief 
  * 
- * @param list Our LinkC pointer
- * @param data The data to append to our list
+ * @param dataSize 
+ * @param data 
+ * @return LinkC* 
  */
+LinkC *LinkC_init(size_t dataSize, void *data);
+
+
+size_t LinkC_size(LinkC *list);
+
 void LinkC_append(LinkC *list, void *data);
 
-/**
- * @brief Linearly searches for the given data in the linked list.
- * @note Worst case running time : O(n)
- * @param list Our LinkC pointer
- * @param data The data to search for
- * @return The index where the data can be found, -1 otherwise.
- */
+void *LinkC_get(LinkC *list, int indexOfElem);
+
 int LinkC_find(LinkC *list, void *data);
 
-/**
- * @brief Prints a visual representation of our linked list. You probably shouldn't use 
- * this for really large lists. For that I'd recommend implementing your own
- * print function.
- * @note [elem1]->[elem2]->...[elemN]->|
- * @param list Our LinkC pointer
- */
-void LinkC_print(LinkC *list);
-
-/**
- * @brief Frees up all the memory used by our list.
- * 
- * @param list Our linked list. Becomes NULL on completion.
- */
 void LinkC_delete(LinkC **list);

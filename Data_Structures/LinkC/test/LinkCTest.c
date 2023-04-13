@@ -19,9 +19,10 @@
 
 
 void test_LinkC_init(void);
-void test_LinkC_delete(void);
+
+void test_LinkC_get(void);
+
 void test_LinkC_append(void);
-void test_LinkC_print(void);
 
 void test_LinkC_find(void);
 
@@ -33,107 +34,59 @@ void tearDown(void);
  * 
  */
 static LinkC *intList;
-static LinkC *charList;
-static LinkC *floatList;
-static LinkC *doubleList;
-static LinkC *stringList;
-
 
 int main(void) {
     UNITY_BEGIN();
     RUN_TEST(test_LinkC_init);
-    RUN_TEST(test_LinkC_delete);
+    RUN_TEST(test_LinkC_get);
     RUN_TEST(test_LinkC_append);
-    RUN_TEST(test_LinkC_print);
     RUN_TEST(test_LinkC_find);
-
     return UNITY_END();
-}
-
-void setUp(void) {
-    int i = 5;
-    char a = 'a';
-    float f = 3.14;
-    double d = 0.073902;
-    const char* s = "Kevin Pluas";
-
-    intList = LinkC_init(INT, &i);
-    charList = LinkC_init(CHAR, &a);
-    floatList = LinkC_init(FLOAT, &f);
-    doubleList = LinkC_init(DOUBLE, &d);
-    stringList = LinkC_init(STRING, &s);
 }
 
 void test_LinkC_init(void) {
     TEST_ASSERT_NOT_NULL(intList);
-    TEST_ASSERT_NOT_NULL(charList);
-    TEST_ASSERT_NOT_NULL(floatList);
-    TEST_ASSERT_NOT_NULL(doubleList);
-    TEST_ASSERT_NOT_NULL(stringList);
 }
 
+void test_LinkC_get(void) {
+    //Correct inputs
+    TEST_ASSERT_EQUAL_INT(1, *(int*)LinkC_get(intList, 0));
 
-void test_LinkC_delete(void) {
-    LinkC_delete(&intList);
-    LinkC_delete(&charList);
-    LinkC_delete(&floatList);
-    LinkC_delete(&doubleList);
-    LinkC_delete(&stringList);
+    //Incorrect inputs
+    TEST_ASSERT_NULL(LinkC_get(intList, 5));
+}
 
-    TEST_ASSERT_NULL(intList);
-    TEST_ASSERT_NULL(charList);
-    TEST_ASSERT_NULL(floatList);
-    TEST_ASSERT_NULL(doubleList);
-    TEST_ASSERT_NULL(stringList);
+void test_LinkC_append(void) {
+    for (int i = 2; i < 101; i++) {
+        LinkC_append(intList, &i);
+    }
+    
+    TEST_ASSERT_EQUAL_size_t(100, LinkC_size(intList));
+}
+
+void test_LinkC_find(void) {
+    for (int i = 2; i < 101; i++) {
+        LinkC_append(intList, &i);
+    }
+    
+    //Correct input
+    int i = 35;
+    TEST_ASSERT_EQUAL_INT(34, LinkC_find(intList, &i));
+
+    i = 200;
+    //Incorrect
+    TEST_ASSERT_EQUAL_INT(-1, LinkC_find(intList, &i));
+}
+
+void setUp(void) {
+    int i = 1;
+
+    intList = LinkC_init(sizeof(int), &i);
+
 }
 
 void tearDown(void) {
     LinkC_delete(&intList);
-    LinkC_delete(&charList);
-    LinkC_delete(&floatList);
-    LinkC_delete(&doubleList);
-    LinkC_delete(&stringList);
 }
 
-void test_LinkC_append(void) {
-    int i = 2;
-    char c = 'b';
-    float f = 5.43;
-    double d = 0.66531;
-    const char* s = "Valerie Ramirez";
-    LinkC_append(intList, &i); 
-    LinkC_append(charList, &c); 
-    LinkC_append(floatList, &f); 
-    LinkC_append(doubleList, &d); 
-    LinkC_append(stringList, &s); 
 
-    TEST_ASSERT_NOT_NULL(intList->head->next->data);
-    TEST_ASSERT_NOT_NULL(charList->head->next->data);
-    TEST_ASSERT_NOT_NULL(floatList->head->next->data);
-    TEST_ASSERT_NOT_NULL(doubleList->head->next->data);
-    TEST_ASSERT_NOT_NULL(stringList->head->next->data);
-    
-}
-
-void test_LinkC_print(void) {
-    LinkC_print(intList);
-    LinkC_print(charList);
-    LinkC_print(floatList);
-    LinkC_print(doubleList);
-    LinkC_print(stringList);
-}
-
-void test_LinkC_find(void) {
-    int i = 5;
-    char a = 'a';
-    float f = 3.14;
-    double d = 0.073902;
-    const char* s = "Kevin Pluas";
-
-
-    TEST_ASSERT_EQUAL_INT(0, LinkC_find(intList, &i));
-    TEST_ASSERT_EQUAL_INT(0, LinkC_find(charList, &a));
-    TEST_ASSERT_EQUAL_INT(0, LinkC_find(floatList, &f));
-    TEST_ASSERT_EQUAL_INT(0, LinkC_find(doubleList, &d));
-    TEST_ASSERT_EQUAL_INT(0, LinkC_find(stringList, &s));
-}
