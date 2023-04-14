@@ -16,6 +16,8 @@
 
 #include"LinkC.h"
 
+
+
 LinkC *LinkC_init(size_t dataSize, void *data) {
     LinkC *list = malloc(sizeof(LinkC));
     LinkCNode *head = malloc(sizeof(LinkCNode));
@@ -183,4 +185,14 @@ void LinkC_insert_at_index(LinkC *list, void *data, size_t index) {
     current->prev = newNode;
 
     return;
+}
+
+const char *LinkC_error_report(ErrorCode code, const char* function_name) {
+    const char *error_string = NULL;
+    if(code >= E_ERROR_COUNT) {
+        return error_string;
+    }
+
+    error_string = ERROR_STRINGS[code];
+    return error_string;
 }

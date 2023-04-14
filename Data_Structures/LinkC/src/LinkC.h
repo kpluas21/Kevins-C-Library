@@ -14,15 +14,29 @@
 
 #include<stddef.h>
 
+/**
+ * @brief ErrorCodes used for debugging errors that occur while using LinkC
+ * 
+ */
 typedef enum ErrorCode {
-    SUCCESS = 0, 
-    OUT_OF_MEMORY,
-    INVALID_ARGUMENT, 
-    INVALID_DATATYPE,
-    OUT_OF_BOUNDS_INDEX,
-    UNKNOWN_ERROR,
+    E_SUCCESS = 0,
+    E_OUT_OF_MEMORY,
+    E_INVALID_ARGUMENT, 
+    E_INVALID_DATATYPE,
+    E_OUT_OF_BOUNDS_INDEX,
+    E_UNKNOWN_ERROR,
+    E_ERROR_COUNT, //Dummy error, used to determine how many valid codes there are
 
 }ErrorCode;
+
+const char* const ERROR_STRINGS[] = {
+    "E_SUCCESS",
+    "E_OUT_OF_MEMORY",
+    "E_INVALID_ARGUMENT",
+    "E_INVALID_DATATYPE",
+    "E_OUT_OF_BOUNDS_INDEX",
+    "E_UNKNOWN_ERROR",
+};
 
 /**
  * @enum DataType
@@ -80,17 +94,68 @@ typedef struct LinkCNode {
  */
 LinkC *LinkC_init(size_t dataSize, void *data);
 
-
+/**
+ * @brief Returns the number of elements in the array
+ * 
+ * @param list LinkC pointer to our list
+ * @return Number of elements as size_t
+ */
 size_t LinkC_size(LinkC *list);
 
+/**
+ * @brief Inserts a single element at the end of the list
+ * 
+ * @param list LinkC pointer to our list
+ * @param data Void pointer to our data
+ */
 void LinkC_insert_at_end(LinkC *list, void *data);
 
+/**
+ * @brief Retrieves the data at the index specified
+ * 
+ * @param list LinkC pointer to our list
+ * @param indexOfElem Index to search for our data
+ * @return Void pointer to our result
+ */
 void *LinkC_get(LinkC *list, size_t indexOfElem);
 
+/**
+ * @brief Attempts to find the specified data in our list. 
+ * 
+ * @param list LinkC pointer to our list
+ * @param data Void pointer to the item we want to find
+ * @return The index where the item is located, -1 otherwise.
+ */
 int LinkC_find(LinkC *list, void *data);
 
+/**
+ * @brief Frees up all memory used by our list and their respective pointers
+ * 
+ * @param list LinkC pointer to our list
+ */
 void LinkC_delete(LinkC **list);
 
+/**
+ * @brief Inserts a single element at the end of the list.
+ * 
+ * @param list LinkC pointer to our list
+ * @param data Void pointer to our data to be inserted
+ */
 void LinkC_insert_at_start(LinkC *list, void *data);
 
+/**
+ * @brief Inserts a single element at the specified index. 
+ * 
+ * @param list LinkC pointer to our list
+ * @param data Void pointer to our data to be inserted
+ * @param index The index where the data is to be inserted
+ */
 void LinkC_insert_at_index(LinkC *list, void *data, size_t index);
+
+/**
+ * @brief Displays an error message
+ * 
+ * @param code The type of error encountered
+ * @return A string detailing the error encountered.
+ */
+const char* LinkC_error_report(ErrorCode code);
