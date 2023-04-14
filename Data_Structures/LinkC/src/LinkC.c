@@ -46,7 +46,7 @@ size_t LinkC_size(LinkC *list) {
     return list->alloc_Data / list->dataSize;
 }
 
-void LinkC_append(LinkC *list, void* data) {
+void LinkC_insert_at_end(LinkC *list, void* data) {
     LinkCNode *current = list->tail;
 
     LinkCNode *newNode = malloc(sizeof(LinkCNode));
@@ -71,9 +71,9 @@ void LinkC_append(LinkC *list, void* data) {
     
 }
 
-void *LinkC_get(LinkC *list, int indexOfElem) {
+void *LinkC_get(LinkC *list, size_t indexOfElem) {
     LinkCNode *current = list->head;
-    int currentIndex = 0;
+    size_t currentIndex = 0;
 
     while(current != NULL) {
         if(currentIndex == indexOfElem) {
@@ -119,7 +119,45 @@ void LinkC_delete(LinkC **list) {
     
 }
 
-void LinkC_insert_at_index(LinkC *list, void *data, int index) {
+void LinkC_insert_at_start(LinkC *list, void *data) {
+    LinkCNode *newNode = malloc(sizeof(LinkCNode));
+    if(newNode == NULL) {
+        return;
+    }
+    
+    newNode->data = malloc(list->dataSize);
+    if(newNode->data == NULL) {
+        free(newNode);
+        return;
+    }
+
+    memcpy(newNode->data, data, list->dataSize);
+
+    newNode->next = list->head;
+    newNode->prev = NULL;
+
+    list->head->prev = newNode;
+    list->head = newNode;
+    
+    list->alloc_Data += list->dataSize;
+    return;
+
+}
+
+void LinkC_insert_at_index(LinkC *list, void *data, size_t index) {
+    if(index == 0) {
+        LinkC_insert_at_start(list, data);
+        return;
+    }
+
+    if(index == LinkC_size(list)) {
+        LinkC_insert_at_end(list, data);
+        return;
+    }
+
+    if(index > LinkC_size(list)) {
+        return;
+    } 
     LinkCNode *current = list->head;
 
     LinkCNode *newNode = malloc(sizeof(LinkCNode));
@@ -133,12 +171,16 @@ void LinkC_insert_at_index(LinkC *list, void *data, int index) {
         return;
     }
 
-    int currentIndex = 0;
-    while(current != NULL) {
-        if(currentIndex == index) {
-            
-        }
+    memcpy(newNode->data, data, list->dataSize);
+
+    size_t currIndex = 0;
+    while(currIndex != index) {
+        current = current->next;
     }
 
+    newNode->next = current;
+    current->prev->next = newNode;
+    current->prev = newNode;
 
+    return;
 }

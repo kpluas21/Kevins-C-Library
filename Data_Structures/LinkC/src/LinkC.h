@@ -14,6 +14,16 @@
 
 #include<stddef.h>
 
+typedef enum ErrorCode {
+    SUCCESS = 0, 
+    OUT_OF_MEMORY,
+    INVALID_ARGUMENT, 
+    INVALID_DATATYPE,
+    OUT_OF_BOUNDS_INDEX,
+    UNKNOWN_ERROR,
+
+}ErrorCode;
+
 /**
  * @enum DataType
  * @brief Constants used to label the data type of the elements in our linked list
@@ -73,12 +83,14 @@ LinkC *LinkC_init(size_t dataSize, void *data);
 
 size_t LinkC_size(LinkC *list);
 
-void LinkC_append(LinkC *list, void *data);
+void LinkC_insert_at_end(LinkC *list, void *data);
 
-void *LinkC_get(LinkC *list, int indexOfElem);
+void *LinkC_get(LinkC *list, size_t indexOfElem);
 
 int LinkC_find(LinkC *list, void *data);
 
 void LinkC_delete(LinkC **list);
 
-void LinkC_insert_at_index(LinkC *list, void *data, int index);
+void LinkC_insert_at_start(LinkC *list, void *data);
+
+void LinkC_insert_at_index(LinkC *list, void *data, size_t index);

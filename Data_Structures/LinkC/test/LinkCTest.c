@@ -22,7 +22,7 @@ void test_LinkC_init(void);
 
 void test_LinkC_get(void);
 
-void test_LinkC_append(void);
+void test_LinkC_insert_at_end(void);
 
 void test_LinkC_find(void);
 
@@ -39,7 +39,7 @@ int main(void) {
     UNITY_BEGIN();
     RUN_TEST(test_LinkC_init);
     RUN_TEST(test_LinkC_get);
-    RUN_TEST(test_LinkC_append);
+    RUN_TEST(test_LinkC_insert_at_end);
     RUN_TEST(test_LinkC_find);
     return UNITY_END();
 }
@@ -56,9 +56,9 @@ void test_LinkC_get(void) {
     TEST_ASSERT_NULL(LinkC_get(intList, 5));
 }
 
-void test_LinkC_append(void) {
+void test_LinkC_insert_at_end(void) {
     for (int i = 2; i < 101; i++) {
-        LinkC_append(intList, &i);
+        LinkC_insert_at_end(intList, &i);
     }
     
     TEST_ASSERT_EQUAL_size_t(100, LinkC_size(intList));
@@ -66,7 +66,7 @@ void test_LinkC_append(void) {
 
 void test_LinkC_find(void) {
     for (int i = 2; i < 101; i++) {
-        LinkC_append(intList, &i);
+        LinkC_insert_at_end(intList, &i);
     }
     
     //Correct input
@@ -76,6 +76,10 @@ void test_LinkC_find(void) {
     i = 200;
     //Incorrect
     TEST_ASSERT_EQUAL_INT(-1, LinkC_find(intList, &i));
+}
+
+void test_LinkC_insert_at_index(void) {
+    
 }
 
 void setUp(void) {
