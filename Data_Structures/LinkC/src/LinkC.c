@@ -16,8 +16,6 @@
 
 #include"LinkC.h"
 
-
-
 LinkC *LinkC_init(size_t dataSize, void *data) {
     LinkC *list = malloc(sizeof(LinkC));
     LinkCNode *head = malloc(sizeof(LinkCNode));

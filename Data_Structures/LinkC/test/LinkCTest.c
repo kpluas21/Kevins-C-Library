@@ -26,6 +26,8 @@ void test_LinkC_insert_at_end(void);
 
 void test_LinkC_find(void);
 
+void test_LinkC_insert_at_index(void);
+
 void setUp(void);
 void tearDown(void);
 
