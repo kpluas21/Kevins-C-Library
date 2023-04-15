@@ -1,3 +1,5 @@
+#ifndef _LINKC_H
+#define _LINKC_H
 /**
  * @file LinkC.h
  * @author Kevin Pluas (kpluas21@gmail.com)
@@ -29,7 +31,7 @@ typedef enum ErrorCode {
 
 }ErrorCode;
 
-const char* const ERROR_STRINGS[] = {
+static const char* const ERROR_STRINGS[] = {
     "E_SUCCESS",
     "E_OUT_OF_MEMORY",
     "E_INVALID_ARGUMENT",
@@ -158,4 +160,6 @@ void LinkC_insert_at_index(LinkC *list, void *data, size_t index);
  * @param code The type of error encountered
  * @return A string detailing the error encountered.
  */
-const char* LinkC_error_report(ErrorCode code);
+void LinkC_error_report(ErrorCode code);
+
+#endif //_LINK_C
