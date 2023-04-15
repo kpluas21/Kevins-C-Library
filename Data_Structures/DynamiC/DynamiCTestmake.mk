@@ -1,6 +1,6 @@
-PROGRAM = DynamicArrayTest
-FILES.c = test/DynamicArrayTest.c src/DynamicArray.c ../lib/unity.c
-FILES.h = DynamicArray.h ../lib/unity.h ../lib/unity_internals.h
+PROGRAM = DynamiCTest
+FILES.c = test/DynamiCTest.c src/DynamiC.c ../lib/unity.c
+FILES.h = DynamiC.h ../lib/unity.h ../lib/unity_internals.h
 FILES.o = ${FILES.c:.c=.o}
 
 CC = gcc
@@ -25,18 +25,19 @@ all:    ${PROGRAM}
 ${PROGRAM}: ${FILES.o}
 	${CC} -o $@ ${CFLAGS} ${FILES.o} ${LDFLAGS} ${LDLIBS}
 
-prog1.o: ${FILES.h}
-file1.o: ${FILES.h}
-file2.o: ${FILES.h}
+DynamiCTest.o: ${FILES.h}
+DynamiC.o: ${FILES.h}
+unity.o: ${FILES.h}
+unity_internals.o: ${FILES.h}
 
 # If it exists, prog1.dSYM is a directory on macOS
 DEBRIS = a.out core *~ *.dSYM
 RM_FR  = rm -fr
 
 clean:
-	${RM_FR} ${FILES.o} ${PROGRAM} ${DEBRIS}
+	${RM_FR} ${FILES.o} ${PROGRAM} ${DEBRIS} test/DynamiCTest.o
 
-TEST = ./DynamicArrayTest
+TEST = ./DynamiCTest
 
 test:
 	${TEST}

@@ -52,6 +52,6 @@ Mkfile.old
 dkms.conf
 .vscode/tasks.json
 .vscode/settings.json
-Data_Structures/DynamicArray/DynamicArrayTest
+Data_Structures/DynamiC/DynamiCTest
 .vscode/c_cpp_properties.json
 Data_Structures/LinkC/LinkCTest

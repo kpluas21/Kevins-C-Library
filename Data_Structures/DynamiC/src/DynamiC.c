@@ -1,14 +1,14 @@
 /**
- * @file DynamicArray.c
+ * @file DynamiC.c
  * @author your name (you@domain.com)
- * @brief Implementation of DynamicArray
+ * @brief Implementation of DynamiC
  * @version 0.0.2
  * @date 2023-04-04
  * 
  * @copyright Copyright (c) 2023
  * 
  */
-#include"DynamicArray.h"
+#include"DynamiC.h"
 
 #include<stdio.h>
 #include<stdlib.h>
@@ -26,11 +26,11 @@
 #define FLTEPSILON 0.001
 #define DBEPSILON 0.000001
 
-DynamicArray *DynamicArray_init(DataType type, void *data, size_t size) {
-    DynamicArray *array = malloc(sizeof(DynamicArray));
+DynamiC *DynamiC_init(DataType type, void *data, size_t size) {
+    DynamiC *array = malloc(sizeof(DynamiC));
 
     if(array == NULL) {
-        fprintf(stderr, "Error: In function: %s: Unable to allocate memory for DynamicArray struct\n", __func__);
+        fprintf(stderr, "Error: In function: %s: Unable to allocate memory for DynamiC struct\n", __func__);
         return NULL;
     }
 
@@ -61,7 +61,7 @@ DynamicArray *DynamicArray_init(DataType type, void *data, size_t size) {
     }
     
     if(array->data == NULL) {
-        printf("Error: Unable to allocate memory for DynamicArray:data\n");
+        printf("Error: Unable to allocate memory for DynamiC:data\n");
         return NULL;
     }
 
@@ -69,7 +69,7 @@ DynamicArray *DynamicArray_init(DataType type, void *data, size_t size) {
 }
 
 
-void DynamicArray_debug_info(DynamicArray *array) {
+void DynamiC_debug_info(DynamiC *array) {
 
     printf("Data type of the elements stored (DataType) : %d\n", array->type);
 
@@ -79,11 +79,11 @@ void DynamicArray_debug_info(DynamicArray *array) {
         return;
     }
     printf("Elements currently stored (data) : \n");
-    DynamicArray_print(array);
+    DynamiC_print(array);
 }
 
 
-void DynamicArray_print(DynamicArray *array) {
+void DynamiC_print(DynamiC *array) {
     //Empty array
     if(array->size == 0) {
         puts("[ ]\n");
@@ -133,9 +133,9 @@ void DynamicArray_print(DynamicArray *array) {
 }
 
 
-inline void DynamicArray_append(DynamicArray *array, void* elem) {
+inline void DynamiC_append(DynamiC *array, void* elem) {
     if(array->size == array->capacity) {
-        array = DynamicArray_resize(array);
+        array = DynamiC_resize(array);
         if(array == NULL) {
             return;
         }
@@ -166,7 +166,7 @@ inline void DynamicArray_append(DynamicArray *array, void* elem) {
 }
 
 
-inline DynamicArray* DynamicArray_resize(DynamicArray *array) {
+inline DynamiC* DynamiC_resize(DynamiC *array) {
     array->capacity *= 2; //Double the capacity;
 
     switch (array->type) {
@@ -187,14 +187,14 @@ inline DynamicArray* DynamicArray_resize(DynamicArray *array) {
     }
 
     if(array->data == NULL) {
-        fprintf(stderr, "Error: In function: %s: Unable to resize DynamicArray.data\n", __func__);
+        fprintf(stderr, "Error: In function: %s: Unable to resize DynamiC.data\n", __func__);
         return NULL;
     }
 
     return array;
 }
 
-void DynamicArray_delete(DynamicArray **array) {
+void DynamiC_delete(DynamiC **array) {
     if(array == NULL || *array == NULL) {
         return;
     }
@@ -208,7 +208,7 @@ void DynamicArray_delete(DynamicArray **array) {
 }
 
 
-size_t DynamicArray_find(DynamicArray *array, void *elem) {
+size_t DynamiC_find(DynamiC *array, void *elem) {
     switch(array->type) {
     case INT: {
         for (size_t i = 0; i < array->size; i++) {
@@ -254,9 +254,9 @@ size_t DynamicArray_find(DynamicArray *array, void *elem) {
 //1) At the beginning of the array
 //2) At the middle
 //3) At the end
-int DynamicArray_insert(DynamicArray *array, void *elem, size_t index) {
+int DynamiC_insert(DynamiC *array, void *elem, size_t index) {
     if(array->size == array->capacity) {
-        array = DynamicArray_resize(array);
+        array = DynamiC_resize(array);
     }
     if(index >= array->capacity || index > array->size) {
         printf("Error: In function %s : Index %zu out of bounds\nArray Size = %zu\nArray Capacity = %zu\n",
@@ -316,7 +316,7 @@ int DynamicArray_insert(DynamicArray *array, void *elem, size_t index) {
     return 0;
 }
 
-void *DynamicArray_get(DynamicArray *array, size_t index) {
+void *DynamiC_get(DynamiC *array, size_t index) {
     if(index >= array->size) {
         fprintf(stderr, "Error: In function: %s: Out-of-bounds index provided : %zu\n", __func__, index);
         return NULL;
@@ -349,7 +349,7 @@ void *DynamicArray_get(DynamicArray *array, size_t index) {
 }
 
 
-inline void DynamicArray_sort(DynamicArray *array) {
+inline void DynamiC_sort(DynamiC *array) {
     size_t j;
     switch(array->type) {
     case INT: {
@@ -358,12 +358,12 @@ inline void DynamicArray_sort(DynamicArray *array) {
             size_t min = i;
             for (j = i; j < array->size; j++)
             {
-                if(DynamicArray_cmp(INT, ((int*)array->data + j), ((int*)array->data + min)) < 0) {
+                if(DynamiC_cmp(INT, ((int*)array->data + j), ((int*)array->data + min)) < 0) {
                     min = j;
                 }
             }
             if(min != i) {
-                DynamicArray_swap(INT, (int*)array->data + i, (int*)array->data + min);
+                DynamiC_swap(INT, (int*)array->data + i, (int*)array->data + min);
             }
             
         }
@@ -376,12 +376,12 @@ inline void DynamicArray_sort(DynamicArray *array) {
             size_t min = i;
             for (j = i; j < array->size; j++)
             {
-                if(DynamicArray_cmp(CHAR, ((char*)array->data + j), ((char*)array->data + min)) < 0) {
+                if(DynamiC_cmp(CHAR, ((char*)array->data + j), ((char*)array->data + min)) < 0) {
                     min = j;
                 }
             }
             if(min != i) {
-                DynamicArray_swap(CHAR, (char*)array->data + i, (char*)array->data + min);
+                DynamiC_swap(CHAR, (char*)array->data + i, (char*)array->data + min);
             }
             
         }
@@ -394,12 +394,12 @@ inline void DynamicArray_sort(DynamicArray *array) {
             size_t min = i;
             for (j = i; j < array->size; j++)
             {
-                if(DynamicArray_cmp(FLOAT, ((float*)array->data + j), ((float*)array->data + min)) < 0) {
+                if(DynamiC_cmp(FLOAT, ((float*)array->data + j), ((float*)array->data + min)) < 0) {
                     min = j;
                 }
             }
             if(min != i) {
-                DynamicArray_swap(FLOAT, (float*)array->data + i, (float*)array->data + min);
+                DynamiC_swap(FLOAT, (float*)array->data + i, (float*)array->data + min);
             }
             
         }
@@ -412,12 +412,12 @@ inline void DynamicArray_sort(DynamicArray *array) {
             size_t min = i;
             for (j = i; j < array->size; j++)
             {
-                if(DynamicArray_cmp(DOUBLE, ((double*)array->data + j), ((double*)array->data + min)) < 0) {
+                if(DynamiC_cmp(DOUBLE, ((double*)array->data + j), ((double*)array->data + min)) < 0) {
                     min = j;
                 }
             }
             if(min != i) {
-                DynamicArray_swap(DOUBLE, (double*)array->data + i, (double*)array->data + min);
+                DynamiC_swap(DOUBLE, (double*)array->data + i, (double*)array->data + min);
             }
             
         }
@@ -430,12 +430,12 @@ inline void DynamicArray_sort(DynamicArray *array) {
 }
 
 
-inline int DynamicArray_isEmpty(DynamicArray *array) {
+inline int DynamiC_isEmpty(DynamiC *array) {
     return array->size;
 }
 
 
-void DynamicArray_remove(DynamicArray *array, size_t index) {
+void DynamiC_remove(DynamiC *array, size_t index) {
 
     if(index >= array->size) {
         fprintf(stderr, "Error: In function: %s: Invalid index provided : %zu\n", __func__, index);
@@ -480,7 +480,7 @@ void DynamicArray_remove(DynamicArray *array, size_t index) {
 }
 
 
-void DynamicArray_empty(DynamicArray *array) {
+void DynamiC_empty(DynamiC *array) {
     free(array->data);
 
     switch (array->type) {
@@ -509,7 +509,7 @@ void DynamicArray_empty(DynamicArray *array) {
 
 }
 
-const char *DynamicArray_error(ErrorCode error, const char* function) {
+const char *DynamiC_error(ErrorCode error, const char* function) {
     char *errorMsg = malloc(256);
 
     switch (error) {
@@ -536,7 +536,7 @@ const char *DynamicArray_error(ErrorCode error, const char* function) {
 }
 
 
-int DynamicArray_cmp(DataType type, void *elem1, void *elem2) {
+int DynamiC_cmp(DataType type, void *elem1, void *elem2) {
     //We will have to use epsilons here again
     switch (type) {
     case INT: {
@@ -575,7 +575,7 @@ int DynamicArray_cmp(DataType type, void *elem1, void *elem2) {
 
 }
 
-void DynamicArray_swap(DataType type, void *elem1, void *elem2) {
+void DynamiC_swap(DataType type, void *elem1, void *elem2) {
     void *temp = malloc(sizeof(double));
 
     switch(type) {
