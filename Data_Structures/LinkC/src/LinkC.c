@@ -23,12 +23,14 @@ LinkC *LinkC_init(size_t dataSize, void *data) {
     LinkCNode *head = malloc(sizeof(LinkCNode));
 
     if(list == NULL || head == NULL) {
+        LinkC_error_report(E_OUT_OF_MEMORY);
         return NULL;
     }
 
     head->data = malloc(dataSize);
 
     if(head->data == NULL) {
+        LinkC_error_report(E_OUT_OF_MEMORY);
         return NULL;
     }
     memcpy(head->data, data, dataSize);
@@ -53,12 +55,14 @@ void LinkC_insert_at_end(LinkC *list, void* data) {
 
     LinkCNode *newNode = malloc(sizeof(LinkCNode));
     if(newNode == NULL) {
+        LinkC_error_report(E_OUT_OF_MEMORY);
         return;
     }
 
     newNode->data = malloc(list->dataSize);
     if(newNode->data == NULL) {
         free(newNode);
+        LinkC_error_report(E_OUT_OF_MEMORY);
         return;
     }
     
@@ -103,6 +107,7 @@ int LinkC_find(LinkC *list, void *data) {
 
 void LinkC_delete(LinkC **list) {
     if(list == NULL || (*list) == NULL) {
+        LinkC_error_report(E_INVALID_ARGUMENT);
         return; //Prevents double free's
     }
     
@@ -124,12 +129,14 @@ void LinkC_delete(LinkC **list) {
 void LinkC_insert_at_start(LinkC *list, void *data) {
     LinkCNode *newNode = malloc(sizeof(LinkCNode));
     if(newNode == NULL) {
+        LinkC_error_report(E_OUT_OF_MEMORY);
         return;
     }
     
     newNode->data = malloc(list->dataSize);
     if(newNode->data == NULL) {
         free(newNode);
+        LinkC_error_report(E_OUT_OF_MEMORY);
         return;
     }
 
@@ -164,12 +171,14 @@ void LinkC_insert_at_index(LinkC *list, void *data, size_t index) {
 
     LinkCNode *newNode = malloc(sizeof(LinkCNode));
     if(newNode == NULL) {
+        LinkC_error_report(E_OUT_OF_MEMORY);
         return;
     }
 
     newNode->data = malloc(list->dataSize);
     if(newNode->data == NULL) {
         free(newNode);
+        LinkC_error_report(E_OUT_OF_MEMORY);
         return;
     }
 
