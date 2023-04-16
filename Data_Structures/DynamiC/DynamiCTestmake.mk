@@ -35,7 +35,7 @@ DEBRIS = a.out core *~ *.dSYM
 RM_FR  = rm -fr
 
 clean:
-	${RM_FR} ${FILES.o} ${PROGRAM} ${DEBRIS} test/DynamiCTest.o
+	${RM_FR} ${FILES.o} ${PROGRAM} ${DEBRIS} test/DynamiCTest.o test/unity.o
 
 TEST = ./DynamiCTest
 
