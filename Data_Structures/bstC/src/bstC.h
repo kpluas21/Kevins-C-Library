@@ -19,7 +19,8 @@ typedef struct BstCNode {
 }BstCNode;
 
 /**
- * @brief 
+ * @brief Initializes our BST with the root node and a single element to add 
+ * to the root node.
  * 
  * @param elem 
  * @return BstCNode* 
@@ -35,7 +36,20 @@ void BstCNode_insert(BstCNode *root, signed int elem);
 
 void BstCNode_remove(BstCNode *root, signed int elem);
 
+/**
+ * @brief Prints all the elements of the tree in order.
+ * 
+ * @param node The BstCNode pointer
+ */
 void BstCNode_print_inOrder(BstCNode *node);
+
+/**
+ * @brief Frees up and deletes all nodes associated with the root BstC node.
+ * Also renders the intial pointer as NULL
+ * 
+ * @param root 
+ */
+void BstCNode_delete(BstCNode **root);
 
 size_t BstCNode_height(BstCNode *node);
 

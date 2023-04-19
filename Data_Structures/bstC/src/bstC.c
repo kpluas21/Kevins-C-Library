@@ -80,7 +80,20 @@ static size_t max_two_values (size_t x, size_t y) {
     else return y;
 }
 
-size_t BstCNode_height(BstCNode *node) {
+void BstCNode_delete(BstCNode **root) {
+    if(root == NULL || *root == NULL) {
+        return; //Prevents double frees
+    }
+
+    BstCNode_delete(&(*root)->left_child);
+    BstCNode_delete(&(*root)->right_child);
+    free((*root));
+
+
+}
+
+size_t BstCNode_height(BstCNode *node)
+{
     if(node == NULL) {
         return 0;
     }

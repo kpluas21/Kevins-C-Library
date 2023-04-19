@@ -1,3 +1,13 @@
+/**
+ * @file bstCTest.c
+ * @author Kevin Pluas (kpluas21@gmail.com)
+ * @brief Unit testing for BstC.h
+ * @version 0.1
+ * @date 2023-04-19
+ * 
+ * @copyright Copyright (c) 2023
+ * 
+ */
 #include<stdio.h>
 #include<stdlib.h>
 #include<time.h>
@@ -27,8 +37,8 @@ void setUp(void) {
 
 }
 
-void tearDown(void) {
-
+void tearDown(void) {   
+    BstCNode_delete(&intTree);
 }
 
 void test_BstCNode_insert(void) {
@@ -46,5 +56,5 @@ void test_BstCNode_init(void) {
 }
 
 void test_BstCNode_minmax(void) {
-    
+
 }
