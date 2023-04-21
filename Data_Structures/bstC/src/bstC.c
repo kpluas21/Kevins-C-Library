@@ -52,6 +52,7 @@ void BstCNode_insert(BstC *tree, signed int elem) {
             x = x->right_child;
         }
     }
+    newNode->parent = y;
 
     if(y == NULL) {
         tree->root = newNode; //tree was empty 
@@ -62,7 +63,6 @@ void BstCNode_insert(BstC *tree, signed int elem) {
     else {
         y->right_child = newNode;
     }
-    newNode->parent = y;
 
     tree->size++;
     return;
@@ -70,7 +70,8 @@ void BstCNode_insert(BstC *tree, signed int elem) {
 
 static void BstCNode_print_inOrder_helper(BstCNode*);
 
-void BstCNode_print_inOrder(BstC *tree) {
+void BstCNode_print_inOrder(BstC *tree)
+{
     BstCNode_print_inOrder_helper(tree->root);
     printf("\n");
 }
@@ -99,14 +100,17 @@ static void BstCNode_delete_helper(BstCNode *node) {
     BstCNode_delete_helper(node->left_child);
     BstCNode_delete_helper(node->right_child);
     free(node);
+    node = NULL;
 }
 
 void BstCNode_delete(BstC **tree) {
-    if(tree == NULL || *tree == NULL) {
-        return; //Prevents double frees
+    if(tree == NULL || (*tree) == NULL) {
+        return;
     }
     BstCNode_delete_helper((*tree)->root);
+
     free(*tree);
+    (*tree) = NULL;
     tree = NULL;
 }
 
@@ -147,3 +151,46 @@ signed int BstCNode_max(BstC *tree) {
     }
     return node->data;
 }
+
+// static void BstC_transplant(BstC *tree, BstCNode*, BstCNode*);
+
+
+// //Helper function: Replaces one subtree as a child of its parent with 
+// //another subtree
+// static void BstC_transplant(BstC *tree, BstCNode *u, BstCNode *v) {
+//     if(u->parent == NULL) {
+//         tree->root = v;
+//     }
+//     else if(u == u->parent->left_child) {
+//         u->parent->left_child = v;
+//     }
+//     else {
+//         u->parent->right_child = v;
+//     }
+//     if(v != NULL) {
+//         v->parent = u->parent;
+//     }
+// }
+
+
+static BstCNode *BstC_search_helper(BstCNode *node, signed int key);
+
+BstCNode *BstC_search(BstC *tree, signed int key) {
+    return BstC_search_helper(tree->root, key);
+}
+
+static BstCNode *BstC_search_helper(BstCNode *node, signed int key) {
+    if(node == NULL || key == node->data) {
+        return node;
+    }
+    if(key < node->data) {
+        return BstC_search_helper(node->left_child, key);
+    }
+    else {
+        return BstC_search_helper(node->right_child, key);
+    }
+}
+
+// void BstCNode_remove(BstC *root, signed int elem) {
+    
+// }

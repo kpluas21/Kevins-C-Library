@@ -88,3 +88,4 @@ signed int BstCNode_min(BstC *root);
  */
 signed int BstCNode_max(BstC *root);
 
+BstCNode *BstC_search(BstC *tree, signed int key);

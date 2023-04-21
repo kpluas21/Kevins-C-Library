@@ -26,6 +26,7 @@ void test_BstCNode_insert(void);
 void test_BstCNode_init(void);
 void test_BstCNode_minmax(void);
 void test_BstCNode_height(void);
+void test_BstC_delete(void);
 
 int main(void) {
     srand(time(NULL));
@@ -35,6 +36,7 @@ int main(void) {
     RUN_TEST(test_BstCNode_insert);
     RUN_TEST(test_BstCNode_minmax);
     RUN_TEST(test_BstCNode_height);
+    RUN_TEST(test_BstC_delete);
     return UNITY_END();
 }
 
@@ -81,4 +83,9 @@ void test_BstCNode_height(void) {
 
     printf("Height of the tree: %zu\n", BstCNode_height(intTree));
     free(vector);
+}
+
+void test_BstC_delete(void) {
+    BstCNode_delete(&intTree);
+    TEST_ASSERT_NULL(intTree);
 }
