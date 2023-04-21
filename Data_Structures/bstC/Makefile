@@ -6,7 +6,7 @@ FILES.o = ${FILES.c:.c=.o}
 CC = gcc
 SFLAGS = -std=c99
 GFLAGS = -g
-OFLAGS = -O3
+OFLAGS = -O0
 DFLAGS = -I/src
 WFLAG1  = -Wall
 WFLAG2  = -Wextra

@@ -13,33 +13,35 @@
 #include<stdlib.h>
 #include<string.h>
 #include<math.h>
-#include "bstC.h"
+#include"bstC.h"
 
 
-BstCNode *BstCNode_init(signed int elem) {
-    BstCNode *head = malloc(sizeof(BstCNode));
-    if(head == NULL) {
+BstC *BstCNode_init(void) {
+    BstC *tree = malloc(sizeof(BstC));
+
+    if(tree == NULL) {
         printf("Error: Could not allocate memory for head\n");
         return NULL;
     }
-
-    head->data = elem;
-    head->parent = NULL;
-    head->left_child = NULL;
-    head->right_child = NULL;
-
-    return head;
+    tree->root = NULL;
+    tree->size = 0;
+    return tree;
 }
 
-void BstCNode_insert(BstCNode *root, signed int elem) {
+void BstCNode_insert(BstC *tree, signed int elem) {
     BstCNode *y = NULL;
-    BstCNode *x = root;
+    BstCNode *x = tree->root;
+
+//Creating a new node for insertion
     BstCNode *newNode = malloc(sizeof(BstCNode));
     if(newNode == NULL) {
         fprintf(stderr, "Error: Unable to initialize new node\n");
         return;
     }
     newNode->data = elem;
+    newNode->left_child = NULL;
+    newNode->right_child = NULL;
+//new node operations end here
 
     while (x != NULL) {
         y = x;
@@ -51,9 +53,8 @@ void BstCNode_insert(BstCNode *root, signed int elem) {
         }
     }
 
-    newNode->parent = y;
     if(y == NULL) {
-        root = newNode;
+        tree->root = newNode; //tree was empty 
     }
     else if(newNode->data < y->data) {
         y->left_child = newNode;
@@ -61,16 +62,26 @@ void BstCNode_insert(BstCNode *root, signed int elem) {
     else {
         y->right_child = newNode;
     }
+    newNode->parent = y;
 
+    tree->size++;
     return;
 }
 
-void BstCNode_print_inOrder(BstCNode *node) {
-    if(node != NULL) {
-        BstCNode_print_inOrder(node->left_child);
-        printf("%d ", node->data);
-        BstCNode_print_inOrder(node->right_child);
+static void BstCNode_print_inOrder_helper(BstCNode*);
+
+void BstCNode_print_inOrder(BstC *tree) {
+    BstCNode_print_inOrder_helper(tree->root);
+    printf("\n");
+}
+
+static void BstCNode_print_inOrder_helper(BstCNode *node) {
+    if(node == NULL) {
+        return;
     }
+    BstCNode_print_inOrder_helper(node->left_child);
+    printf("%d ", node->data);
+    BstCNode_print_inOrder_helper(node->right_child);
 }
 
 static size_t max_two_values (size_t x, size_t y) {
@@ -80,25 +91,39 @@ static size_t max_two_values (size_t x, size_t y) {
     else return y;
 }
 
-void BstCNode_delete(BstCNode **root) {
-    if(root == NULL || *root == NULL) {
-        return; //Prevents double frees
+static void BstCNode_delete_helper(BstCNode *node) {
+    if(node == NULL) {
+        return;
     }
 
-    BstCNode_delete(&(*root)->left_child);
-    BstCNode_delete(&(*root)->right_child);
-    free((*root));
-
-
+    BstCNode_delete_helper(node->left_child);
+    BstCNode_delete_helper(node->right_child);
+    free(node);
 }
 
-size_t BstCNode_height(BstCNode *node)
+void BstCNode_delete(BstC **tree) {
+    if(tree == NULL || *tree == NULL) {
+        return; //Prevents double frees
+    }
+    BstCNode_delete_helper((*tree)->root);
+    free(*tree);
+    tree = NULL;
+}
+
+static size_t BstCNode_height_helper(BstCNode*);
+
+size_t BstCNode_height(BstC *tree) {
+    return BstCNode_height_helper(tree->root);
+}
+
+
+static size_t BstCNode_height_helper(BstCNode *node)
 {
     if(node == NULL) {
         return 0;
     }
-    size_t left_tree_height = BstCNode_height(node->left_child);
-    size_t right_tree_height = BstCNode_height(node->right_child);
+    size_t left_tree_height = BstCNode_height_helper(node->left_child);
+    size_t right_tree_height = BstCNode_height_helper(node->right_child);
 
     #ifdef DEBUG
         printf("left height: %zu\n", left_tree_height);
@@ -108,9 +133,17 @@ size_t BstCNode_height(BstCNode *node)
     return max_two_values(left_tree_height, right_tree_height) + 1;
 }
 
-signed int BstCNode_min(BstCNode *root) {
-    if(root != NULL) {
-        return BstCNode_min(root->left_child);
+signed int BstCNode_min(BstC *tree) {
+    BstCNode *node = tree->root;
+    while(node->left_child != NULL) {
+        node = node->left_child;
     }
-    return root->parent->data;
+    return node->data;
+}
+signed int BstCNode_max(BstC *tree) {
+    BstCNode *node = tree->root;
+    while(node->right_child != NULL) {
+        node = node->right_child;
+    }
+    return node->data;
 }

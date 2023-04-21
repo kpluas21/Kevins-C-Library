@@ -10,6 +10,13 @@
  */
 
 typedef struct BstCNode BstCNode;
+typedef struct BstC BstC;
+
+
+typedef struct BstC {
+    size_t size;
+    BstCNode *root;
+}BstC;
 
 typedef struct BstCNode {
     BstCNode *parent;
@@ -23,25 +30,31 @@ typedef struct BstCNode {
  * to the root node.
  * 
  * @param elem 
- * @return BstCNode* 
+ * @return BstC* Our main BST struct 
  */
-BstCNode *BstCNode_init(signed int elem);
+BstC *BstCNode_init(void);
 
 /**
  * @brief Inserts a new node into the tree
  * 
  * @param elem The number to add to the new node
  */
-void BstCNode_insert(BstCNode *root, signed int elem);
+void BstCNode_insert(BstC *root, signed int elem);
 
-void BstCNode_remove(BstCNode *root, signed int elem);
+/**
+ * @brief Removes a specified node from the BST
+ * 
+ * @param root The root node to search through
+ * @param elem The element to search for deletion
+ */
+void BstCNode_remove(BstC *root, signed int elem);
 
 /**
  * @brief Prints all the elements of the tree in order.
  * 
  * @param node The BstCNode pointer
  */
-void BstCNode_print_inOrder(BstCNode *node);
+void BstCNode_print_inOrder(BstC *node);
 
 /**
  * @brief Frees up and deletes all nodes associated with the root BstC node.
@@ -49,9 +62,15 @@ void BstCNode_print_inOrder(BstCNode *node);
  * 
  * @param root 
  */
-void BstCNode_delete(BstCNode **root);
+void BstCNode_delete(BstC **root);
 
-size_t BstCNode_height(BstCNode *node);
+/**
+ * @brief Returns the max height of the tree
+ * 
+ * @param node 
+ * @return size_t 
+ */
+size_t BstCNode_height(BstC *node);
 
 /**
  * @brief Returns the minimum value found in this BST
@@ -59,9 +78,13 @@ size_t BstCNode_height(BstCNode *node);
  * @param root The root node to search through
  * @return signed int 
  */
-signed int BstCNode_min(BstCNode *root);
+signed int BstCNode_min(BstC *root);
 
-signed int BstCNode_max(BstCNode *root);
-
-
+/**
+ * @brief Returns the maximum value found in this BST
+ * 
+ * @param root The root node to search through
+ * @return signed int 
+ */
+signed int BstCNode_max(BstC *root);
 
