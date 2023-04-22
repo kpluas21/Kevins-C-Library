@@ -13,8 +13,11 @@
 
 #include<assert.h>
 #include<stdlib.h>
+#include<stdio.h>
 
 int *generate_unique_ints(void);
+
+char **get_array_of_strings(void);
 
 
 
@@ -32,6 +35,24 @@ int *generate_unique_ints(void) {
         vector[j] = temp;
     }   
     return vector;
+}
+
+inline char **get_array_of_strings(void) {
+    FILE *file = fopen("test_strings.txt", "r");
+
+    if(file == NULL) {
+        printf("Error: File could not be opened for testing!\n");
+        return NULL;
+    }
+    char line[256];
+    while (fgets(line, sizeof(line), file)) {
+        //printf("%s", line);
+        
+    }
+
+    fclose(file);
+    return NULL;
+    
 }
 
 #endif //_HELPER_FUNCTIONS_H

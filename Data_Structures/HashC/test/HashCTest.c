@@ -1,6 +1,6 @@
 /**
  * @file HashCTest.c
- * @author your name (you@domain.com)
+ * @author Kevin Pluas (kpluas21@gmail.com)
  * @brief 
  * @version 0.1
  * @date 2023-04-22
@@ -13,6 +13,7 @@
 #include"../src/HashC.h"
 
 #include"../../lib/unity.h"
+#include"../../lib/helper_functions.h"
 
 static HashC_table *table;
 
@@ -21,12 +22,14 @@ void tearDown(void);
 
 void test_HashC_init(void);
 void test_HashC_insert(void);
+void test_HashC_search(void);
 void test_HashC_delete(void);
 
 int main(void) {
     UNITY_BEGIN();
     RUN_TEST(test_HashC_init);
     RUN_TEST(test_HashC_insert);
+    RUN_TEST(test_HashC_search);
     RUN_TEST(test_HashC_delete);
     return UNITY_END();
 }
@@ -45,7 +48,28 @@ void test_HashC_init(void) {
 
 void test_HashC_insert(void) {
     HashC_insert(table, "Kevin Pluas", 27);
+        get_array_of_strings();
 
+
+}
+
+void test_HashC_search(void) {
+    HashC_insert(table, "K", 13);
+    HashC_insert(table, "Z", 1000);
+    HashC_insert(table, "Kevin Pluas", 27);
+
+    //This should spout an error. Only unique keys are allowed
+    HashC_insert(table, "Kevin Pluas", 27);
+    //
+
+    HashC_insert(table, "Valerie Ramirez", 54);
+    HashC_insert(table, "Teresa Pluas", 41);
+
+    TEST_ASSERT_EQUAL_INT(27, HashC_search(table, "Kevin Pluas"));
+    TEST_ASSERT_EQUAL_INT(54, HashC_search(table, "Valerie Ramirez"));
+    TEST_ASSERT_EQUAL_INT(41, HashC_search(table, "Teresa Pluas"));
+    TEST_ASSERT_EQUAL_INT(13, HashC_search(table, "K"));
+    TEST_ASSERT_EQUAL_INT(1000, HashC_search(table, "Z"));
 }
 
 void test_HashC_delete(void) {

@@ -46,7 +46,8 @@ typedef struct HashC_table {
 HashC_table *HashC_init(void);
 
 /**
- * @brief Attempts to insert a key-value pair into the hash table.
+ * @brief Attempts to insert a key-value pair into the hash table. This table uses
+ * open probing to avoid collisions.
  * 
  * @param table 
  * @param key A string key
@@ -59,7 +60,7 @@ void HashC_insert(HashC_table *table, const char *key, int value);
  * associated value
  * @return int
  */
-int HashC_search(const char *key);
+int HashC_search(HashC_table *table, const char *key);
 
 /**
  * @brief Deletes and frees up any memory associated with the hash table provided
