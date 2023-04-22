@@ -26,6 +26,7 @@ void test_BstCNode_insert(void);
 void test_BstCNode_init(void);
 void test_BstCNode_minmax(void);
 void test_BstCNode_height(void);
+void test_BstC_search(void);
 void test_BstC_delete(void);
 
 int main(void) {
@@ -36,6 +37,7 @@ int main(void) {
     RUN_TEST(test_BstCNode_insert);
     RUN_TEST(test_BstCNode_minmax);
     RUN_TEST(test_BstCNode_height);
+    RUN_TEST(test_BstC_search);
     RUN_TEST(test_BstC_delete);
     return UNITY_END();
 }
@@ -82,6 +84,20 @@ void test_BstCNode_height(void) {
     }
 
     printf("Height of the tree: %zu\n", BstCNode_height(intTree));
+    free(vector);
+}
+
+void test_BstC_search(void) {
+    int *vector = generate_unique_ints();
+    for(int i = 0; i < 100; i++) {
+        BstCNode_insert(intTree, *(vector+i));
+    }
+
+    TEST_ASSERT_EQUAL(BstCNode_min(intTree), 
+        (BstC_search(intTree, BstCNode_min(intTree)))->data);
+    TEST_ASSERT_EQUAL(BstCNode_max(intTree), 
+        (BstC_search(intTree, BstCNode_max(intTree)))->data);
+
     free(vector);
 }
 

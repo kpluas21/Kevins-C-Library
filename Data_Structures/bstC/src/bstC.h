@@ -39,7 +39,7 @@ BstC *BstCNode_init(void);
  * 
  * @param elem The number to add to the new node
  */
-void BstCNode_insert(BstC *root, signed int elem);
+void BstCNode_insert(BstC *tree, signed int elem);
 
 /**
  * @brief Removes a specified node from the BST
@@ -47,7 +47,7 @@ void BstCNode_insert(BstC *root, signed int elem);
  * @param root The root node to search through
  * @param elem The element to search for deletion
  */
-void BstCNode_remove(BstC *root, signed int elem);
+void BstCNode_remove(BstC *tree, signed int elem);
 
 /**
  * @brief Prints all the elements of the tree in order.
@@ -62,7 +62,7 @@ void BstCNode_print_inOrder(BstC *node);
  * 
  * @param root 
  */
-void BstCNode_delete(BstC **root);
+void BstCNode_delete(BstC **tree);
 
 /**
  * @brief Returns the max height of the tree
@@ -88,4 +88,12 @@ signed int BstCNode_min(BstC *root);
  */
 signed int BstCNode_max(BstC *root);
 
+
+/**
+ * @brief Returns the node whose key matches the one provided by the user
+ * 
+ * @param tree 
+ * @param key 
+ * @return BstCNode* 
+ */
 BstCNode *BstC_search(BstC *tree, signed int key);
