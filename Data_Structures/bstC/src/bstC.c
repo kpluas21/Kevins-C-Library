@@ -152,25 +152,25 @@ signed int BstCNode_max(BstC *tree) {
     return node->data;
 }
 
-// static void BstC_transplant(BstC *tree, BstCNode*, BstCNode*);
+static void BstC_transplant(BstC *tree, BstCNode*, BstCNode*);
 
 
-// //Helper function: Replaces one subtree as a child of its parent with 
-// //another subtree
-// static void BstC_transplant(BstC *tree, BstCNode *u, BstCNode *v) {
-//     if(u->parent == NULL) {
-//         tree->root = v;
-//     }
-//     else if(u == u->parent->left_child) {
-//         u->parent->left_child = v;
-//     }
-//     else {
-//         u->parent->right_child = v;
-//     }
-//     if(v != NULL) {
-//         v->parent = u->parent;
-//     }
-// }
+//Helper function: Replaces one subtree as a child of its parent with 
+//another subtree
+static void BstC_transplant(BstC *tree, BstCNode *u, BstCNode *v) {
+    if(u->parent == NULL) {
+        tree->root = v;
+    }
+    else if(u == u->parent->left_child) {
+        u->parent->left_child = v;
+    }
+    else {
+        u->parent->right_child = v;
+    }
+    if(v != NULL) {
+        v->parent = u->parent;
+    }
+}
 
 
 static BstCNode *BstC_search_helper(BstCNode *node, signed int key);
@@ -191,6 +191,16 @@ static BstCNode *BstC_search_helper(BstCNode *node, signed int key) {
     }
 }
 
-// void BstCNode_remove(BstC *root, signed int elem) {
-    
-// }
+void BstCNode_remove(BstC *tree, signed int key) {
+    BstCNode *node_to_delete = BstC_search(tree, key);
+
+    if(node_to_delete->left_child == NULL) {
+        BstC_transplant(tree, node_to_delete, node_to_delete->right_child);
+    }
+    else if (node_to_delete->right_child == NULL) {
+        BstC_transplant(tree, node_to_delete, node_to_delete->left_child);
+    }
+    else {
+        BstCNode *y =
+    }
+}
