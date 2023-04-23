@@ -1,4 +1,4 @@
 # Contributors
-Kevin Pluas
-Gabriella Minew
+Kevin Pluas <br/>
+Gabriella Minew<br/>
 Alexandria Thompson
