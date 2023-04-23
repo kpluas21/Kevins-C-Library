@@ -3,7 +3,7 @@
 
 /**
  * @file HashC.h
- * @author your name (you@domain.com)
+ * @author Kevin Pluas (kpluas21@gmail.com)
  * @brief Interface for HashC.c
  * @version 0.1
  * @date 2023-04-21
