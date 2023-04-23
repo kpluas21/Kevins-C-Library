@@ -26,20 +26,19 @@ typedef struct BstCNode {
 }BstCNode;
 
 /**
- * @brief Initializes our BST with the root node and a single element to add 
- * to the root node.
+ * @brief Initializes our BST. Root starts off as NULL until an element gets inserted
+ * with _insert()
  * 
- * @param elem 
  * @return BstC* Our main BST struct 
  */
-BstC *BstCNode_init(void);
+BstC *BstC_init(void);
 
 /**
  * @brief Inserts a new node into the tree
  * 
  * @param elem The number to add to the new node
  */
-void BstCNode_insert(BstC *tree, signed int elem);
+void BstC_insert(BstC *tree, signed int elem);
 
 // /**
 //  * @brief Removes a specified node from the BST
@@ -52,9 +51,9 @@ void BstCNode_insert(BstC *tree, signed int elem);
 /**
  * @brief Prints all the elements of the tree in order.
  * 
- * @param node The BstCNode pointer
+ * @param node The BstC pointer
  */
-void BstCNode_print_inOrder(BstC *node);
+void BstC_print_inOrder(BstC *tree);
 
 /**
  * @brief Frees up and deletes all nodes associated with the root BstC node.
@@ -62,7 +61,7 @@ void BstCNode_print_inOrder(BstC *node);
  * 
  * @param root 
  */
-void BstCNode_delete(BstC **tree);
+void BstC_delete(BstC **tree);
 
 /**
  * @brief Returns the max height of the tree
@@ -70,7 +69,7 @@ void BstCNode_delete(BstC **tree);
  * @param node 
  * @return size_t 
  */
-size_t BstCNode_height(BstC *node);
+size_t BstC_height(BstC *tree);
 
 /**
  * @brief Returns the minimum value found in this BST
@@ -78,7 +77,7 @@ size_t BstCNode_height(BstC *node);
  * @param root The root node to search through
  * @return signed int 
  */
-signed int BstCNode_min(BstC *root);
+signed int BstC_min(BstC *tree);
 
 /**
  * @brief Returns the maximum value found in this BST
@@ -86,7 +85,7 @@ signed int BstCNode_min(BstC *root);
  * @param root The root node to search through
  * @return signed int 
  */
-signed int BstCNode_max(BstC *root);
+signed int BstC_max(BstC *tree);
 
 
 /**

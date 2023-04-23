@@ -16,7 +16,7 @@
 #include"bstC.h"
 
 
-BstC *BstCNode_init(void) {
+BstC *BstC_init(void) {
     BstC *tree = malloc(sizeof(BstC));
 
     if(tree == NULL) {
@@ -28,7 +28,7 @@ BstC *BstCNode_init(void) {
     return tree;
 }
 
-void BstCNode_insert(BstC *tree, signed int elem) {
+void BstC_insert(BstC *tree, signed int elem) {
     BstCNode *y = NULL;
     BstCNode *x = tree->root;
 
@@ -70,7 +70,7 @@ void BstCNode_insert(BstC *tree, signed int elem) {
 
 static void BstCNode_print_inOrder_helper(BstCNode*);
 
-void BstCNode_print_inOrder(BstC *tree)
+void BstC_print_inOrder(BstC *tree)
 {
     BstCNode_print_inOrder_helper(tree->root);
     printf("\n");
@@ -103,7 +103,7 @@ static void BstCNode_delete_helper(BstCNode *node) {
     node = NULL;
 }
 
-void BstCNode_delete(BstC **tree) {
+void BstC_delete(BstC **tree) {
     if(tree == NULL || (*tree) == NULL) {
         return;
     }
@@ -116,7 +116,7 @@ void BstCNode_delete(BstC **tree) {
 
 static size_t BstCNode_height_helper(BstCNode*);
 
-size_t BstCNode_height(BstC *tree) {
+size_t BstC_height(BstC *tree) {
     return BstCNode_height_helper(tree->root);
 }
 
@@ -137,14 +137,14 @@ static size_t BstCNode_height_helper(BstCNode *node)
     return max_two_values(left_tree_height, right_tree_height) + 1;
 }
 
-signed int BstCNode_min(BstC *tree) {
+signed int BstC_min(BstC *tree) {
     BstCNode *node = tree->root;
     while(node->left_child != NULL) {
         node = node->left_child;
     }
     return node->data;
 }
-signed int BstCNode_max(BstC *tree) {
+signed int BstC_max(BstC *tree) {
     BstCNode *node = tree->root;
     while(node->right_child != NULL) {
         node = node->right_child;

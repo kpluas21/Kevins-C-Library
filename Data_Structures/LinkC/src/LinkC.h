@@ -88,10 +88,10 @@ typedef struct LinkCNode {
 
 
 /**
- * @brief 
+ * @brief Initializes our linked list. 
  * 
- * @param dataSize 
- * @param data 
+ * @param dataSize The size, in bytes, of each elements.
+ * @param data A pointer to our initial data.
  * @return LinkC* 
  */
 LinkC *LinkC_init(size_t dataSize, void *data);
