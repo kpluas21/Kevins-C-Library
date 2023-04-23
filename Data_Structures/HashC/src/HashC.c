@@ -128,7 +128,6 @@ int HashC_search(HashC_table *table, const char *key) {
         return table->table[hashIndex]->value;
     }
     
-    
     return -1;
 }
 

@@ -17,7 +17,7 @@ WFLAGS  = ${WFLAG1} ${WFLAG2} ${WFLAG3} ${WFLAG4} ${WFLAG5}
 UFLAGS  = # Set on command line only
 
 #Uncomment the last command for debug information on output
-CFLAGS  = ${SFLAGS} ${GFLAGS} ${OFLAGS} ${WFLAGS} ${UFLAGS} ${DFLAGS} -DDEBUG
+CFLAGS  = ${SFLAGS} ${GFLAGS} ${OFLAGS} ${WFLAGS} ${UFLAGS} ${DFLAGS} #-DDEBUG
 LDFLAGS = -lm
 LDLIBS  =
 

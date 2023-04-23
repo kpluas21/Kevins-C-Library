@@ -56,3 +56,4 @@ Data_Structures/DynamiC/DynamiCTest
 .vscode/c_cpp_properties.json
 Data_Structures/LinkC/LinkCTest
 Data_Structures/bstC/bstCTest
+Data_Structures/HashC/HashCTest
