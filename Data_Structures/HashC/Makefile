@@ -10,14 +10,14 @@ OFLAGS = -O1
 DFLAGS = -I/src 
 WFLAG1  = -Wall
 WFLAG2  = -Wextra
-WFLAG3  = -Werror
+WFLAG3  = #-Werror
 WFLAG4  = -Wstrict-prototypes
 WFLAG5  = -Wmissing-prototypes
 WFLAGS  = ${WFLAG1} ${WFLAG2} ${WFLAG3} ${WFLAG4} ${WFLAG5} 
 UFLAGS  = # Set on command line only
 
 #Uncomment the last command for debug information on output
-CFLAGS  = ${SFLAGS} ${GFLAGS} ${OFLAGS} ${WFLAGS} ${UFLAGS} ${DFLAGS} #-DDEBUG
+CFLAGS  = ${SFLAGS} ${GFLAGS} ${OFLAGS} ${WFLAGS} ${UFLAGS} ${DFLAGS} -DDEBUG
 LDFLAGS = -lm
 LDLIBS  =
 

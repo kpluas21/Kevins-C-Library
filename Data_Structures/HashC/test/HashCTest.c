@@ -51,15 +51,19 @@ void test_HashC_init(void) {
 void test_HashC_insert(void) {
     
     char **nameArray = get_array_of_strings();
+    if(nameArray == NULL) {
+        printf("Error: Could not get array of names for testing\n");
+        TEST_FAIL();
+    }
 
     for (int i = 0; i < 100; i++)
     {
-        printf("%s", nameArray[i]);
-        // HashC_insert(table, nameArray[i], i);
+        // printf("%s", nameArray[i]);
+        HashC_insert(table, nameArray[i], i);
     }
     
-    // TEST_ASSERT_EQUAL_INT(100, HashC_table_size(table));
-    // free_array_of_stuff(nameArray, sizeof(char*), 100);
+    TEST_ASSERT_EQUAL_INT(100, HashC_table_size(table));
+    free_array_of_strings(nameArray, 100);
 
 }
 

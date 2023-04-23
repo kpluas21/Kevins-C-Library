@@ -19,7 +19,7 @@ int *generate_unique_ints(void);
 
 char **get_array_of_strings(void);
 
-void free_array_of_stuff(char **array, size_t data_size, size_t num_of_elements);
+void free_array_of_strings(char **array, size_t num_of_elements);
 
 int *generate_unique_ints(void) {
     int *vector = (int*)malloc(sizeof(int) * 1000);
@@ -49,10 +49,12 @@ char **get_array_of_strings(void) {
     char **lineArray = (char**) malloc(sizeof(char*) * 100);
 
     for(int i = 0; fgets(line, 256, file) ; i++) {
-        lineArray[i] = malloc(sizeof(line));
+        lineArray[i] = malloc(256);
+        // printf("Size of line : %zu\n", sizeof(line));
         line[strcspn(line, "\n")] = 0;
         strcpy(lineArray[i], line);
     }
+    free(line);
 
     fclose(file);
     return lineArray;
@@ -63,15 +65,13 @@ char **get_array_of_strings(void) {
  * 
  * @param array 
  */
-void free_array_of_stuff(char **array, size_t data_size, size_t num_of_elements) {
-    char *traversal_ptr = array[0];
+void free_array_of_strings(char **array, size_t num_of_elements) {
     for (size_t i = 0; i < num_of_elements; i++)
     {
-        free(traversal_ptr);
-        traversal_ptr += data_size;
+        free(array[i]);
     }
 
-    free(*array);
+    free(array);
     
 }
 

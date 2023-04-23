@@ -67,15 +67,20 @@ static HashC_pair *HashC_pair_init(const char *key, int value) {
     if(pair == NULL) {
         return NULL;
     }
-    pair->key = malloc(strlen(key) + 1);
+    
+    size_t key_length = strlen(key);
+    pair->key = malloc(key_length + 1);
     if(pair->key == NULL) {
         free(pair);
         return NULL;
     }
-    pair->key[sizeof(key)] = '\0';
+    
     strcpy(pair->key, key);
     pair->value = value;
 
+    #ifdef DEBUG
+        printf("Size of this current pair->key:%zu\n", key_length);
+    #endif
     return pair;
 }
 
@@ -97,7 +102,9 @@ void HashC_insert(HashC_table *table, const char *key, int value) {
         strcmp(table->table[hashIndex]->key, pair->key) == 0) {
 
         printf("Error: Duplicate key %s already in table\n", key);
+        free(pair->key);
         free(pair);
+
         return;
     }
 
@@ -113,12 +120,14 @@ void HashC_insert(HashC_table *table, const char *key, int value) {
 
 int HashC_search(HashC_table *table, const char *key) {
     unsigned int hashIndex = HashC_hashcode(key);
+    int i = 0;
 
     if(table->table[hashIndex] != NULL && 
         strcmp(table->table[hashIndex]->key, key) == 0) {
 
         return table->table[hashIndex]->value;
     }
+    
     
     return -1;
 }
@@ -129,6 +138,7 @@ void HashC_delete(HashC_table **table) {
     }
     for (size_t i = 0; i < (*table)->max_size; i++) {
         if((*table)->table[i] != NULL) {
+            free((*table)->table[i]->key);
             free((*table)->table[i]);
         }
     }
