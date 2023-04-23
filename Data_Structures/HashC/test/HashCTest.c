@@ -10,9 +10,11 @@
  */
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
+#include"../../lib/unity.h"
+
 #include"../src/HashC.h"
 
-#include"../../lib/unity.h"
 #include"../../lib/helper_functions.h"
 
 static HashC_table *table;
@@ -47,9 +49,17 @@ void test_HashC_init(void) {
 }
 
 void test_HashC_insert(void) {
-    HashC_insert(table, "Kevin Pluas", 27);
-        get_array_of_strings();
+    
+    char **nameArray = get_array_of_strings();
 
+    for (int i = 0; i < 100; i++)
+    {
+        printf("%s", nameArray[i]);
+        // HashC_insert(table, nameArray[i], i);
+    }
+    
+    // TEST_ASSERT_EQUAL_INT(100, HashC_table_size(table));
+    // free_array_of_stuff(nameArray, sizeof(char*), 100);
 
 }
 

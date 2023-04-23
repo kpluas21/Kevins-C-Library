@@ -13,7 +13,7 @@
 #include<string.h>
 #include"HashC.h"
 
-#define DEFAULT_SIZE 100 //The default size of the table. Change this as needed
+#define DEFAULT_SIZE 300 //The default size of the table. Change this as needed
 
 /**
  * @brief Initializes a key-value pair for storage. The user should not have to call

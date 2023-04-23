@@ -1,13 +1,13 @@
 PROGRAM = HashCTest
 FILES.c = test/HashCTest.c src/HashC.c ../lib/unity.c
-FILES.h = HashC.h ../lib/unity.h ../lib/unity_internals.h
+FILES.h = HashC.h ../lib/unity.h ../lib/unity_internals.h 
 FILES.o = ${FILES.c:.c=.o}
 
 CC = gcc
 SFLAGS = -std=c99
 GFLAGS = -g
-OFLAGS = -O3
-DFLAGS = -I/src
+OFLAGS = -O1
+DFLAGS = -I/src 
 WFLAG1  = -Wall
 WFLAG2  = -Wextra
 WFLAG3  = -Werror
@@ -26,6 +26,7 @@ all:    ${PROGRAM}
 ${PROGRAM}: ${FILES.o}
 	${CC} -o $@ ${CFLAGS} ${FILES.o} ${LDFLAGS} ${LDLIBS}
 
+helper_functions.o: ${FILES.h}
 HashCTest.o: ${FILES.h}
 HashC.o: ${FILES.h}
 unity.o: ${FILES.h}
@@ -36,7 +37,7 @@ DEBRIS = a.out core *~ *.dSYM
 RM_FR  = rm -fr
 
 clean:
-	${RM_FR} ${FILES.o} ${PROGRAM} ${DEBRIS} test/HashCTest.o test/unity.o
+	${RM_FR} ${FILES.o} ${PROGRAM} ${DEBRIS} test/HashCTest.o test/unity.o 
 
 TEST = ./HashCTest
 
