@@ -41,13 +41,13 @@ BstC *BstCNode_init(void);
  */
 void BstCNode_insert(BstC *tree, signed int elem);
 
-/**
- * @brief Removes a specified node from the BST
- * 
- * @param root The root node to search through
- * @param elem The element to search for deletion
- */
-void BstCNode_remove(BstC *tree, signed int elem);
+// /**
+//  * @brief Removes a specified node from the BST
+//  * 
+//  * @param root The root node to search through
+//  * @param elem The element to search for deletion
+//  */
+// void BstCNode_remove(BstC *tree, signed int elem);
 
 /**
  * @brief Prints all the elements of the tree in order.
