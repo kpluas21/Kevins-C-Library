@@ -76,7 +76,7 @@ int DynamiC_insert(DynamiC *array, void *elem, size_t index) {
         return -1;
     }
 
-    if(array->alloc_data == array->capacity) {
+    if(array->alloc_data + array->data_size >= array->capacity) {
         DynamiC_resize(array);
     }
     size_t currSize = DynamiC_size(array);
@@ -96,7 +96,7 @@ int DynamiC_insert(DynamiC *array, void *elem, size_t index) {
         &indexPtr[index * data_step], 
         (currSize - 1 * data_step) );
 
-    memcpy(&indexPtr[index * data_step], elem, data_step);
+    memmove(&indexPtr[index * data_step], elem, data_step);
     
     array->alloc_data += array->data_size;
     return 0;

@@ -132,6 +132,7 @@ void test_DynamiC_insert_1000(void) {
     int i = 999;
     DynamiC_insert(intArray, &i, 0);
     DynamiC_insert(intArray, &i, 500);
+    printf("%zu\n", DynamiC_size(intArray));
     DynamiC_insert(intArray, &i, DynamiC_size(intArray));
 
     TEST_ASSERT_EQUAL_INT_MESSAGE(999, *(int*)DynamiC_get(intArray, 0), "1st test");
