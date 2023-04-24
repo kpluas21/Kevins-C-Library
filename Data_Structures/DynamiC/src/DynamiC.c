@@ -64,10 +64,50 @@ void *DynamiC_get(DynamiC *array, size_t index) {
     return indexPtr + (array->data_size * index);
 }
 
-void DynamiC_resize(DynamiC *array) {
+int DynamiC_insert(DynamiC *array, void *elem, size_t index) {
+    //Simply use append if the user gives an index at the end of the array 
+    if(index == DynamiC_size(array)) {
+        DynamiC_append(array, elem);
+        return 0;
+    }
+    
+    if(index > DynamiC_size(array)) {
+        printf("Error: Out of bounds index\n");
+        return -1;
+    }
+
+    if(array->alloc_data == array->capacity) {
+        DynamiC_resize(array);
+    }
+    size_t currSize = DynamiC_size(array);
+
+    //To help readability...
+    //Moving over 1 data step is the equivalent of incrementing 
+    //the index in array[i].
+    size_t data_step = array->data_size; 
+
+    //Our traversal pointer
+    char *indexPtr = array->data;
+
+    //The following snipper was shamelessly borrowed from  
+    //https://github.com/fragglet/c-algorithms/blob/master/src/arraylist.c    
+    //This moves all of the contents of the array from the index one step to the right
+    memmove(&indexPtr[(index * data_step) + data_step], 
+        &indexPtr[index * data_step], 
+        (currSize - 1 * data_step) );
+
+    memcpy(&indexPtr[index * data_step], elem, data_step);
+    
+    array->alloc_data += array->data_size;
+    return 0;
+}
+
+void DynamiC_resize(DynamiC *array)
+{
     array->capacity *= 2;
     array->data = realloc(array->data, array->capacity);
     if(array->data == NULL) {
+        printf("Error: Unable to resize data array\n");
         return; 
     }
 }

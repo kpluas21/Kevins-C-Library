@@ -25,21 +25,33 @@ void tearDown(void);
 void test_DynamiC_append_1000(void);
 void test_DynamiC_append_100000(void);
 
+void test_DynamiC_insert_1(void);
+void test_DynamiC_insert_1000(void);
+
 void test_DynamiC_stats(void);
 void test_DynamiC_get(void);
 
+void test_DynamiC_delete(void);
+
+void helper_print_all_int(DynamiC *array);
+
+static DynamiC **arrayOfArrays;
 
 static DynamiC *intArray;
 static DynamiC *charArray;
 static DynamiC *floatArray;
+static DynamiC *doubleArray;
 
 
 int main(void) {
     UNITY_BEGIN();
     RUN_TEST(test_DynamiC_stats);
+    RUN_TEST(test_DynamiC_insert_1);
+    RUN_TEST(test_DynamiC_insert_1000);
     RUN_TEST(test_DynamiC_append_1000);
     RUN_TEST(test_DynamiC_append_100000);
     RUN_TEST(test_DynamiC_get);
+    RUN_TEST(test_DynamiC_delete);
 
     return UNITY_END();
 }
@@ -48,16 +60,19 @@ void setUp(void) {
     int arr[0];
     char chArr[0];
     float fltArr[0];
+    double dbArr[0];
 
     intArray = DynamiC_init(arr, sizeof(int), 0);
     charArray = DynamiC_init(chArr, sizeof(char), 0);
     floatArray = DynamiC_init(fltArr, sizeof(float), 0);
+    doubleArray = DynamiC_init(dbArr, sizeof(double), 0);
 }
 
 void tearDown(void) {
     DynamiC_delete(&intArray);
     DynamiC_delete(&charArray);
     DynamiC_delete(&floatArray);
+    DynamiC_delete(&doubleArray);
 }
 
 void test_DynamiC_append_1000(void) {
@@ -83,23 +98,72 @@ void test_DynamiC_append_100000(void) {
     TEST_ASSERT_EQUAL(100000, DynamiC_size(floatArray));
 }
 
+void test_DynamiC_insert_1(void) {
+    int i = 5;
+    char c = 'g';
+    float f = 0.50;
+    double d = 2.89797;
+
+    DynamiC_insert(intArray, &i, 0);
+    DynamiC_insert(charArray, &c, 0);
+    DynamiC_insert(floatArray, &f, 0);
+    DynamiC_insert(doubleArray, &d, 0);
+
+    //Testing for failure
+    TEST_ASSERT_EQUAL_INT(-1, DynamiC_insert(intArray, &i, 4));
+    ///
+
+
+    TEST_ASSERT_EQUAL_INT(5, *(int*)DynamiC_get(intArray, 0));
+    TEST_ASSERT_EQUAL_INT('g', *(char*)DynamiC_get(charArray, 0));
+    TEST_ASSERT_EQUAL_INT(0.50, *(float*)DynamiC_get(floatArray, 0));
+    TEST_ASSERT_EQUAL_INT(2.89797, *(double*)DynamiC_get(doubleArray, 0));
+}
+
+void test_DynamiC_insert_1000(void) {
+    for(int i = 0; i < 1000; i++) {
+        DynamiC_insert(intArray, &i, i);
+    }
+
+    helper_print_all_int(intArray);
+    TEST_ASSERT_EQUAL_INT(1000, DynamiC_size(intArray));
+
+    //Testing insertion in beginning, middle, and end.
+    int i = 999;
+    DynamiC_insert(intArray, &i, 0);
+    DynamiC_insert(intArray, &i, 500);
+    DynamiC_insert(intArray, &i, DynamiC_size(intArray));
+
+    TEST_ASSERT_EQUAL_INT_MESSAGE(999, *(int*)DynamiC_get(intArray, 0), "1st test");
+    TEST_ASSERT_EQUAL_INT_MESSAGE(999, *(int*)DynamiC_get(intArray, 500), "2nd Test");
+    TEST_ASSERT_EQUAL_INT_MESSAGE(999, *(int*)DynamiC_get(intArray, DynamiC_size(intArray)-1), "3rd test");
+
+    helper_print_all_int(intArray);
+}
+
 void test_DynamiC_stats(void) {
     printf("DynamiC stats\n");
-    printf("intArray : \n");
-    printf("Size of each elem: %zu\n", intArray->data_size);
-    printf("Bytes allocated: %zu\n", intArray->alloc_data);
-    printf("Capacity: %zu\n\n", intArray->capacity);
-    printf("charArray : \n");
-    printf("Size of each elem: %zu\n", charArray->data_size);
-    printf("Bytes allocated: %zu\n", charArray->alloc_data);
-    printf("Capacity: %zu\n\n", charArray->capacity);
-    printf("floatArray : \n");
-    printf("Size of each elem: %zu\n", floatArray->data_size);
-    printf("Bytes allocated: %zu\n", floatArray->alloc_data);
-    printf("Capacity: %zu\n", floatArray->capacity);
+
+    arrayOfArrays = malloc(sizeof(DynamiC) * 3);
+    arrayOfArrays[0] = intArray;
+    arrayOfArrays[1] = charArray;
+    arrayOfArrays[2] = floatArray;
+
+    for (size_t i = 0; i < 3; i++)
+    {
+        printf("Array %zu:\n", i);
+        printf("Size of each elem: %zu\n", arrayOfArrays[i]->data_size);
+        printf("Bytes allocated: %zu\n", arrayOfArrays[i]->alloc_data);
+        printf("Capacity: %zu\n", arrayOfArrays[i]->capacity);
+    }
+
+    free(arrayOfArrays);
+    
 }
 
 void test_DynamiC_get(void) {
+    //Three values for testing _get in the beginning, middle and end
+
     for (size_t i = 0; i < 3; i++) {
         DynamiC_append(intArray, &i);
         DynamiC_append(charArray, &i);
@@ -121,4 +185,25 @@ void test_DynamiC_get(void) {
     TEST_ASSERT_EQUAL_FLOAT(0.50, *(float*)DynamiC_get(floatArray, 0));
     TEST_ASSERT_EQUAL_FLOAT(1, *(float*)DynamiC_get(floatArray, 1));
     TEST_ASSERT_EQUAL_FLOAT(2.5, *(float*)DynamiC_get(floatArray, DynamiC_size(floatArray) - 1));
+}
+
+void test_DynamiC_delete(void) {
+    DynamiC_delete(&intArray);
+    DynamiC_delete(&charArray);
+    DynamiC_delete(&floatArray);
+    DynamiC_delete(&doubleArray);
+
+    TEST_ASSERT_NULL(intArray);
+    TEST_ASSERT_NULL(charArray);
+    TEST_ASSERT_NULL(floatArray);
+    TEST_ASSERT_NULL(doubleArray);
+}
+
+void helper_print_all_int(DynamiC *array) {
+    printf("[");
+    for (size_t i = 0; i < DynamiC_size(array); i++)
+    {
+        printf("%d, ", *(int*)DynamiC_get(intArray, i));
+    }
+    printf("\b\b]");
 }
