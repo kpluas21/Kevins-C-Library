@@ -70,7 +70,6 @@ DynamiC *DynamiC_init(void *data, size_t data_size, size_t num_elems);
  */
 size_t DynamiC_size(DynamiC *array);
 
-// //TODO : This takes a single void pointer as input. Are we able to append JUST one or can we append everything in the pointer?
 /**
  * @brief Appends the given element to the end of the array, 
  * automatically resizing the array if necessary.
@@ -79,13 +78,6 @@ size_t DynamiC_size(DynamiC *array);
  * @param elem The element to be added
  */
 void DynamiC_append(DynamiC *array, void *elem);
-
-// /**
-//  * @brief Prints out the contents of the DynamiC to stdout
-//  * 
-//  * @param array The DynamiC pointer
-//  */
-// void DynamiC_print(DynamiC *array);
 
 // /**
 //  * @brief Displays the meta info about our dynamic array such as size, capacity, type, and contents so long as the size does
@@ -167,17 +159,17 @@ void *DynamiC_get(DynamiC *array, size_t index);
 //  */
 // int DynamiC_isEmpty(DynamiC *array);
 
-// /**
-//  * @brief Inserts an element at the chosen index. This effectively shifts all 
-//  * existing elements over. Automatically reallocates memory if needed.
-//  * If index equals size, it will basically act as _append() would. 
-//  * 
-//  * @param array The DynamiC pointer
-//  * @param elem The element to be inserted
-//  * @param index The location where the element is to be inserted
-//  * @return int Returns 0 if successful, <0 if error encountered.
-//  */
-// int DynamiC_insert(DynamiC *array, void *elem, size_t index);
+/**
+ * @brief Inserts an element at the chosen index. This effectively shifts all 
+ * existing elements over. Automatically reallocates memory if needed.
+ * If index equals size, it will basically act as _append() would. 
+ * 
+ * @param array The DynamiC pointer
+ * @param elem The element to be inserted
+ * @param index The location where the element is to be inserted
+ * @return int Returns 0 if successful, <0 if error encountered.
+ */
+int DynamiC_insert(DynamiC *array, void *elem, size_t index);
 
 // /**
 //  * @brief Linearly searches through the array to find the given input, returning the index if found, 
