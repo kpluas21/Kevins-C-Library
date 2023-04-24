@@ -35,6 +35,8 @@ void test_DynamiC_delete(void);
 
 void helper_print_all_int(DynamiC *array);
 
+void helper_print_all_char(DynamiC *array);
+
 static DynamiC **arrayOfArrays;
 
 static DynamiC *intArray;
@@ -124,13 +126,25 @@ void test_DynamiC_insert_1000(void) {
     for(int i = 0; i < 10; i++) {
         DynamiC_insert(intArray, &i, i);
     }
-    helper_print_all_int(intArray);
-    int i = 99;
-    DynamiC_insert(intArray, &i, 0);
-    DynamiC_insert(intArray, &i, 5);
-    DynamiC_insert(intArray, &i, DynamiC_size(intArray) + 1);
+
+    int i = 0;
+    for(char c = 'a'; c < 123; c++) {
+        DynamiC_insert(charArray, &c, i);
+        i++;
+    }
+
+    i = 0;
+    for (float f = 0.00; f < 50.0; f += 0.50) {
+        DynamiC_insert(floatArray, &f, i);
+        i++;
+    }
+
+    TEST_ASSERT_EQUAL_INT(10, DynamiC_size(intArray));
+    TEST_ASSERT_EQUAL_INT(26, DynamiC_size(charArray));
+    TEST_ASSERT_EQUAL_INT(100, DynamiC_size(floatArray));
     
-    helper_print_all_int(intArray);
+
+
 }
 
 void test_DynamiC_stats(void) {
@@ -195,7 +209,15 @@ void helper_print_all_int(DynamiC *array) {
     printf("[");
     for (size_t i = 0; i < DynamiC_size(array); i++)
     {
-        printf("%d, ", *(int*)DynamiC_get(intArray, i));
+        printf("%d, ", *(int*)DynamiC_get(array, i));
+    }
+    printf("\b\b]\n");
+}
+void helper_print_all_char(DynamiC *array) {
+    printf("[");
+    for (size_t i = 0; i < DynamiC_size(array); i++)
+    {
+        printf("%c, ", *(char*)DynamiC_get(array, i));
     }
     printf("\b\b]\n");
 }
