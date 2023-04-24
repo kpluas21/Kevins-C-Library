@@ -76,7 +76,7 @@ int DynamiC_insert(DynamiC *array, void *elem, size_t index) {
         return -1;
     }
 
-    if(array->alloc_data + array->data_size >= array->capacity) {
+    if(array->alloc_data + array->data_size > array->capacity) {
         DynamiC_resize(array);
     }
     size_t currSize = DynamiC_size(array);
@@ -89,14 +89,11 @@ int DynamiC_insert(DynamiC *array, void *elem, size_t index) {
     //Our traversal pointer
     char *indexPtr = array->data;
 
-    //The following snipper was shamelessly borrowed from  
-    //https://github.com/fragglet/c-algorithms/blob/master/src/arraylist.c    
-    //This moves all of the contents of the array from the index one step to the right
-    memmove(&indexPtr[(index * data_step) + data_step], 
-        &indexPtr[index * data_step], 
-        (currSize - 1 * data_step) );
+    for(size_t i = currSize * data_step; i > index * data_step; i -= data_step) {
+        memcpy(indexPtr + i, indexPtr + (i - data_step), data_step);
+    }
 
-    memmove(&indexPtr[index * data_step], elem, data_step);
+    memcpy((indexPtr + (data_step * index)), elem, data_step);
     
     array->alloc_data += array->data_size;
     return 0;
