@@ -28,6 +28,8 @@ void test_DynamiC_append_100000(void);
 void test_DynamiC_insert_1(void);
 void test_DynamiC_insert_1000(void);
 
+void test_DynamiC_remove(void);
+
 void test_DynamiC_stats(void);
 void test_DynamiC_get(void);
 
@@ -52,6 +54,7 @@ int main(void) {
     RUN_TEST(test_DynamiC_insert_1000);
     RUN_TEST(test_DynamiC_append_1000);
     RUN_TEST(test_DynamiC_append_100000);
+    RUN_TEST(test_DynamiC_remove);
     RUN_TEST(test_DynamiC_get);
     RUN_TEST(test_DynamiC_delete);
 
@@ -145,6 +148,23 @@ void test_DynamiC_insert_1000(void) {
     
 
 
+}
+
+void test_DynamiC_remove(void) {
+    for (size_t i = 0; i < 11; i++)
+    {
+        DynamiC_insert(intArray, &i, i);
+    }
+    helper_print_all_int(intArray);
+
+    DynamiC_remove(intArray, 0);
+    TEST_ASSERT_EQUAL_INT(10, DynamiC_size(intArray));
+
+    while(DynamiC_size(intArray) != 0) {
+        DynamiC_remove(intArray, 0);
+    }
+
+    TEST_ASSERT_EQUAL_INT(0, DynamiC_size(intArray));
 }
 
 void test_DynamiC_stats(void) {
