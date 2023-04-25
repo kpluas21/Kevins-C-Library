@@ -99,6 +99,20 @@ int DynamiC_insert(DynamiC *array, void *elem, size_t index) {
     return 0;
 }
 
+size_t DynamiC_find(DynamiC *array, void *data, 
+                    int (*DynamiC_cmp)(const void *elem1, const void *elem2)) {
+    char *indexPtr = array->data;
+    size_t data_step = array->data_size;
+
+    for(size_t i = 0; i < array->alloc_data; i += data_step) {
+        if((*DynamiC_cmp)(indexPtr + i, data) == 0) {
+            return i / data_step;
+        }
+    }
+    data = NULL;
+    return 1;
+}
+
 void DynamiC_resize(DynamiC *array)
 {
     array->capacity *= 2;
@@ -163,3 +177,4 @@ void DynamiC_empty(DynamiC *array)
         printf("ERROR\n");
     }
 }
+

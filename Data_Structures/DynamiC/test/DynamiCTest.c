@@ -32,6 +32,8 @@ void test_DynamiC_remove(void);
 
 void test_DynamiC_stats(void);
 void test_DynamiC_get(void);
+int DynamiC_cmp_int(const void *x, const void *y);
+void test_DynamiC_find(void);
 
 void test_DynamiC_delete(void);
 
@@ -56,6 +58,7 @@ int main(void) {
     RUN_TEST(test_DynamiC_append_100000);
     RUN_TEST(test_DynamiC_remove);
     RUN_TEST(test_DynamiC_get);
+    RUN_TEST(test_DynamiC_find);
     RUN_TEST(test_DynamiC_delete);
 
     return UNITY_END();
@@ -211,6 +214,26 @@ void test_DynamiC_get(void) {
     TEST_ASSERT_EQUAL_FLOAT(0.50, *(float*)DynamiC_get(floatArray, 0));
     TEST_ASSERT_EQUAL_FLOAT(1, *(float*)DynamiC_get(floatArray, 1));
     TEST_ASSERT_EQUAL_FLOAT(2.5, *(float*)DynamiC_get(floatArray, DynamiC_size(floatArray) - 1));
+}
+
+int DynamiC_cmp_int(const void *x, const void *y) {
+    return (*(int*)x > *(int*)y) - (*(int*)x < *(int*)y);
+}
+
+void test_DynamiC_find(void) {
+    for (size_t i = 0; i < 11; i++)
+    {
+        DynamiC_insert(intArray, &i, i);
+    }
+    int b = 0;   
+    int i = 5;
+    int e = 10;
+    int n = 99;
+    
+    printf("5 found in index: %zu\n", DynamiC_find(intArray, &i, DynamiC_cmp_int));
+    printf("0 found in index: %zu\n", DynamiC_find(intArray, &b, DynamiC_cmp_int));
+    printf("10 found in index: %zu\n", DynamiC_find(intArray, &e, DynamiC_cmp_int));
+    printf("99 found in index: %zu\n", DynamiC_find(intArray, &n, DynamiC_cmp_int));
 }
 
 void test_DynamiC_delete(void) {

@@ -113,16 +113,14 @@ void DynamiC_remove(DynamiC *array, size_t index);
 void DynamiC_empty(DynamiC *array);
 
 // /**
-//  * @brief Compares two elements in the array. Mostly used by other 
-//  * functions in this library
+//  * @brief Compares two elements in the array.
 //  * 
-//  * @param type The datatype of the elements
 //  * @param elem1 The first element
 //  * @param elem2 The second element
 //  * @return int 0 if elements are equal, <0 if x is less than y, 
 //  *         >0 if x is greater than y;
 //  */
-// int DynamiC_cmp(DataType type, void *elem1, void *elem2);
+// int DynamiC_cmp(void *elem1, void *elem2);
 
 // /**
 //  * @brief Swaps the contents of two elements.
@@ -171,20 +169,20 @@ void *DynamiC_get(DynamiC *array, size_t index);
  */
 int DynamiC_insert(DynamiC *array, void *elem, size_t index);
 
-// /**
-//  * @brief Linearly searches through the array to find the given input, returning the index if found, 
-//  * -1 otherwise
-//  * Caution must be used when comparing floating-point values because of general imprecision. Use 
-//  * an epsilon for some "good enough" results. You may need to change the epsilon to suit your needs.
-//  * @note Epsilon Values :
-//  * Float : 0.001
-//  * Double: 0.000001
-//  * 
-//  * @param array The DynamiC pointer
-//  * @param ptr A void pointer pointing to the data needing to be searched for.
-//  * @return int The index where the element is located at.
-//  */
-// size_t DynamiC_find(DynamiC *array, void *elem);
+
+
+/**
+ * @brief Attempts to linearly search through the array for the given data. Because of 
+ * the generic nature of the array, a comparator function must be provided for this 
+ * function to work with any data types. 
+ * 
+ * @param array The DynamiC pointer
+ * @param data The data to search for 
+ * @param DynamiC_cmp A pointer to a comparator function
+ * @return size_t The index where the data is located.
+ */
+size_t DynamiC_find(DynamiC *array, void *data, 
+                    int (*DynamiC_cmp) (const void *elem1, const void *elem2));
 
 /**
  * @brief Attempts to resize the array by doubling the current capacity and realloc'ing 
