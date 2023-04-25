@@ -10,6 +10,7 @@ Everything needed is contained in the included header and source file. Simply ad
 You can also use the following command to try out the library!
 ```
 make all 
+./DynamiCTest
 ```
 This will create an executable that tests all of the functions and ensure they work on your machine.
 
