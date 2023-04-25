@@ -158,11 +158,13 @@ void test_DynamiC_remove(void) {
     helper_print_all_int(intArray);
 
     DynamiC_remove(intArray, 0);
-    helper_print_all_int(intArray);
-    DynamiC_remove(intArray, 5);
-    helper_print_all_int(intArray);
-    DynamiC_remove(intArray, DynamiC_size(intArray) - 1);
-    helper_print_all_int(intArray);
+    TEST_ASSERT_EQUAL_INT(10, DynamiC_size(intArray));
+
+    while(DynamiC_size(intArray) != 0) {
+        DynamiC_remove(intArray, 0);
+    }
+
+    TEST_ASSERT_EQUAL_INT(0, DynamiC_size(intArray));
 }
 
 void test_DynamiC_stats(void) {
