@@ -15,16 +15,6 @@
 #include<string.h>
 #include<math.h>
 
-/**
- * @brief Global epsilons to be used when comparing floating-point values. If you need to change
- * how precise the comparisons should be, change it here.
- * Used in the following functions
- * _find()
- * _cmp()
- * 
- */
-#define FLTEPSILON 0.001
-#define DBEPSILON 0.000001
 
 DynamiC *DynamiC_init(void *data, size_t data_size, size_t num_elems) {
     DynamiC *newList = malloc(sizeof(DynamiC));

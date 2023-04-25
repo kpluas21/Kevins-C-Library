@@ -26,6 +26,21 @@
  */
 
 #include<stddef.h>
+/**
+ * @brief Global epsilons to be used when comparing floating-point values. If you need to change
+ * how precise the comparisons should be, change it here.
+ * Used in the following functions
+ * _find()
+ * _cmp()
+ * 
+ */
+#define FLTEPSILON 0.001
+#define DBEPSILON 0.000001
+
+#define min(a, b) \
+    ({ __typeof__ (a) _a = (a); \
+        __typeof__ (b) _b = (b); \
+        _a < _b ? _a : _b; })
 
 typedef enum ErrorCode {
     SUCCESS = 0, 
