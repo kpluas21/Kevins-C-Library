@@ -95,15 +95,15 @@ void DynamiC_append(DynamiC *array, void *elem);
  */
 void DynamiC_delete(DynamiC **array);
 
-// /**
-//  * @brief Removes from the array a single element. Reduces the size of the array by 1 and 
-//  * closes the gap by shifting every element over by 1. The capacity remains unchanged after
-//  * this operation.
-//  * 
-//  * @param array The DynamiC pointer
-//  * @param index The index of the element
-//  */
-// void DynamiC_remove(DynamiC *array, size_t index);
+/**
+ * @brief Removes from the array a single element. Reduces the size of the array by 1 and 
+ * closes the gap by shifting every element over by 1. The capacity remains unchanged after
+ * this operation.
+ * 
+ * @param array The DynamiC pointer
+ * @param index The index of the element
+ */
+void DynamiC_remove(DynamiC *array, size_t index);
 /**
  * @brief Clears out the entire array, reducing the size to 0. Does not change the 
  * capacity in any way.

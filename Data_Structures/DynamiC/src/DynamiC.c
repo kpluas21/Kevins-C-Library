@@ -137,7 +137,25 @@ void DynamiC_delete(DynamiC **array) {
     (*array) = NULL;
 }
 
-void DynamiC_empty(DynamiC *array) {
+void DynamiC_remove(DynamiC *array, size_t index) {
+    if(index >= DynamiC_size(array)) {
+        printf("Error: Out of bounds index provided\n");
+        return;
+    }
+
+    char *indexPtr = array->data;
+    size_t data_step = array->data_size;
+    // size_t currSize = DynamiC_size(array);
+    size_t memIndex = data_step * index;
+
+    memmove(indexPtr + memIndex, indexPtr + (memIndex + data_step), array->alloc_data - memIndex);
+    
+    array->alloc_data -= array->data_size;
+
+}
+
+void DynamiC_empty(DynamiC *array)
+{
     free(array->data);
 
     array->data = calloc(array->capacity, array->data_size);
