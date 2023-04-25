@@ -15,6 +15,7 @@
 #include<stdlib.h>
 #include<time.h>
 #include<float.h>
+#include<math.h>
 
 #include"../src/DynamiC.h"
 #include"../../lib/unity.h"
@@ -33,11 +34,17 @@ void test_DynamiC_remove(void);
 void test_DynamiC_stats(void);
 void test_DynamiC_get(void);
 
+void test_DynamiC_find(void);
+
 void test_DynamiC_delete(void);
 
 void helper_print_all_int(DynamiC *array);
-
 void helper_print_all_char(DynamiC *array);
+void helper_print_all_float(DynamiC *array);
+
+int DynamiC_cmp_int(const void *x, const void *y);
+int DynamiC_cmp_char(const void *x, const void *y);
+int DynamiC_cmp_float(const void *x, const void *y);
 
 static DynamiC **arrayOfArrays;
 
@@ -56,6 +63,7 @@ int main(void) {
     RUN_TEST(test_DynamiC_append_100000);
     RUN_TEST(test_DynamiC_remove);
     RUN_TEST(test_DynamiC_get);
+    RUN_TEST(test_DynamiC_find);
     RUN_TEST(test_DynamiC_delete);
 
     return UNITY_END();
@@ -213,6 +221,59 @@ void test_DynamiC_get(void) {
     TEST_ASSERT_EQUAL_FLOAT(2.5, *(float*)DynamiC_get(floatArray, DynamiC_size(floatArray) - 1));
 }
 
+
+void test_DynamiC_find(void) {
+    //INTS
+    for (size_t i = 0; i < 11; i++)
+    {
+        DynamiC_insert(intArray, &i, i);
+    }
+    int b = 0;   
+    int i = 5;
+    int e = 10;
+    int n = 99;
+    
+    printf("5 found in index: %zu\n", DynamiC_find(intArray, &i, DynamiC_cmp_int));
+    printf("0 found in index: %zu\n", DynamiC_find(intArray, &b, DynamiC_cmp_int));
+    printf("10 found in index: %zu\n", DynamiC_find(intArray, &e, DynamiC_cmp_int));
+    
+    //Incorrect input
+    printf("99 found in index: %zu\n", DynamiC_find(intArray, &n, DynamiC_cmp_int));
+
+    //CHARS
+    for (size_t i = 'a'; i <= 'z'; i++) {
+        DynamiC_append(charArray, &i);
+    }
+    
+    helper_print_all_char(charArray);
+    char c1 = 'a';
+    char c2 = 'g';
+    char c3 = 'z';
+    char c4 = '?'; //Incorrect input
+
+    TEST_ASSERT_EQUAL_INT(0, DynamiC_find(charArray, &c1, DynamiC_cmp_char));
+    TEST_ASSERT_EQUAL_INT(6, DynamiC_find(charArray, &c2, DynamiC_cmp_char));
+    TEST_ASSERT_EQUAL_INT(25, DynamiC_find(charArray, &c3, DynamiC_cmp_char));
+    TEST_ASSERT_EQUAL_INT(1, DynamiC_find(charArray, &c4, DynamiC_cmp_char));
+    
+    //FLOATS
+    for (float i = 0.0; i <= 5.0; i += 0.50) {
+        DynamiC_append(floatArray, &i);
+    }
+
+    float f1 = 0.0;
+    float f2 = 2.5;
+    float f3 = 5.0;
+    float f4 = 6.9; // ;)
+
+    helper_print_all_float(floatArray);
+    TEST_ASSERT_EQUAL_INT(0, DynamiC_find(floatArray, &f1, DynamiC_cmp_float));    
+    TEST_ASSERT_EQUAL_INT(5, DynamiC_find(floatArray, &f2, DynamiC_cmp_float));    
+    TEST_ASSERT_EQUAL_INT(10, DynamiC_find(floatArray, &f3, DynamiC_cmp_float));    
+    TEST_ASSERT_EQUAL_INT(1, DynamiC_find(floatArray, &f4, DynamiC_cmp_float));    
+
+}
+
 void test_DynamiC_delete(void) {
     DynamiC_delete(&intArray);
     DynamiC_delete(&charArray);
@@ -241,3 +302,52 @@ void helper_print_all_char(DynamiC *array) {
     }
     printf("\b\b]\n");
 }
+void helper_print_all_float(DynamiC *array) {
+    printf("[");
+    for (size_t i = 0; i < DynamiC_size(array); i++)
+    {
+        printf("%f, ", *(float*)DynamiC_get(array, i));
+    }
+    printf("\b\b]\n");
+}
+
+//Comparator functions used in sorting, searching, etc.
+
+int DynamiC_cmp_int(const void *x, const void *y) {
+    return (*(int*)x > *(int*)y) - (*(int*)x < *(int*)y);
+}
+int DynamiC_cmp_char(const void *x, const void *y) {
+    return (*(char*)x > *(char*)y) - (*(char*)x < *(char*)y);
+}
+
+int DynamiC_cmp_float(const void *a, const void *b) {
+    
+    if(fabs((*(float*) a) - (*(float*) b)) < FLTEPSILON) {
+        return 0;
+    }
+    else if(*(float*)a < *(float*)b) {
+        return -1;
+    }
+    return 1;
+}
+
+
+// int DynamiC_cmp_float(const void *a, const void *b) {
+//     const float fA = *(float*)a;
+//     const float fB = *(float*)b;
+//     const float absA = fabs(fA);
+//     const float absB = fabs(fB);
+//     const float diff = fabs(fA - fB);
+
+//     if(fA == fB) {
+//         return 0; //handles infinities
+//     }
+//     else if(fA == 0 || fB == 0 || absA + absB < FLT_MIN) {
+//         return diff < (0.5 * FLT_MIN);
+//     }
+//     else {
+//         return diff / min((absA + absB), FLT_MAX) < FLT_EPSILON;
+//     }
+
+// }
+
