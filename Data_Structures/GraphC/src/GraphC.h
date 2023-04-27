@@ -41,8 +41,10 @@ GraphC *GraphC_init(void);
  * 
  * @param graph Our graph pointer
  * @param x The label/key of the vertex to be added
+ * @return Vertex* A pointer to the newly created vertex. Can be safely discarded. NULL
+ * on error.
  */
-void GraphC_add_vertex(GraphC* graph, char x);
+Vertex *GraphC_add_vertex(GraphC* graph, char x);
 
 /**
  * @brief Adds an edge from vertex x to vertex y if it does not exist already
