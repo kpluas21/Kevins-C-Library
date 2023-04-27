@@ -43,7 +43,16 @@ GraphC *GraphC_init(void);
  * @param x The label/key of the vertex to be added
  * @return int A non zero value on error
  */
-int GraphC_add_vertex(GraphC* graph, char x);
+int GraphC_add_vertex(GraphC *graph, char x);
+
+/**
+ * @brief Removes vertex x from the graph if it exists.
+ * 
+ * @param graph 
+ * @param x The vertex to remove.
+ * @return int 0 if successful. Non zero otherwise
+ */
+int GraphC_remove_vertex(GraphC *graph, char x);
 
 /**
  * @brief Adds an edge from vertex x to vertex y if it does not exist already
@@ -53,6 +62,16 @@ int GraphC_add_vertex(GraphC* graph, char x);
  * @param y 
  */
 void GraphC_add_edge(GraphC *graph, char x, char y);
+
+/**
+ * @brief Removes the edge from x to y, if it exists.
+ * 
+ * @param graph 
+ * @param x 
+ * @param y 
+ * @return int 0 if successful, Non zero otherwise.
+ */
+int GraphC_remove_edge(GraphC *graph, char x, char y);
 
 /**
  * @brief Searches for the vertex in the graph, returning its index in the list, -1 otherwise.

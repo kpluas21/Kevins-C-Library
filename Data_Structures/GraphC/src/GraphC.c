@@ -65,6 +65,13 @@ int GraphC_add_vertex(GraphC *graph, char x) {
 
 }
 
+/* Like any dynamic array , the contents of .vertices will have to be shifted over to close the gap left when removing a vertex */
+/* And when a vertex gets removed, the associated edge must also be removed.  */
+
+int GraphC_remove_vertex(GraphC *graph, char x) {
+    
+}
+
 void GraphC_add_edge(GraphC *graph, char x, char y) { 
     int iX, iY; //Indices for our keys to be used for insertion
 
@@ -100,14 +107,18 @@ void GraphC_add_edge(GraphC *graph, char x, char y) {
     graph->num_of_edges++;
 }
 
-int GraphC_vertex_exists(GraphC *graph, char key) {
+int GraphC_remove_edge(GraphC *graph, char x, char y) {
+    return 0;
+}
+
+int GraphC_vertex_exists(GraphC *graph, char key)
+{
     for (size_t i = 0; i < graph->num_of_vertices; i++) {
         if(graph->vertices[i].key == key) {
             return i;
         }
     }
     return -1;
-    
 }
 
 void GraphC_print(GraphC *graph) {
