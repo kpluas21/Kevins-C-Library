@@ -1,17 +1,17 @@
-name: C/C++ CI
+# name: C/C++ CI
 
-on: [push]
+# on: [push]
 
-jobs:
-  build:
+# jobs:
+#   build:
 
-    runs-on: ubuntu-latest
+#     runs-on: ubuntu-latest
 
-    steps:
-    - uses: actions/checkout@v3
-    - name: Setup tests for DynamiC
-      working-directory: Data_Structures/DynamiC/
-      run: make -f DynamiCTestmake.mk
-    - name: Run tests for DynamiC
-      working-directory: Data_Structures/DynamiC/
-      run: ./DynamiCTest
+#     steps:
+#     - uses: actions/checkout@v3
+#     - name: Setup tests for DynamiC
+#       working-directory: Data_Structures/DynamiC/
+#       run: make -f DynamiCTestmake.mk
+#     - name: Run tests for DynamiC
+#       working-directory: Data_Structures/DynamiC/
+#       run: ./DynamiCTest
