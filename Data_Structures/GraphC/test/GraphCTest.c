@@ -19,6 +19,7 @@ void tearDown(void);
 void test_GraphC_init(void);
 
 void test_GraphC_add_vertex(void);
+void test_GraphC_add_edge(void);
 
 void test_GraphC_destroy(void);
 
@@ -26,6 +27,7 @@ int main(void) {
     UNITY_BEGIN();
     RUN_TEST(test_GraphC_init);
     RUN_TEST(test_GraphC_add_vertex);
+    RUN_TEST(test_GraphC_add_edge);
     RUN_TEST(test_GraphC_destroy);
     return UNITY_END();
 }
@@ -44,11 +46,33 @@ void test_GraphC_init(void) {
 }
 
 void test_GraphC_add_vertex(void) {
-    TEST_ASSERT_NOT_NULL(GraphC_add_vertex(graph, 'a'));
-    TEST_ASSERT_NOT_NULL(GraphC_add_vertex(graph, 'b'));
+    TEST_ASSERT_EQUAL_INT(0, GraphC_add_vertex(graph, 'a'));
+    TEST_ASSERT_EQUAL_INT(0, GraphC_add_vertex(graph, 'b'));
 
-    TEST_ASSERT_NULL(GraphC_add_vertex(graph, 'b'));
+    TEST_ASSERT_EQUAL_INT(-1, GraphC_add_vertex(graph, 'b'));
+    for (size_t i = 'a'; i <= 'z'; i++)
+    {
+        GraphC_add_vertex(graph, i);
+    }
 
+    TEST_ASSERT_EQUAL_size_t(26, graph->num_of_vertices);
+    
+
+}
+
+void test_GraphC_add_edge(void) {
+    for (size_t i = 'a'; i <= 'z'; i++) {
+        GraphC_add_vertex(graph, i);
+    }
+
+    for (size_t i = 'b'; i <= 'z'; i++)
+    {
+        GraphC_add_edge(graph, 'a', i);
+    }    
+    
+    GraphC_print(graph);
+
+    TEST_ASSERT_EQUAL_size_t(25, graph->num_of_edges);
 }
 
 void test_GraphC_destroy(void) {

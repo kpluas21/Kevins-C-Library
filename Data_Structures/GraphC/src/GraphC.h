@@ -11,7 +11,7 @@
  * 
  * This is GraphC, an undirected, unweighted graph. This graph will be represented using an adjacency list through the use of linked lists. 
  * 
- * Each node will contain a key in the form of a char, followed by a list of VertexNodes adjacent to this vertex
+ * GraphC stores a contiguous array of Vertexs which serve as heads to a linked list of adjacent neighbors. 
  */
 
 #include<stdlib.h>
@@ -41,10 +41,9 @@ GraphC *GraphC_init(void);
  * 
  * @param graph Our graph pointer
  * @param x The label/key of the vertex to be added
- * @return Vertex* A pointer to the newly created vertex. Can be safely discarded. NULL
- * on error.
+ * @return int A non zero value on error
  */
-Vertex *GraphC_add_vertex(GraphC* graph, char x);
+int GraphC_add_vertex(GraphC* graph, char x);
 
 /**
  * @brief Adds an edge from vertex x to vertex y if it does not exist already
@@ -54,6 +53,22 @@ Vertex *GraphC_add_vertex(GraphC* graph, char x);
  * @param y 
  */
 void GraphC_add_edge(GraphC *graph, char x, char y);
+
+/**
+ * @brief Searches for the vertex in the graph, returning its index in the list, -1 otherwise.
+ * 
+ * @param graph 
+ * @param key 
+ * @return size_t 
+ */
+int GraphC_vertex_exists(GraphC *graph, char key);
+
+/**
+ * @brief Prints a list of all vertices and their adjacent neighbors.
+ * 
+ * @param graph 
+ */
+void GraphC_print(GraphC *graph);
 
 /**
  * @brief Frees up all memory associated with the graph and destroys all

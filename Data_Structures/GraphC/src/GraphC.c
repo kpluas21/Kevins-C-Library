@@ -30,57 +30,118 @@ GraphC *GraphC_init(void) {
     return graph;
 }
 
-Vertex *GraphC_add_vertex(GraphC *graph, char x) {
+int GraphC_add_vertex(GraphC *graph, char x) {
 
     if(graph->vertices == NULL) {
         //Empty graph
         graph->vertices = malloc(sizeof(Vertex));
         if(!graph->vertices) {
-            return NULL;
+            return -1;
         }
 
         graph->vertices->key = x;
         graph->vertices->next_adj_vertex = NULL;
         graph->num_of_vertices++;
-        return graph->vertices;
+        return 0;
     }
     
     //Checking for duplicate vertex, return if found spitting out an error
-    for (size_t i = 0; i < graph->num_of_vertices; i++) {
-        if(graph->vertices[i].key == x) {
-            printf("Error: Cannot insert duplicate vertex\n");
-            return NULL;
-        }
-    }
-    Vertex *new_vertex = malloc(sizeof(Vertex));
-    if(new_vertex == NULL) {
-        printf("Error allocating memory for new_vertex\n");
-        return NULL;
-    }
-    new_vertex->key = x;
-    new_vertex->next_adj_vertex = NULL;
 
-    //Not NULL and No duplicates found. Append a new vertex to the tail end of the array.
-    graph->vertices = realloc(graph->vertices, sizeof(Vertex) * graph->num_of_vertices + 1);
-    memcpy(&graph->vertices[graph->num_of_vertices], new_vertex, sizeof(Vertex));
+    if(GraphC_vertex_exists(graph, x) != -1) {
+        printf("Error: Cannot insert duplicate vertex\n");
+        return -1;
+    }
+
+    Vertex new_vertex;
+    new_vertex.key = x;
+    new_vertex.next_adj_vertex = NULL;
+
     graph->num_of_vertices++;
+    graph->vertices = realloc(graph->vertices, sizeof(Vertex) * graph->num_of_vertices);
+    graph->vertices[graph->num_of_vertices - 1] = new_vertex;
 
-    return new_vertex;
+
+    return 0;
 
 }
 
-void GraphC_destroy(GraphC **graph) {
-    if(graph == NULL || (*graph) == NULL) {
+void GraphC_add_edge(GraphC *graph, char x, char y) { 
+    int iX, iY; //Indices for our keys to be used for insertion
+
+    iX = GraphC_vertex_exists(graph, x);
+    iY = GraphC_vertex_exists(graph, y);
+
+    if(iX == -1 || iY == -1) {
+        printf("Invalid vertices inputted\n");
         return;
     }
 
-    //TODO: Destroy_node to be implemented once adding edges is good. 
-    // Vertex *current_node = (*graph)->vertices;
-    // Vertex *next_node;
+    //Both vertices exists, add them to each other's adj_list
+    Vertex *newVertex_X = malloc(sizeof(Vertex));
+    Vertex *newVertex_Y = malloc(sizeof(Vertex));
+
+    //This linked list is unordered, so to keep it fast, simply insert these new
+    //vertices to the head of the list. 
+
+    Vertex *tempNode;
+
+    newVertex_X->key = x;
+    newVertex_Y->key = y;
+
+    tempNode = graph->vertices[iY].next_adj_vertex;
+    graph->vertices[iY].next_adj_vertex = newVertex_X;
+    newVertex_X->next_adj_vertex = tempNode;
+
+
+    tempNode = graph->vertices[iX].next_adj_vertex;
+    graph->vertices[iX].next_adj_vertex = newVertex_Y;
+    newVertex_Y->next_adj_vertex = tempNode;
+
+    graph->num_of_edges++;
+}
+
+int GraphC_vertex_exists(GraphC *graph, char key) {
+    for (size_t i = 0; i < graph->num_of_vertices; i++) {
+        if(graph->vertices[i].key == key) {
+            return i;
+        }
+    }
+    return -1;
+    
+}
+
+void GraphC_print(GraphC *graph) {
+    Vertex *traversalPtr;
+    for (size_t i = 0; i < graph->num_of_vertices; i++)
+    {
+        printf("%c | ", graph->vertices[i].key);
+        traversalPtr = graph->vertices[i].next_adj_vertex;
+        
+        while(traversalPtr != NULL) {
+            printf("%c ", traversalPtr->key);
+            traversalPtr = traversalPtr->next_adj_vertex;
+        }
+        printf("\n");
+    }
+    
+}
+
+void GraphC_destroy(GraphC **graph)
+{
+    if(graph == NULL || (*graph) == NULL) {
+        return;
+    }
+ 
+    Vertex *current_node;
+    Vertex *next_node;
+
     for (size_t i = 0; i < (*graph)->num_of_vertices; i++) {
+        current_node = (*graph)->vertices[i].next_adj_vertex;
         //For each Vertex whose adj_nabors is NOT NULL, go through them and free every node along the way
-        if((*graph)->vertices[i].next_adj_vertex != NULL) {
-            //FREE THE NABORS
+        if(current_node != NULL) {
+            next_node = current_node->next_adj_vertex;
+            free(current_node);
+            current_node = next_node;
         }
     }
     free((*graph)->vertices);
