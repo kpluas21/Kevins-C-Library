@@ -1,0 +1,136 @@
+\hypertarget{HashC_8c}{}\doxysection{Data\+\_\+\+Structures/\+Hash\+C/src/\+HashC.c File Reference}
+\label{HashC_8c}\index{Data\_Structures/HashC/src/HashC.c@{Data\_Structures/HashC/src/HashC.c}}
+
+
+Implementation for hashmaps in C.  
+
+
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}Hash\+C.\+h\char`\"{}}\newline
+Include dependency graph for Hash\+C.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=334pt]{HashC_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{HashC_8c_a9771cabfd673a8e350f1f8ce0b8f458f}\label{HashC_8c_a9771cabfd673a8e350f1f8ce0b8f458f}} 
+\#define {\bfseries DEFAULT\+\_\+\+SIZE}~300
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structHashC__table}{Hash\+C\+\_\+table}} $\ast$ \mbox{\hyperlink{HashC_8c_a54121f836d757ef54e4957aa398b7f24}{Hash\+C\+\_\+init}} (void)
+\begin{DoxyCompactList}\small\item\em Initializes and returns a pointer to a new hash table. The maximum number of pairs allowed is defined in the .c file and can be changed as needed. The current default is 100. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{HashC_8c_a671b29f7793c915d225d383d6c876ea3}{Hash\+C\+\_\+insert}} (\mbox{\hyperlink{structHashC__table}{Hash\+C\+\_\+table}} $\ast$table, const char $\ast$key, int value)
+\begin{DoxyCompactList}\small\item\em Attempts to insert a key-\/value pair into the hash table. This table uses open probing to avoid collisions. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{HashC_8c_a14cf2d16e84bb3709ee19cc5891bb0f7}{Hash\+C\+\_\+search}} (\mbox{\hyperlink{structHashC__table}{Hash\+C\+\_\+table}} $\ast$table, const char $\ast$key)
+\begin{DoxyCompactList}\small\item\em Attempts to search for the key provided in the table and returns the associated value. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{HashC_8c_a505f7742ad913462bb9e6df914c986e7}{Hash\+C\+\_\+delete}} (\mbox{\hyperlink{structHashC__table}{Hash\+C\+\_\+table}} $\ast$$\ast$table)
+\begin{DoxyCompactList}\small\item\em Deletes and frees up any memory associated with the hash table provided. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{HashC_8c_a651e2556f957fce86fd6eebed13ad9a8}{Hash\+C\+\_\+table\+\_\+size}} (\mbox{\hyperlink{structHashC__table}{Hash\+C\+\_\+table}} $\ast$table)
+\begin{DoxyCompactList}\small\item\em Returns the current number of key-\/value pairs stored in the table. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Implementation for hashmaps in C. 
+
+\begin{DoxyAuthor}{Author}
+Kevin Pluas (\href{mailto:kpluas21@gmail.com}{\texttt{ kpluas21@gmail.\+com}}) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2023-\/04-\/21
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2023 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{HashC_8c_a505f7742ad913462bb9e6df914c986e7}\label{HashC_8c_a505f7742ad913462bb9e6df914c986e7}} 
+\index{HashC.c@{HashC.c}!HashC\_delete@{HashC\_delete}}
+\index{HashC\_delete@{HashC\_delete}!HashC.c@{HashC.c}}
+\doxysubsubsection{\texorpdfstring{HashC\_delete()}{HashC\_delete()}}
+{\footnotesize\ttfamily void Hash\+C\+\_\+delete (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structHashC__table}{Hash\+C\+\_\+table}} $\ast$$\ast$}]{table }\end{DoxyParamCaption})}
+
+
+
+Deletes and frees up any memory associated with the hash table provided. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em table} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{HashC_8c_a54121f836d757ef54e4957aa398b7f24}\label{HashC_8c_a54121f836d757ef54e4957aa398b7f24}} 
+\index{HashC.c@{HashC.c}!HashC\_init@{HashC\_init}}
+\index{HashC\_init@{HashC\_init}!HashC.c@{HashC.c}}
+\doxysubsubsection{\texorpdfstring{HashC\_init()}{HashC\_init()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structHashC__table}{Hash\+C\+\_\+table}}$\ast$ Hash\+C\+\_\+init (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Initializes and returns a pointer to a new hash table. The maximum number of pairs allowed is defined in the .c file and can be changed as needed. The current default is 100. 
+
+\begin{DoxyReturn}{Returns}
+Hash\+C\+\_\+table$\ast$ 
+\end{DoxyReturn}
+\mbox{\Hypertarget{HashC_8c_a671b29f7793c915d225d383d6c876ea3}\label{HashC_8c_a671b29f7793c915d225d383d6c876ea3}} 
+\index{HashC.c@{HashC.c}!HashC\_insert@{HashC\_insert}}
+\index{HashC\_insert@{HashC\_insert}!HashC.c@{HashC.c}}
+\doxysubsubsection{\texorpdfstring{HashC\_insert()}{HashC\_insert()}}
+{\footnotesize\ttfamily void Hash\+C\+\_\+insert (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structHashC__table}{Hash\+C\+\_\+table}} $\ast$}]{table,  }\item[{const char $\ast$}]{key,  }\item[{int}]{value }\end{DoxyParamCaption})}
+
+
+
+Attempts to insert a key-\/value pair into the hash table. This table uses open probing to avoid collisions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em table} & \\
+\hline
+{\em key} & A string key \\
+\hline
+{\em value} & The value associated with the string key \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{HashC_8c_a14cf2d16e84bb3709ee19cc5891bb0f7}\label{HashC_8c_a14cf2d16e84bb3709ee19cc5891bb0f7}} 
+\index{HashC.c@{HashC.c}!HashC\_search@{HashC\_search}}
+\index{HashC\_search@{HashC\_search}!HashC.c@{HashC.c}}
+\doxysubsubsection{\texorpdfstring{HashC\_search()}{HashC\_search()}}
+{\footnotesize\ttfamily int Hash\+C\+\_\+search (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structHashC__table}{Hash\+C\+\_\+table}} $\ast$}]{table,  }\item[{const char $\ast$}]{key }\end{DoxyParamCaption})}
+
+
+
+Attempts to search for the key provided in the table and returns the associated value. 
+
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\mbox{\Hypertarget{HashC_8c_a651e2556f957fce86fd6eebed13ad9a8}\label{HashC_8c_a651e2556f957fce86fd6eebed13ad9a8}} 
+\index{HashC.c@{HashC.c}!HashC\_table\_size@{HashC\_table\_size}}
+\index{HashC\_table\_size@{HashC\_table\_size}!HashC.c@{HashC.c}}
+\doxysubsubsection{\texorpdfstring{HashC\_table\_size()}{HashC\_table\_size()}}
+{\footnotesize\ttfamily size\+\_\+t Hash\+C\+\_\+table\+\_\+size (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structHashC__table}{Hash\+C\+\_\+table}} $\ast$}]{table }\end{DoxyParamCaption})}
+
+
+
+Returns the current number of key-\/value pairs stored in the table. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em table} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+size\+\_\+t 
+\end{DoxyReturn}
