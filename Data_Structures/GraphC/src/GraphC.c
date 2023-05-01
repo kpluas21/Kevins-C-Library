@@ -15,6 +15,9 @@
 #include<stdio.h>
 #include<string.h>
 
+//Frees up the entire linked list associated with a head vertex. Because the head vertex is in an array the head will not be freed, 
+static void GraphC_destroy_list(Vertex *head_node);
+
 
 GraphC *GraphC_init(void) {
     GraphC *graph = malloc(sizeof(GraphC));
@@ -69,6 +72,13 @@ int GraphC_add_vertex(GraphC *graph, char x) {
 /* And when a vertex gets removed, the associated edge must also be removed.  */
 
 int GraphC_remove_vertex(GraphC *graph, char x) {
+    Vertex *traversal_ptr;
+    for (size_t i = 0; i < graph->num_of_vertices; i++) {
+        if((graph->vertices + i)->key == x) {
+            GraphC_destroy_list(graph->vertices + i);
+        }
+
+    }
     
 }
 
@@ -158,4 +168,14 @@ void GraphC_destroy(GraphC **graph)
     free((*graph)->vertices);
     free((*graph));
     (*graph) = NULL;
+}
+
+void GraphC_destroy_list(Vertex *head_node) {
+    Vertex *current_node = head_node;
+    Vertex *next_node;
+    while(current_node->next_adj_vertex != NULL) {
+        next_node = current_node->next_adj_vertex;
+        free(current_node);
+        current_node = next_node;
+    }
 }
