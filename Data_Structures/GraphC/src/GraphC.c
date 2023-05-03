@@ -16,7 +16,7 @@
 #include<string.h>
 
 /**
- * @brief Destroys ALL adjacent vertices of a given head(unique) Vertex. Mainly used by GraphC.h::GraphC_remove_vertex() 
+ * @brief Helper function: Destroys ALL adjacent vertices of a given head(unique) Vertex. Mainly used by GraphC.h::GraphC_remove_vertex() 
  * 
  * @param head_node A pointer to the Vertex node in the contiguous array located in GraphC
  */
@@ -79,13 +79,40 @@ int GraphC_remove_vertex(GraphC *graph, char x) {
         //We found the "root" vertex to be removed
         if(x == (graph->vertices + i)->key) {
             //destroy this root vertex's whole list of neighbors
-            GraphC_destroy_list( (graph->num_of_vertices + i) );
-        }
+            GraphC_destroy_list( graph->vertices + i );
+            graph->num_of_vertices--;
 
-        //go through the list of nabors and remove any edge relating to 
-        //the removed vertex
-        
+        }
+        //Go through all of the adj_vertices to the root vertex and remove all instances of the 
+        //removed vertex.
+        else {
+            Vertex *head = (graph->vertices + i)->next_adj_vertex;
+            if(head == NULL) {
+                //Skip over this vertex. No neighbors
+            }
+
+            //Handle the case where the head adj_vertex is the key.
+            else if(head->key == x) {
+                Vertex *temp = head;
+                (graph->vertices + i)->next_adj_vertex = head->next_adj_vertex;
+                free(temp);
+            }
+
+
+            else {
+                while(head->next_adj_vertex != NULL) {
+                    if(head->next_adj_vertex->key == x) {
+                        Vertex *temp = head->next_adj_vertex;
+                        head->next_adj_vertex = head->next_adj_vertex->next_adj_vertex;
+                        free(temp);
+                    }
+                    head = head->next_adj_vertex;
+                }
+            }
+
+        }
     }
+    return 0;
     
 }
 
@@ -103,6 +130,11 @@ void GraphC_add_edge(GraphC *graph, char x, char y) {
     //Both vertices exists, add them to each other's adj_list
     Vertex *newVertex_X = malloc(sizeof(Vertex));
     Vertex *newVertex_Y = malloc(sizeof(Vertex));
+
+    if(newVertex_X == NULL || newVertex_Y == NULL) {
+        printf("Error: Cannot malloc newVertex in %s\n", __func__);
+        return;
+    }
 
     //This linked list is unordered, so to keep it fast, simply insert these new
     //vertices to the head of the list. 
@@ -124,9 +156,9 @@ void GraphC_add_edge(GraphC *graph, char x, char y) {
     graph->num_of_edges++;
 }
 
-int GraphC_remove_edge(GraphC *graph, char x, char y) {
-    return 0;
-}
+// int GraphC_remove_edge(GraphC *graph, char x, char y) {
+//     return 0;
+// }
 
 int GraphC_vertex_exists(GraphC *graph, char key)
 {
@@ -190,7 +222,6 @@ void GraphC_destroy_list(Vertex *head_node) {
         next_node = current_node->next_adj_vertex;
         free(current_node);
         current_node = next_node;
-
     }
 
     return;
