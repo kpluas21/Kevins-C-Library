@@ -1,0 +1,36 @@
+An implementation of a generic dynamic array data structure in C. It supports fast insertion and dynamic memory allocation. It can support any type with a clearly defined size in bytes. ~\newline
+\hypertarget{md_Data_Structures_DynamiC_README_autotoc_md4}{}\doxysection{Installation}\label{md_Data_Structures_DynamiC_README_autotoc_md4}
+Everything needed is contained in the included header and source file. Simply add this line to the top of your file and you should be good to go! \begin{DoxyVerb}#include"DynamiC.h"
+\end{DoxyVerb}
+ You can also use the following command to try out the library! 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make all }
+\DoxyCodeLine{./DynamiCTest}
+
+\end{DoxyCode}
+ This will create an executable that tests all of the functions and ensure they work on your machine.\hypertarget{md_Data_Structures_DynamiC_README_autotoc_md5}{}\doxysection{How To Use}\label{md_Data_Structures_DynamiC_README_autotoc_md5}
+To start, call the \+\_\+init() function and pass it the array(or pointer) containing your inital data, the size(in bytes) of each element and the number of elements pointed to by the initial pointer. \begin{DoxyVerb}    DynamiC *intVector = DynamiC(voidPtrToInitialData, sizeOfOneElem, numOfElems);
+\end{DoxyVerb}
+ If done correctly, you should have a pointer to a dynamic array containing your initial data and of the typing of your choosing. From there, call the functions as needed, passing the pointer to your array. More information on the functions and their use can be found in the source code. \begin{DoxyVerb}    DynamiC_append(array, &elem);
+    DynamiC_get(array, index);
+\end{DoxyVerb}
+ Casting to the appropriate data type is a must when using certain functions such as \+\_\+get. It is up to you to ensure the types match. For example \+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{//Retrieve an int at index 5 of our array}
+\DoxyCodeLine{//Because \_get returns void, we will need to cast to an int and dereference.}
+\DoxyCodeLine{}
+\DoxyCodeLine{    int num;}
+\DoxyCodeLine{    num = *(int*)DynamiC\_get(intVector, 5);}
+
+\end{DoxyCode}
+
+
+As shown, you\textquotesingle{}ll be using pointers quite a bit so make sure to call the provided delete function when you\textquotesingle{}re done. Make sure you pass a reference to the pointer you\textquotesingle{}ve been working with. This will ensure that everything, including the pointer, is free\textquotesingle{}d and null\textquotesingle{}d safely! \begin{DoxyVerb}    //....
+    DynamiC_delete(&array);
+    //array will be NULL at this point. 
+    return 0;
+}
+\end{DoxyVerb}
+ 

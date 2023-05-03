@@ -23,11 +23,13 @@ void test_LinkC_init(void);
 void test_LinkC_get(void);
 
 void test_LinkC_insert_at_end(void);
+void test_LinkC_insert_at_index(void);
 
 void test_LinkC_find(void);
 
-void test_LinkC_insert_at_index(void);
+void test_LinkC_remove(void);
 
+//Automatically sets up a single linked list containing a single node with an int.
 void setUp(void);
 void tearDown(void);
 
@@ -43,6 +45,7 @@ int main(void) {
     RUN_TEST(test_LinkC_get);
     RUN_TEST(test_LinkC_insert_at_end);
     RUN_TEST(test_LinkC_find);
+    RUN_TEST(test_LinkC_remove);
     return UNITY_END();
 }
 
@@ -52,7 +55,7 @@ void test_LinkC_init(void) {
 
 void test_LinkC_get(void) {
     //Correct inputs
-    TEST_ASSERT_EQUAL_INT(1, *(int*)LinkC_get(intList, 0));
+    TEST_ASSERT_EQUAL_INT(0, *(int*)LinkC_get(intList, 0));
 
     //Incorrect inputs
     TEST_ASSERT_NULL(LinkC_get(intList, 5));
@@ -80,12 +83,31 @@ void test_LinkC_find(void) {
     TEST_ASSERT_EQUAL_INT(-1, LinkC_find(intList, &i));
 }
 
+void test_LinkC_remove(void) {
+    for (int i = 1; i < 100; i++)
+    {
+        LinkC_insert_at_end(intList, &i);
+    }
+    TEST_ASSERT_EQUAL_size_t(100, LinkC_size(intList));
+    //Testing head removal
+    LinkC_remove_at_middle(intList, 0);
+
+    //Testing middle removal
+    LinkC_remove_at_middle(intList, LinkC_size(intList)/2);
+
+    //Testing tail removal
+    LinkC_remove_at_middle(intList, LinkC_size(intList) - 1);
+
+    TEST_ASSERT_EQUAL_size_t(97, LinkC_size(intList));
+    
+}
+
 void test_LinkC_insert_at_index(void) {
     
 }
 
 void setUp(void) {
-    int i = 1;
+    int i = 0;
 
     intList = LinkC_init(sizeof(int), &i);
 

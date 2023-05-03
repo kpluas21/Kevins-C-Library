@@ -1,0 +1,201 @@
+\hypertarget{bstC_8h}{}\doxysection{Data\+\_\+\+Structures/bst\+C/src/bstC.h File Reference}
+\label{bstC_8h}\index{Data\_Structures/bstC/src/bstC.h@{Data\_Structures/bstC/src/bstC.h}}
+
+
+Interface for bstC.  
+
+
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=322pt]{bstC_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structBstC}{BstC}}
+\item 
+struct \mbox{\hyperlink{structBstCNode}{Bst\+CNode}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{bstC_8h_a59dda7b4b8811397c0a19c65d810acde}\label{bstC_8h_a59dda7b4b8811397c0a19c65d810acde}} 
+typedef struct \mbox{\hyperlink{structBstCNode}{Bst\+CNode}} {\bfseries Bst\+CNode}
+\item 
+\mbox{\Hypertarget{bstC_8h_ab80a1c4d1d90e93746cea9f1beddbbfb}\label{bstC_8h_ab80a1c4d1d90e93746cea9f1beddbbfb}} 
+typedef struct \mbox{\hyperlink{structBstC}{BstC}} {\bfseries BstC}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structBstC}{BstC}} $\ast$ \mbox{\hyperlink{bstC_8h_ae1a42a02e7c943b47dd8ff23e21c4a9b}{Bst\+C\+\_\+init}} (void)
+\begin{DoxyCompactList}\small\item\em Initializes our BST. Root starts off as NULL until an element gets inserted with \+\_\+insert() \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{bstC_8h_a7b4a4375f4b3598992374904142a9e70}{Bst\+C\+\_\+insert}} (\mbox{\hyperlink{structBstC}{BstC}} $\ast$tree, signed int elem)
+\begin{DoxyCompactList}\small\item\em Inserts a new node into the tree. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{bstC_8h_a527ddbe4b4214ba4744a776a74976d0c}{Bst\+C\+\_\+print\+\_\+in\+Order}} (\mbox{\hyperlink{structBstC}{BstC}} $\ast$tree)
+\begin{DoxyCompactList}\small\item\em Prints all the elements of the tree in order. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{bstC_8h_a4a270c04bac0af45e48092566a30f95c}{Bst\+C\+\_\+delete}} (\mbox{\hyperlink{structBstC}{BstC}} $\ast$$\ast$tree)
+\begin{DoxyCompactList}\small\item\em Frees up and deletes all nodes associated with the root \mbox{\hyperlink{structBstC}{BstC}} node. Also renders the intial pointer as NULL. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{bstC_8h_a7f033522b04515308d4fb2db797dd156}{Bst\+C\+\_\+height}} (\mbox{\hyperlink{structBstC}{BstC}} $\ast$tree)
+\begin{DoxyCompactList}\small\item\em Returns the max height of the tree. \end{DoxyCompactList}\item 
+signed int \mbox{\hyperlink{bstC_8h_a13c8119f3d287722c3a94ffe22e7be3e}{Bst\+C\+\_\+min}} (\mbox{\hyperlink{structBstC}{BstC}} $\ast$tree)
+\begin{DoxyCompactList}\small\item\em Returns the minimum value found in this BST. \end{DoxyCompactList}\item 
+signed int \mbox{\hyperlink{bstC_8h_ad0b65c72a44955ab047a96f802d7ba2a}{Bst\+C\+\_\+max}} (\mbox{\hyperlink{structBstC}{BstC}} $\ast$tree)
+\begin{DoxyCompactList}\small\item\em Returns the maximum value found in this BST. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structBstCNode}{Bst\+CNode}} $\ast$ \mbox{\hyperlink{bstC_8h_ac2c6643987d797660bddb80a93cff094}{Bst\+C\+\_\+search}} (\mbox{\hyperlink{structBstC}{BstC}} $\ast$tree, signed int key)
+\begin{DoxyCompactList}\small\item\em Returns the node whose key matches the one provided by the user. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Interface for bstC. 
+
+\begin{DoxyAuthor}{Author}
+Kevin Pluas (\href{mailto:kpluas21@gmail.com}{\texttt{ kpluas21@gmail.\+com}}) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2023-\/04-\/16
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2023 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{bstC_8h_a4a270c04bac0af45e48092566a30f95c}\label{bstC_8h_a4a270c04bac0af45e48092566a30f95c}} 
+\index{bstC.h@{bstC.h}!BstC\_delete@{BstC\_delete}}
+\index{BstC\_delete@{BstC\_delete}!bstC.h@{bstC.h}}
+\doxysubsubsection{\texorpdfstring{BstC\_delete()}{BstC\_delete()}}
+{\footnotesize\ttfamily void Bst\+C\+\_\+delete (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structBstC}{BstC}} $\ast$$\ast$}]{tree }\end{DoxyParamCaption})}
+
+
+
+Frees up and deletes all nodes associated with the root \mbox{\hyperlink{structBstC}{BstC}} node. Also renders the intial pointer as NULL. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em root} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{bstC_8h_a7f033522b04515308d4fb2db797dd156}\label{bstC_8h_a7f033522b04515308d4fb2db797dd156}} 
+\index{bstC.h@{bstC.h}!BstC\_height@{BstC\_height}}
+\index{BstC\_height@{BstC\_height}!bstC.h@{bstC.h}}
+\doxysubsubsection{\texorpdfstring{BstC\_height()}{BstC\_height()}}
+{\footnotesize\ttfamily size\+\_\+t Bst\+C\+\_\+height (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structBstC}{BstC}} $\ast$}]{tree }\end{DoxyParamCaption})}
+
+
+
+Returns the max height of the tree. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+size\+\_\+t 
+\end{DoxyReturn}
+\mbox{\Hypertarget{bstC_8h_ae1a42a02e7c943b47dd8ff23e21c4a9b}\label{bstC_8h_ae1a42a02e7c943b47dd8ff23e21c4a9b}} 
+\index{bstC.h@{bstC.h}!BstC\_init@{BstC\_init}}
+\index{BstC\_init@{BstC\_init}!bstC.h@{bstC.h}}
+\doxysubsubsection{\texorpdfstring{BstC\_init()}{BstC\_init()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structBstC}{BstC}}$\ast$ Bst\+C\+\_\+init (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Initializes our BST. Root starts off as NULL until an element gets inserted with \+\_\+insert() 
+
+\begin{DoxyReturn}{Returns}
+Bst\+C$\ast$ Our main BST struct 
+\end{DoxyReturn}
+\mbox{\Hypertarget{bstC_8h_a7b4a4375f4b3598992374904142a9e70}\label{bstC_8h_a7b4a4375f4b3598992374904142a9e70}} 
+\index{bstC.h@{bstC.h}!BstC\_insert@{BstC\_insert}}
+\index{BstC\_insert@{BstC\_insert}!bstC.h@{bstC.h}}
+\doxysubsubsection{\texorpdfstring{BstC\_insert()}{BstC\_insert()}}
+{\footnotesize\ttfamily void Bst\+C\+\_\+insert (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structBstC}{BstC}} $\ast$}]{tree,  }\item[{signed int}]{elem }\end{DoxyParamCaption})}
+
+
+
+Inserts a new node into the tree. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em elem} & The number to add to the new node \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{bstC_8h_ad0b65c72a44955ab047a96f802d7ba2a}\label{bstC_8h_ad0b65c72a44955ab047a96f802d7ba2a}} 
+\index{bstC.h@{bstC.h}!BstC\_max@{BstC\_max}}
+\index{BstC\_max@{BstC\_max}!bstC.h@{bstC.h}}
+\doxysubsubsection{\texorpdfstring{BstC\_max()}{BstC\_max()}}
+{\footnotesize\ttfamily signed int Bst\+C\+\_\+max (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structBstC}{BstC}} $\ast$}]{tree }\end{DoxyParamCaption})}
+
+
+
+Returns the maximum value found in this BST. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em root} & The root node to search through \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+signed int 
+\end{DoxyReturn}
+\mbox{\Hypertarget{bstC_8h_a13c8119f3d287722c3a94ffe22e7be3e}\label{bstC_8h_a13c8119f3d287722c3a94ffe22e7be3e}} 
+\index{bstC.h@{bstC.h}!BstC\_min@{BstC\_min}}
+\index{BstC\_min@{BstC\_min}!bstC.h@{bstC.h}}
+\doxysubsubsection{\texorpdfstring{BstC\_min()}{BstC\_min()}}
+{\footnotesize\ttfamily signed int Bst\+C\+\_\+min (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structBstC}{BstC}} $\ast$}]{tree }\end{DoxyParamCaption})}
+
+
+
+Returns the minimum value found in this BST. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em root} & The root node to search through \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+signed int 
+\end{DoxyReturn}
+\mbox{\Hypertarget{bstC_8h_a527ddbe4b4214ba4744a776a74976d0c}\label{bstC_8h_a527ddbe4b4214ba4744a776a74976d0c}} 
+\index{bstC.h@{bstC.h}!BstC\_print\_inOrder@{BstC\_print\_inOrder}}
+\index{BstC\_print\_inOrder@{BstC\_print\_inOrder}!bstC.h@{bstC.h}}
+\doxysubsubsection{\texorpdfstring{BstC\_print\_inOrder()}{BstC\_print\_inOrder()}}
+{\footnotesize\ttfamily void Bst\+C\+\_\+print\+\_\+in\+Order (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structBstC}{BstC}} $\ast$}]{tree }\end{DoxyParamCaption})}
+
+
+
+Prints all the elements of the tree in order. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & The \mbox{\hyperlink{structBstC}{BstC}} pointer \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{bstC_8h_ac2c6643987d797660bddb80a93cff094}\label{bstC_8h_ac2c6643987d797660bddb80a93cff094}} 
+\index{bstC.h@{bstC.h}!BstC\_search@{BstC\_search}}
+\index{BstC\_search@{BstC\_search}!bstC.h@{bstC.h}}
+\doxysubsubsection{\texorpdfstring{BstC\_search()}{BstC\_search()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structBstCNode}{Bst\+CNode}}$\ast$ Bst\+C\+\_\+search (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structBstC}{BstC}} $\ast$}]{tree,  }\item[{signed int}]{key }\end{DoxyParamCaption})}
+
+
+
+Returns the node whose key matches the one provided by the user. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tree} & \\
+\hline
+{\em key} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Bst\+CNode$\ast$ 
+\end{DoxyReturn}

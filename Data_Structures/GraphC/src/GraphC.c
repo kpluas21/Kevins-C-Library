@@ -15,6 +15,12 @@
 #include<stdio.h>
 #include<string.h>
 
+/**
+ * @brief Helper function: Destroys ALL adjacent vertices of a given head(unique) Vertex. Mainly used by GraphC.h::GraphC_remove_vertex() 
+ * 
+ * @param head_node A pointer to the Vertex node in the contiguous array located in GraphC
+ */
+static void GraphC_destroy_list(Vertex *head_node);
 
 GraphC *GraphC_init(void) {
     GraphC *graph = malloc(sizeof(GraphC));
@@ -65,6 +71,57 @@ int GraphC_add_vertex(GraphC *graph, char x) {
 
 }
 
+/* Like any dynamic array , the contents of .vertices will have to be shifted over to close the gap left when removing a vertex */
+/* And when a vertex gets removed, the associated edge must also be removed.  */
+
+int GraphC_remove_vertex(GraphC *graph, char x) {
+    for (size_t i = 0; i < graph->num_of_vertices; i++) {
+        //We found the "root" vertex to be removed
+        if(x == (graph->vertices + i)->key) {
+            //destroy this root vertex's whole list of neighbors
+            GraphC_destroy_list( graph->vertices + i );
+
+            //overwrite the root vertex's spot in memory
+            memmove(graph->vertices + i, graph->vertices + i + 1, (sizeof(Vertex) * (graph->num_of_vertices - i)));
+            graph->num_of_vertices--;
+
+        }
+        //Go through all of the adj_vertices to the root vertex and remove all instances of the 
+        //removed vertex.
+        else {
+            Vertex *head = (graph->vertices + i)->next_adj_vertex;
+            if(head == NULL) {
+                //Skip over this vertex. No neighbors
+            }
+
+            //Handle the case where the head adj_vertex is the key.
+            else if(head->key == x) {
+                Vertex *temp = head;
+                (graph->vertices + i)->next_adj_vertex = head->next_adj_vertex;
+                free(temp);
+                graph->num_of_edges--;
+            }
+
+
+            else {
+                while(head->next_adj_vertex != NULL) {
+                    if(head->next_adj_vertex->key == x) {
+                        Vertex *temp = head->next_adj_vertex;
+                        head->next_adj_vertex = head->next_adj_vertex->next_adj_vertex;
+                        free(temp);
+                        graph->num_of_edges--;
+                        continue;
+                    }
+                    head = head->next_adj_vertex;
+                }
+            }
+
+        }
+    }
+    return 0;
+    
+}
+
 void GraphC_add_edge(GraphC *graph, char x, char y) { 
     int iX, iY; //Indices for our keys to be used for insertion
 
@@ -79,6 +136,11 @@ void GraphC_add_edge(GraphC *graph, char x, char y) {
     //Both vertices exists, add them to each other's adj_list
     Vertex *newVertex_X = malloc(sizeof(Vertex));
     Vertex *newVertex_Y = malloc(sizeof(Vertex));
+
+    if(newVertex_X == NULL || newVertex_Y == NULL) {
+        printf("Error: Cannot malloc newVertex in %s\n", __func__);
+        return;
+    }
 
     //This linked list is unordered, so to keep it fast, simply insert these new
     //vertices to the head of the list. 
@@ -100,14 +162,18 @@ void GraphC_add_edge(GraphC *graph, char x, char y) {
     graph->num_of_edges++;
 }
 
-int GraphC_vertex_exists(GraphC *graph, char key) {
+// int GraphC_remove_edge(GraphC *graph, char x, char y) {
+//     return 0;
+// }
+
+int GraphC_vertex_exists(GraphC *graph, char key)
+{
     for (size_t i = 0; i < graph->num_of_vertices; i++) {
         if(graph->vertices[i].key == key) {
             return i;
         }
     }
     return -1;
-    
 }
 
 void GraphC_print(GraphC *graph) {
@@ -123,6 +189,7 @@ void GraphC_print(GraphC *graph) {
         }
         printf("\n");
     }
+    printf("\n");
     
 }
 
@@ -147,4 +214,22 @@ void GraphC_destroy(GraphC **graph)
     free((*graph)->vertices);
     free((*graph));
     (*graph) = NULL;
+}
+
+//We pass the "node" thats inside the ARRAY, not the node pointed to by the array.
+void GraphC_destroy_list(Vertex *head_node) {
+    if(head_node->next_adj_vertex == NULL) {
+        return; //Covers vertices without any neighbors
+    }
+
+    //If there are neighbors
+    Vertex *current_node = head_node->next_adj_vertex;
+    Vertex *next_node;
+    while(current_node != NULL) {
+        next_node = current_node->next_adj_vertex;
+        free(current_node);
+        current_node = next_node;
+    }
+
+    return;
 }

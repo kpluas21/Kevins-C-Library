@@ -1,0 +1,248 @@
+\hypertarget{DynamiC_8c}{}\doxysection{Data\+\_\+\+Structures/\+Dynami\+C/src/\+DynamiC.c File Reference}
+\label{DynamiC_8c}\index{Data\_Structures/DynamiC/src/DynamiC.c@{Data\_Structures/DynamiC/src/DynamiC.c}}
+
+
+Implementation of \mbox{\hyperlink{structDynamiC}{DynamiC}}.  
+
+
+{\ttfamily \#include \char`\"{}Dynami\+C.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+Include dependency graph for Dynami\+C.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{DynamiC_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structDynamiC}{DynamiC}} $\ast$ \mbox{\hyperlink{DynamiC_8c_ad8606d55b9cb283a4f848446d9163669}{Dynami\+C\+\_\+init}} (void $\ast$data, size\+\_\+t data\+\_\+size, size\+\_\+t num\+\_\+elems)
+\begin{DoxyCompactList}\small\item\em Initializes our dynamic array. \end{DoxyCompactList}\item 
+void $\ast$ \mbox{\hyperlink{DynamiC_8c_a5d45fde098aadb02481a4ed3534fb482}{Dynami\+C\+\_\+get}} (\mbox{\hyperlink{structDynamiC}{DynamiC}} $\ast$array, size\+\_\+t index)
+\begin{DoxyCompactList}\small\item\em Retrieves the element at the specified index. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{DynamiC_8c_aa6f27a0dc3df28f051c09aca0695d112}{Dynami\+C\+\_\+insert}} (\mbox{\hyperlink{structDynamiC}{DynamiC}} $\ast$array, void $\ast$elem, size\+\_\+t index)
+\begin{DoxyCompactList}\small\item\em Inserts an element at the chosen index. This effectively shifts all existing elements over. Automatically reallocates memory if needed. If index equals size, it will basically act as \+\_\+append() would. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{DynamiC_8c_abea8f34622962bbc9d871b91bc72eabe}{Dynami\+C\+\_\+find}} (\mbox{\hyperlink{structDynamiC}{DynamiC}} $\ast$array, void $\ast$data, int($\ast$Dynami\+C\+\_\+cmp)(const void $\ast$elem1, const void $\ast$elem2))
+\begin{DoxyCompactList}\small\item\em Attempts to linearly search through the array for the given data. Because of the generic nature of the array, a comparator function must be provided for this function to work with any data types. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{DynamiC_8c_a76201441ca0c75ddc00c0b720b9e9f41}{Dynami\+C\+\_\+resize}} (\mbox{\hyperlink{structDynamiC}{DynamiC}} $\ast$array)
+\begin{DoxyCompactList}\small\item\em Attempts to resize the array by doubling the current capacity and realloc\textquotesingle{}ing the pointer. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{DynamiC_8c_a16002f8f4c909dfa6eab51c62995971e}{Dynami\+C\+\_\+size}} (\mbox{\hyperlink{structDynamiC}{DynamiC}} $\ast$array)
+\begin{DoxyCompactList}\small\item\em Returns the number of elements currently in the array. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{DynamiC_8c_a106a046307b9b93652580edbaf641616}{Dynami\+C\+\_\+append}} (\mbox{\hyperlink{structDynamiC}{DynamiC}} $\ast$array, void $\ast$elem)
+\begin{DoxyCompactList}\small\item\em Appends the given element to the end of the array, automatically resizing the array if necessary. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{DynamiC_8c_a836ed8df3987f5e12785f3a2ff3ebf4a}{Dynami\+C\+\_\+delete}} (\mbox{\hyperlink{structDynamiC}{DynamiC}} $\ast$$\ast$array)
+\begin{DoxyCompactList}\small\item\em Frees up all memory used by the array including the struct itself. Pass a reference to the \mbox{\hyperlink{structDynamiC}{DynamiC}} pointer, that way everything will be NULL\textquotesingle{}d safely. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{DynamiC_8c_ae4226241f4d3e615e98c8bc0f485c012}{Dynami\+C\+\_\+remove}} (\mbox{\hyperlink{structDynamiC}{DynamiC}} $\ast$array, size\+\_\+t index)
+\begin{DoxyCompactList}\small\item\em Removes from the array a single element. Reduces the size of the array by 1 and closes the gap by shifting every element over by 1. The capacity remains unchanged after this operation. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{DynamiC_8c_a9fb39b89fe70436bc5d9bc0674b8b193}{Dynami\+C\+\_\+empty}} (\mbox{\hyperlink{structDynamiC}{DynamiC}} $\ast$array)
+\begin{DoxyCompactList}\small\item\em Clears out the entire array, reducing the size to 0. Does not change the capacity in any way. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Implementation of \mbox{\hyperlink{structDynamiC}{DynamiC}}. 
+
+\begin{DoxyAuthor}{Author}
+your name (\href{mailto:you@domain.com}{\texttt{ you@domain.\+com}}) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+0.\+2 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2023-\/04-\/04
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2023 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{DynamiC_8c_a106a046307b9b93652580edbaf641616}\label{DynamiC_8c_a106a046307b9b93652580edbaf641616}} 
+\index{DynamiC.c@{DynamiC.c}!DynamiC\_append@{DynamiC\_append}}
+\index{DynamiC\_append@{DynamiC\_append}!DynamiC.c@{DynamiC.c}}
+\doxysubsubsection{\texorpdfstring{DynamiC\_append()}{DynamiC\_append()}}
+{\footnotesize\ttfamily void Dynami\+C\+\_\+append (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structDynamiC}{DynamiC}} $\ast$}]{array,  }\item[{void $\ast$}]{elem }\end{DoxyParamCaption})}
+
+
+
+Appends the given element to the end of the array, automatically resizing the array if necessary. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em array} & The \mbox{\hyperlink{structDynamiC}{DynamiC}} pointer \\
+\hline
+{\em elem} & The element to be added \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{DynamiC_8c_a836ed8df3987f5e12785f3a2ff3ebf4a}\label{DynamiC_8c_a836ed8df3987f5e12785f3a2ff3ebf4a}} 
+\index{DynamiC.c@{DynamiC.c}!DynamiC\_delete@{DynamiC\_delete}}
+\index{DynamiC\_delete@{DynamiC\_delete}!DynamiC.c@{DynamiC.c}}
+\doxysubsubsection{\texorpdfstring{DynamiC\_delete()}{DynamiC\_delete()}}
+{\footnotesize\ttfamily void Dynami\+C\+\_\+delete (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structDynamiC}{DynamiC}} $\ast$$\ast$}]{array }\end{DoxyParamCaption})}
+
+
+
+Frees up all memory used by the array including the struct itself. Pass a reference to the \mbox{\hyperlink{structDynamiC}{DynamiC}} pointer, that way everything will be NULL\textquotesingle{}d safely. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em array} & A pointer to a \mbox{\hyperlink{structDynamiC}{DynamiC}} pointer \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{DynamiC_8c_a9fb39b89fe70436bc5d9bc0674b8b193}\label{DynamiC_8c_a9fb39b89fe70436bc5d9bc0674b8b193}} 
+\index{DynamiC.c@{DynamiC.c}!DynamiC\_empty@{DynamiC\_empty}}
+\index{DynamiC\_empty@{DynamiC\_empty}!DynamiC.c@{DynamiC.c}}
+\doxysubsubsection{\texorpdfstring{DynamiC\_empty()}{DynamiC\_empty()}}
+{\footnotesize\ttfamily void Dynami\+C\+\_\+empty (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structDynamiC}{DynamiC}} $\ast$}]{array }\end{DoxyParamCaption})}
+
+
+
+Clears out the entire array, reducing the size to 0. Does not change the capacity in any way. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em array} & The \mbox{\hyperlink{structDynamiC}{DynamiC}} pointer \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{DynamiC_8c_abea8f34622962bbc9d871b91bc72eabe}\label{DynamiC_8c_abea8f34622962bbc9d871b91bc72eabe}} 
+\index{DynamiC.c@{DynamiC.c}!DynamiC\_find@{DynamiC\_find}}
+\index{DynamiC\_find@{DynamiC\_find}!DynamiC.c@{DynamiC.c}}
+\doxysubsubsection{\texorpdfstring{DynamiC\_find()}{DynamiC\_find()}}
+{\footnotesize\ttfamily size\+\_\+t Dynami\+C\+\_\+find (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structDynamiC}{DynamiC}} $\ast$}]{array,  }\item[{void $\ast$}]{data,  }\item[{int($\ast$)(const void $\ast$elem1, const void $\ast$elem2)}]{Dynami\+C\+\_\+cmp }\end{DoxyParamCaption})}
+
+
+
+Attempts to linearly search through the array for the given data. Because of the generic nature of the array, a comparator function must be provided for this function to work with any data types. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em array} & The \mbox{\hyperlink{structDynamiC}{DynamiC}} pointer \\
+\hline
+{\em data} & The data to search for \\
+\hline
+{\em Dynami\+C\+\_\+cmp} & A pointer to a comparator function \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+size\+\_\+t The index where the data is located. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{DynamiC_8c_a5d45fde098aadb02481a4ed3534fb482}\label{DynamiC_8c_a5d45fde098aadb02481a4ed3534fb482}} 
+\index{DynamiC.c@{DynamiC.c}!DynamiC\_get@{DynamiC\_get}}
+\index{DynamiC\_get@{DynamiC\_get}!DynamiC.c@{DynamiC.c}}
+\doxysubsubsection{\texorpdfstring{DynamiC\_get()}{DynamiC\_get()}}
+{\footnotesize\ttfamily void$\ast$ Dynami\+C\+\_\+get (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structDynamiC}{DynamiC}} $\ast$}]{array,  }\item[{size\+\_\+t}]{index }\end{DoxyParamCaption})}
+
+
+
+Retrieves the element at the specified index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em array} & The \mbox{\hyperlink{structDynamiC}{DynamiC}} pointer \\
+\hline
+{\em index} & Index of the element \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void$\ast$ A void pointer that points to the result of this function call. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{DynamiC_8c_ad8606d55b9cb283a4f848446d9163669}\label{DynamiC_8c_ad8606d55b9cb283a4f848446d9163669}} 
+\index{DynamiC.c@{DynamiC.c}!DynamiC\_init@{DynamiC\_init}}
+\index{DynamiC\_init@{DynamiC\_init}!DynamiC.c@{DynamiC.c}}
+\doxysubsubsection{\texorpdfstring{DynamiC\_init()}{DynamiC\_init()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structDynamiC}{DynamiC}}$\ast$ Dynami\+C\+\_\+init (\begin{DoxyParamCaption}\item[{void $\ast$}]{data,  }\item[{size\+\_\+t}]{data\+\_\+size,  }\item[{size\+\_\+t}]{num\+\_\+elems }\end{DoxyParamCaption})}
+
+
+
+Initializes our dynamic array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The void pointer to our initial data. \\
+\hline
+{\em data\+\_\+size} & The size, in bytes, each element is. \\
+\hline
+{\em num\+\_\+elems} & The number of elements in our initial array/pointer \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Dynami\+C$\ast$ A pointer to your newly created dynamic array. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{DynamiC_8c_aa6f27a0dc3df28f051c09aca0695d112}\label{DynamiC_8c_aa6f27a0dc3df28f051c09aca0695d112}} 
+\index{DynamiC.c@{DynamiC.c}!DynamiC\_insert@{DynamiC\_insert}}
+\index{DynamiC\_insert@{DynamiC\_insert}!DynamiC.c@{DynamiC.c}}
+\doxysubsubsection{\texorpdfstring{DynamiC\_insert()}{DynamiC\_insert()}}
+{\footnotesize\ttfamily int Dynami\+C\+\_\+insert (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structDynamiC}{DynamiC}} $\ast$}]{array,  }\item[{void $\ast$}]{elem,  }\item[{size\+\_\+t}]{index }\end{DoxyParamCaption})}
+
+
+
+Inserts an element at the chosen index. This effectively shifts all existing elements over. Automatically reallocates memory if needed. If index equals size, it will basically act as \+\_\+append() would. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em array} & The \mbox{\hyperlink{structDynamiC}{DynamiC}} pointer \\
+\hline
+{\em elem} & The element to be inserted \\
+\hline
+{\em index} & The location where the element is to be inserted \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int Returns 0 if successful, $<$0 if error encountered. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{DynamiC_8c_ae4226241f4d3e615e98c8bc0f485c012}\label{DynamiC_8c_ae4226241f4d3e615e98c8bc0f485c012}} 
+\index{DynamiC.c@{DynamiC.c}!DynamiC\_remove@{DynamiC\_remove}}
+\index{DynamiC\_remove@{DynamiC\_remove}!DynamiC.c@{DynamiC.c}}
+\doxysubsubsection{\texorpdfstring{DynamiC\_remove()}{DynamiC\_remove()}}
+{\footnotesize\ttfamily void Dynami\+C\+\_\+remove (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structDynamiC}{DynamiC}} $\ast$}]{array,  }\item[{size\+\_\+t}]{index }\end{DoxyParamCaption})}
+
+
+
+Removes from the array a single element. Reduces the size of the array by 1 and closes the gap by shifting every element over by 1. The capacity remains unchanged after this operation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em array} & The \mbox{\hyperlink{structDynamiC}{DynamiC}} pointer \\
+\hline
+{\em index} & The index of the element \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{DynamiC_8c_a76201441ca0c75ddc00c0b720b9e9f41}\label{DynamiC_8c_a76201441ca0c75ddc00c0b720b9e9f41}} 
+\index{DynamiC.c@{DynamiC.c}!DynamiC\_resize@{DynamiC\_resize}}
+\index{DynamiC\_resize@{DynamiC\_resize}!DynamiC.c@{DynamiC.c}}
+\doxysubsubsection{\texorpdfstring{DynamiC\_resize()}{DynamiC\_resize()}}
+{\footnotesize\ttfamily void Dynami\+C\+\_\+resize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structDynamiC}{DynamiC}} $\ast$}]{array }\end{DoxyParamCaption})}
+
+
+
+Attempts to resize the array by doubling the current capacity and realloc\textquotesingle{}ing the pointer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em array} & The \mbox{\hyperlink{structDynamiC}{DynamiC}} pointer \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Dynami\+C$\ast$ A pointer to the struct with the newly realloc\textquotesingle{}d data pointer. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{DynamiC_8c_a16002f8f4c909dfa6eab51c62995971e}\label{DynamiC_8c_a16002f8f4c909dfa6eab51c62995971e}} 
+\index{DynamiC.c@{DynamiC.c}!DynamiC\_size@{DynamiC\_size}}
+\index{DynamiC\_size@{DynamiC\_size}!DynamiC.c@{DynamiC.c}}
+\doxysubsubsection{\texorpdfstring{DynamiC\_size()}{DynamiC\_size()}}
+{\footnotesize\ttfamily size\+\_\+t Dynami\+C\+\_\+size (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structDynamiC}{DynamiC}} $\ast$}]{array }\end{DoxyParamCaption})}
+
+
+
+Returns the number of elements currently in the array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em array} & Our \mbox{\hyperlink{structDynamiC}{DynamiC}} pointer \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+size\+\_\+t The number of elements 
+\end{DoxyReturn}
