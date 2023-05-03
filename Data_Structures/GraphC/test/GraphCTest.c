@@ -21,6 +21,8 @@ void test_GraphC_init(void);
 void test_GraphC_add_vertex(void);
 void test_GraphC_add_edge(void);
 
+void test_GraphC_remove_vertex(void);
+
 void test_GraphC_destroy(void);
 
 int main(void) {
@@ -28,6 +30,7 @@ int main(void) {
     RUN_TEST(test_GraphC_init);
     RUN_TEST(test_GraphC_add_vertex);
     RUN_TEST(test_GraphC_add_edge);
+    RUN_TEST(test_GraphC_remove_vertex);
     RUN_TEST(test_GraphC_destroy);
     return UNITY_END();
 }
@@ -73,6 +76,9 @@ void test_GraphC_add_edge(void) {
     GraphC_print(graph);
 
     TEST_ASSERT_EQUAL_size_t(25, graph->num_of_edges);
+}
+
+void test_GraphC_remove_vertex(void) {
 }
 
 void test_GraphC_destroy(void) {
