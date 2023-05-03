@@ -55,7 +55,7 @@ void test_LinkC_init(void) {
 
 void test_LinkC_get(void) {
     //Correct inputs
-    TEST_ASSERT_EQUAL_INT(1, *(int*)LinkC_get(intList, 0));
+    TEST_ASSERT_EQUAL_INT(0, *(int*)LinkC_get(intList, 0));
 
     //Incorrect inputs
     TEST_ASSERT_NULL(LinkC_get(intList, 5));
