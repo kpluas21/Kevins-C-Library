@@ -68,24 +68,60 @@ $(function() {
 <div class="title">Vertex Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>The main nodes that make up the graph. Contains a pointer to another vertex as it's neighbor, if one exists.  
+ <a href="structVertex.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="GraphC_8h_source.html">GraphC.h</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for Vertex:</div>
 <div class="dyncontent">
 <div class="center"><img src="structVertex__coll__graph.png" border="0" usemap="#aVertex_coll__map" alt="Collaboration graph"/></div>
 <map name="aVertex_coll__map" id="aVertex_coll__map">
-<area shape="rect" title=" " alt="" coords="5,5,65,32"/>
+<area shape="rect" title="The main nodes that make up the graph. Contains a pointer to another vertex as it&#39;s neighbor,..." alt="" coords="5,5,65,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a8126bb7d36489e554873077bcd783e7c"><td class="memItemLeft" align="right" valign="top"><a id="a8126bb7d36489e554873077bcd783e7c"></a>
-char&#160;</td><td class="memItemRight" valign="bottom"><b>key</b></td></tr>
-<tr class="separator:a8126bb7d36489e554873077bcd783e7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab532a24c8d089b9e7f923361c8dad44a"><td class="memItemLeft" align="right" valign="top"><a id="ab532a24c8d089b9e7f923361c8dad44a"></a>
-<a class="el" href="structVertex.html">Vertex</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>next_adj_vertex</b></td></tr>
-<tr class="separator:ab532a24c8d089b9e7f923361c8dad44a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af787dc3fe26d50e1a278578b462863d6"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVertex.html#af787dc3fe26d50e1a278578b462863d6">key</a></td></tr>
+<tr class="separator:af787dc3fe26d50e1a278578b462863d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a667860d10597220af4e5a04fa724c839"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structVertex.html">Vertex</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structVertex.html#a667860d10597220af4e5a04fa724c839">next_adj_vertex</a></td></tr>
+<tr class="separator:a667860d10597220af4e5a04fa724c839"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The main nodes that make up the graph. Contains a pointer to another vertex as it's neighbor, if one exists. </p>
+</div><h2 class="groupheader">Field Documentation</h2>
+<a id="af787dc3fe26d50e1a278578b462863d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af787dc3fe26d50e1a278578b462863d6">&#9670;&nbsp;</a></span>key</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vertex::key</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Key is simply a label for the vertex to ensure no duplicates exist. </p>
+
+</div>
+</div>
+<a id="a667860d10597220af4e5a04fa724c839"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a667860d10597220af4e5a04fa724c839">&#9670;&nbsp;</a></span>next_adj_vertex</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vertex::next_adj_vertex</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>next_adj_vertex is a pointer to another <a class="el" href="structVertex.html" title="The main nodes that make up the graph. Contains a pointer to another vertex as it&#39;s neighbor,...">Vertex</a> object adjacent to this one. The pointers are structured as a linked list. </p>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li>Data_Structures/GraphC/src/<a class="el" href="GraphC_8h_source.html">GraphC.h</a></li>
 </ul>

@@ -137,6 +137,30 @@ int LinkC_find(LinkC *list, void *data);
  */
 void LinkC_delete(LinkC **list);
 
+
+/**
+ * @brief Removes a single node from the middle of the list at the 
+ * specified index
+ * 
+ * @param list The linked list
+ * @param index The index of the element to be removed
+ */
+void LinkC_remove_at_middle(LinkC *list, size_t index);
+
+/**
+ * @brief Removes the first node at the head of the list
+ * 
+ * @param list 
+ */
+void LinkC_remove_head(LinkC *list);
+
+/**
+ * @brief Removes the last node at the tail of the list
+ * 
+ * @param list 
+ */
+void LinkC_remove_tail(LinkC *list);
+
 /**
  * @brief Inserts a single element at the end of the list.
  * 

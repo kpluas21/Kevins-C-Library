@@ -15,9 +15,12 @@
 #include<stdio.h>
 #include<string.h>
 
-//Frees up the entire linked list associated with a head vertex. Because the head vertex is in an array the head will not be freed, 
+/**
+ * @brief Destroys ALL adjacent vertices of a given head(unique) Vertex. Mainly used by GraphC.h::GraphC_remove_vertex() 
+ * 
+ * @param head_node A pointer to the Vertex node in the contiguous array located in GraphC
+ */
 static void GraphC_destroy_list(Vertex *head_node);
-
 
 GraphC *GraphC_init(void) {
     GraphC *graph = malloc(sizeof(GraphC));
@@ -72,12 +75,16 @@ int GraphC_add_vertex(GraphC *graph, char x) {
 /* And when a vertex gets removed, the associated edge must also be removed.  */
 
 int GraphC_remove_vertex(GraphC *graph, char x) {
-    Vertex *traversal_ptr;
     for (size_t i = 0; i < graph->num_of_vertices; i++) {
-        if((graph->vertices + i)->key == x) {
-            GraphC_destroy_list(graph->vertices + i);
+        //We found the "root" vertex to be removed
+        if(x == (graph->vertices + i)->key) {
+            //destroy this root vertex's whole list of neighbors
+            GraphC_destroy_list( (graph->num_of_vertices + i) );
         }
 
+        //go through the list of nabors and remove any edge relating to 
+        //the removed vertex
+        
     }
     
 }
@@ -170,12 +177,21 @@ void GraphC_destroy(GraphC **graph)
     (*graph) = NULL;
 }
 
+//We pass the "node" thats inside the ARRAY, not the node pointed to by the array.
 void GraphC_destroy_list(Vertex *head_node) {
-    Vertex *current_node = head_node;
+    if(head_node->next_adj_vertex == NULL) {
+        return; //Covers vertices without any neighbors
+    }
+
+    //If there are neighbors
+    Vertex *current_node = head_node->next_adj_vertex;
     Vertex *next_node;
-    while(current_node->next_adj_vertex != NULL) {
+    while(current_node != NULL) {
         next_node = current_node->next_adj_vertex;
         free(current_node);
         current_node = next_node;
+
     }
+
+    return;
 }

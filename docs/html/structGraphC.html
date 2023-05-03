@@ -68,28 +68,78 @@ $(function() {
 <div class="title">GraphC Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>The main data structure used to interact and interface with the graph.  
+ <a href="structGraphC.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="GraphC_8h_source.html">GraphC.h</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for GraphC:</div>
 <div class="dyncontent">
 <div class="center"><img src="structGraphC__coll__graph.png" border="0" usemap="#aGraphC_coll__map" alt="Collaboration graph"/></div>
 <map name="aGraphC_coll__map" id="aGraphC_coll__map">
-<area shape="rect" title=" " alt="" coords="5,95,72,121"/>
-<area shape="rect" href="structVertex.html" title=" " alt="" coords="9,5,69,32"/>
+<area shape="rect" title="The main data structure used to interact and interface with the graph." alt="" coords="5,95,72,121"/>
+<area shape="rect" href="structVertex.html" title="The main nodes that make up the graph. Contains a pointer to another vertex as it&#39;s neighbor,..." alt="" coords="9,5,69,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:abbe30020f968303b2d42f6f5eff7eb79"><td class="memItemLeft" align="right" valign="top"><a id="abbe30020f968303b2d42f6f5eff7eb79"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>num_of_edges</b></td></tr>
-<tr class="separator:abbe30020f968303b2d42f6f5eff7eb79"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1237260a437190c72d05bc41d4ad9d87"><td class="memItemLeft" align="right" valign="top"><a id="a1237260a437190c72d05bc41d4ad9d87"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>num_of_vertices</b></td></tr>
-<tr class="separator:a1237260a437190c72d05bc41d4ad9d87"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2633e412bb48ba5aeada842339cfbf9a"><td class="memItemLeft" align="right" valign="top"><a id="a2633e412bb48ba5aeada842339cfbf9a"></a>
-<a class="el" href="structVertex.html">Vertex</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>vertices</b></td></tr>
-<tr class="separator:a2633e412bb48ba5aeada842339cfbf9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a2f6afd77c6cfb59f7161874e559298"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGraphC.html#a7a2f6afd77c6cfb59f7161874e559298">num_of_edges</a></td></tr>
+<tr class="separator:a7a2f6afd77c6cfb59f7161874e559298"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67858fc48fce3a3aa2f426eb5f66099b"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGraphC.html#a67858fc48fce3a3aa2f426eb5f66099b">num_of_vertices</a></td></tr>
+<tr class="separator:a67858fc48fce3a3aa2f426eb5f66099b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee8ae1a7b1a4c9a67887ad5eb14ec6bb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structVertex.html">Vertex</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGraphC.html#aee8ae1a7b1a4c9a67887ad5eb14ec6bb">vertices</a></td></tr>
+<tr class="separator:aee8ae1a7b1a4c9a67887ad5eb14ec6bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The main data structure used to interact and interface with the graph. </p>
+</div><h2 class="groupheader">Field Documentation</h2>
+<a id="a7a2f6afd77c6cfb59f7161874e559298"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a2f6afd77c6cfb59f7161874e559298">&#9670;&nbsp;</a></span>num_of_edges</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">GraphC::num_of_edges</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The number of edges contained in our graph. A single edge is defined as a connection between a pair of vertices. </p>
+
+</div>
+</div>
+<a id="a67858fc48fce3a3aa2f426eb5f66099b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67858fc48fce3a3aa2f426eb5f66099b">&#9670;&nbsp;</a></span>num_of_vertices</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">GraphC::num_of_vertices</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The number of vertices contained in our graph. A single vertex is defined as a data node or point that make up a graph. </p>
+
+</div>
+</div>
+<a id="aee8ae1a7b1a4c9a67887ad5eb14ec6bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee8ae1a7b1a4c9a67887ad5eb14ec6bb">&#9670;&nbsp;</a></span>vertices</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">GraphC::vertices</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>A pointer to the first vertex in our graph. Every unique instance of a vertex is stored in a contiguous array. It's easier to think of the graph as an array of linked lists. </p>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li>Data_Structures/GraphC/src/<a class="el" href="GraphC_8h_source.html">GraphC.h</a></li>
 </ul>
