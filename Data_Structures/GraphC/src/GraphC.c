@@ -80,6 +80,9 @@ int GraphC_remove_vertex(GraphC *graph, char x) {
         if(x == (graph->vertices + i)->key) {
             //destroy this root vertex's whole list of neighbors
             GraphC_destroy_list( graph->vertices + i );
+
+            //overwrite the root vertex's spot in memory
+            memmove(graph->vertices + i, graph->vertices + i + 1, (sizeof(Vertex) * (graph->num_of_vertices - i)));
             graph->num_of_vertices--;
 
         }
@@ -96,6 +99,7 @@ int GraphC_remove_vertex(GraphC *graph, char x) {
                 Vertex *temp = head;
                 (graph->vertices + i)->next_adj_vertex = head->next_adj_vertex;
                 free(temp);
+                graph->num_of_edges--;
             }
 
 
@@ -105,6 +109,8 @@ int GraphC_remove_vertex(GraphC *graph, char x) {
                         Vertex *temp = head->next_adj_vertex;
                         head->next_adj_vertex = head->next_adj_vertex->next_adj_vertex;
                         free(temp);
+                        graph->num_of_edges--;
+                        continue;
                     }
                     head = head->next_adj_vertex;
                 }
@@ -183,6 +189,7 @@ void GraphC_print(GraphC *graph) {
         }
         printf("\n");
     }
+    printf("\n");
     
 }
 

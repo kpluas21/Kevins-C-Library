@@ -30,6 +30,7 @@ int main(void) {
     RUN_TEST(test_GraphC_init);
     RUN_TEST(test_GraphC_add_vertex);
     RUN_TEST(test_GraphC_add_edge);
+    printf("\n\n");
     RUN_TEST(test_GraphC_remove_vertex);
     RUN_TEST(test_GraphC_destroy);
     return UNITY_END();
@@ -79,6 +80,30 @@ void test_GraphC_add_edge(void) {
 }
 
 void test_GraphC_remove_vertex(void) {
+    for (size_t i = 'a'; i <= 'z'; i++) {
+        GraphC_add_vertex(graph, i);
+    }
+
+    //Beginning
+    GraphC_remove_vertex(graph, 'a');
+    //Middle
+    GraphC_remove_vertex(graph, 'o');
+    //End
+    GraphC_remove_vertex(graph, 'z');
+
+    TEST_ASSERT_EQUAL_size_t(23, graph->num_of_vertices);
+
+    GraphC_add_edge(graph, 'b', 'c');
+    GraphC_add_edge(graph, 'b', 'd');
+
+    GraphC_print(graph);
+    GraphC_remove_vertex(graph, 'c');
+    GraphC_print(graph);
+
+    GraphC_remove_vertex(graph, 'd');
+    GraphC_print(graph);
+
+    
 }
 
 void test_GraphC_destroy(void) {
