@@ -86,9 +86,9 @@ int GraphC_remove_vertex(GraphC *graph, char x);
 /**
  * @brief Adds an edge from vertex x to vertex y if it does not exist already
  * 
- * @param graph 
- * @param x 
- * @param y 
+ * @param graph A GraphC pointer
+ * @param x The key for the 1st vertex
+ * @param y The key for the 2nd vertex
  */
 void GraphC_add_edge(GraphC *graph, char x, char y);
 
@@ -105,16 +105,16 @@ int GraphC_remove_edge(GraphC *graph, char x, char y);
 /**
  * @brief Searches for the vertex in the graph, returning its index in the list, -1 otherwise.
  * 
- * @param graph 
- * @param key 
- * @return size_t 
+ * @param graph A GraphC pointer
+ * @param key The key of the vertex
+ * @return The index where the vertex is located, -1 otherwise. 
  */
 int GraphC_vertex_exists(GraphC *graph, char key);
 
 /**
  * @brief Prints a list of all vertices and their adjacent neighbors.
  * 
- * @param graph 
+ * @param graph A GraphC pointer
  */
 void GraphC_print(GraphC *graph);
 
@@ -122,7 +122,7 @@ void GraphC_print(GraphC *graph);
  * @brief Frees up all memory associated with the graph and destroys all
  * associated objects 
  * 
- * @param graph 
+ * @param graph A GraphC pointer
  */
 void GraphC_destroy(GraphC **graph);
 
