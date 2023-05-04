@@ -1,18 +1,17 @@
 var searchData=
 [
-  ['datatype_14',['DataType',['../LinkC_8h.html#ad8ed01ff3ff33333d8e19db4d2818bb6',1,'LinkC.h']]],
-  ['dynamic_15',['DynamiC',['../structDynamiC.html',1,'DynamiC'],['../md_Data_Structures_DynamiC_README.html',1,'(Global Namespace)']]],
-  ['dynamic_2ec_16',['DynamiC.c',['../DynamiC_8c.html',1,'']]],
-  ['dynamic_2eh_17',['DynamiC.h',['../DynamiC_8h.html',1,'']]],
-  ['dynamic_5fappend_18',['DynamiC_append',['../DynamiC_8c.html#a106a046307b9b93652580edbaf641616',1,'DynamiC_append(DynamiC *array, void *elem):&#160;DynamiC.c'],['../DynamiC_8h.html#a106a046307b9b93652580edbaf641616',1,'DynamiC_append(DynamiC *array, void *elem):&#160;DynamiC.c']]],
-  ['dynamic_5fdelete_19',['DynamiC_delete',['../DynamiC_8c.html#a836ed8df3987f5e12785f3a2ff3ebf4a',1,'DynamiC_delete(DynamiC **array):&#160;DynamiC.c'],['../DynamiC_8h.html#a836ed8df3987f5e12785f3a2ff3ebf4a',1,'DynamiC_delete(DynamiC **array):&#160;DynamiC.c']]],
-  ['dynamic_5fempty_20',['DynamiC_empty',['../DynamiC_8c.html#a9fb39b89fe70436bc5d9bc0674b8b193',1,'DynamiC_empty(DynamiC *array):&#160;DynamiC.c'],['../DynamiC_8h.html#a9fb39b89fe70436bc5d9bc0674b8b193',1,'DynamiC_empty(DynamiC *array):&#160;DynamiC.c']]],
-  ['dynamic_5ffind_21',['DynamiC_find',['../DynamiC_8c.html#abea8f34622962bbc9d871b91bc72eabe',1,'DynamiC_find(DynamiC *array, void *data, int(*DynamiC_cmp)(const void *elem1, const void *elem2)):&#160;DynamiC.c'],['../DynamiC_8h.html#abea8f34622962bbc9d871b91bc72eabe',1,'DynamiC_find(DynamiC *array, void *data, int(*DynamiC_cmp)(const void *elem1, const void *elem2)):&#160;DynamiC.c']]],
-  ['dynamic_5fget_22',['DynamiC_get',['../DynamiC_8c.html#a5d45fde098aadb02481a4ed3534fb482',1,'DynamiC_get(DynamiC *array, size_t index):&#160;DynamiC.c'],['../DynamiC_8h.html#a5d45fde098aadb02481a4ed3534fb482',1,'DynamiC_get(DynamiC *array, size_t index):&#160;DynamiC.c']]],
-  ['dynamic_5finit_23',['DynamiC_init',['../DynamiC_8h.html#ad8606d55b9cb283a4f848446d9163669',1,'DynamiC_init(void *data, size_t data_size, size_t num_elems):&#160;DynamiC.c'],['../DynamiC_8c.html#ad8606d55b9cb283a4f848446d9163669',1,'DynamiC_init(void *data, size_t data_size, size_t num_elems):&#160;DynamiC.c']]],
-  ['dynamic_5finsert_24',['DynamiC_insert',['../DynamiC_8c.html#aa6f27a0dc3df28f051c09aca0695d112',1,'DynamiC_insert(DynamiC *array, void *elem, size_t index):&#160;DynamiC.c'],['../DynamiC_8h.html#aa6f27a0dc3df28f051c09aca0695d112',1,'DynamiC_insert(DynamiC *array, void *elem, size_t index):&#160;DynamiC.c']]],
-  ['dynamic_5fremove_25',['DynamiC_remove',['../DynamiC_8c.html#ae4226241f4d3e615e98c8bc0f485c012',1,'DynamiC_remove(DynamiC *array, size_t index):&#160;DynamiC.c'],['../DynamiC_8h.html#ae4226241f4d3e615e98c8bc0f485c012',1,'DynamiC_remove(DynamiC *array, size_t index):&#160;DynamiC.c']]],
-  ['dynamic_5fresize_26',['DynamiC_resize',['../DynamiC_8c.html#a76201441ca0c75ddc00c0b720b9e9f41',1,'DynamiC_resize(DynamiC *array):&#160;DynamiC.c'],['../DynamiC_8h.html#a76201441ca0c75ddc00c0b720b9e9f41',1,'DynamiC_resize(DynamiC *array):&#160;DynamiC.c']]],
-  ['dynamic_5fsize_27',['DynamiC_size',['../DynamiC_8c.html#a16002f8f4c909dfa6eab51c62995971e',1,'DynamiC_size(DynamiC *array):&#160;DynamiC.c'],['../DynamiC_8h.html#a16002f8f4c909dfa6eab51c62995971e',1,'DynamiC_size(DynamiC *array):&#160;DynamiC.c']]],
-  ['dynamictest_2ec_28',['DynamiCTest.c',['../DynamiCTest_8c.html',1,'']]]
+  ['bstc_1',['BstC',['../structBstC.html',1,'']]],
+  ['bstc_2',['bstC',['../md_Data_Structures_bstC_README.html',1,'']]],
+  ['bstc_2ec_3',['bstC.c',['../bstC_8c.html',1,'']]],
+  ['bstc_2eh_4',['bstC.h',['../bstC_8h.html',1,'']]],
+  ['bstc_5fdelete_5',['BstC_delete',['../bstC_8c.html#a4a270c04bac0af45e48092566a30f95c',1,'BstC_delete(BstC **tree):&#160;bstC.c'],['../bstC_8h.html#a4a270c04bac0af45e48092566a30f95c',1,'BstC_delete(BstC **tree):&#160;bstC.c']]],
+  ['bstc_5fheight_6',['BstC_height',['../bstC_8c.html#a7f033522b04515308d4fb2db797dd156',1,'BstC_height(BstC *tree):&#160;bstC.c'],['../bstC_8h.html#a7f033522b04515308d4fb2db797dd156',1,'BstC_height(BstC *tree):&#160;bstC.c']]],
+  ['bstc_5finit_7',['BstC_init',['../bstC_8c.html#ae1a42a02e7c943b47dd8ff23e21c4a9b',1,'BstC_init(void):&#160;bstC.c'],['../bstC_8h.html#ae1a42a02e7c943b47dd8ff23e21c4a9b',1,'BstC_init(void):&#160;bstC.c']]],
+  ['bstc_5finsert_8',['BstC_insert',['../bstC_8c.html#a7b4a4375f4b3598992374904142a9e70',1,'BstC_insert(BstC *tree, signed int elem):&#160;bstC.c'],['../bstC_8h.html#a7b4a4375f4b3598992374904142a9e70',1,'BstC_insert(BstC *tree, signed int elem):&#160;bstC.c']]],
+  ['bstc_5fmax_9',['BstC_max',['../bstC_8c.html#ad0b65c72a44955ab047a96f802d7ba2a',1,'BstC_max(BstC *tree):&#160;bstC.c'],['../bstC_8h.html#ad0b65c72a44955ab047a96f802d7ba2a',1,'BstC_max(BstC *tree):&#160;bstC.c']]],
+  ['bstc_5fmin_10',['BstC_min',['../bstC_8c.html#a13c8119f3d287722c3a94ffe22e7be3e',1,'BstC_min(BstC *tree):&#160;bstC.c'],['../bstC_8h.html#a13c8119f3d287722c3a94ffe22e7be3e',1,'BstC_min(BstC *tree):&#160;bstC.c']]],
+  ['bstc_5fprint_5finorder_11',['BstC_print_inOrder',['../bstC_8c.html#a527ddbe4b4214ba4744a776a74976d0c',1,'BstC_print_inOrder(BstC *tree):&#160;bstC.c'],['../bstC_8h.html#a527ddbe4b4214ba4744a776a74976d0c',1,'BstC_print_inOrder(BstC *tree):&#160;bstC.c']]],
+  ['bstc_5fsearch_12',['BstC_search',['../bstC_8c.html#ac2c6643987d797660bddb80a93cff094',1,'BstC_search(BstC *tree, signed int key):&#160;bstC.c'],['../bstC_8h.html#ac2c6643987d797660bddb80a93cff094',1,'BstC_search(BstC *tree, signed int key):&#160;bstC.c']]],
+  ['bstcnode_13',['BstCNode',['../structBstCNode.html',1,'']]],
+  ['bstctest_2ec_14',['bstCTest.c',['../bstCTest_8c.html',1,'']]]
 ];

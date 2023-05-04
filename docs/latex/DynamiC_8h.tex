@@ -28,13 +28,14 @@ struct \mbox{\hyperlink{structDynamiC}{DynamiC}}
 \doxysubsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
+\mbox{\Hypertarget{DynamiC_8h_a523d971724d531776bd68b46b1d9ac09}\label{DynamiC_8h_a523d971724d531776bd68b46b1d9ac09}} 
 \#define \mbox{\hyperlink{DynamiC_8h_a523d971724d531776bd68b46b1d9ac09}{FLTEPSILON}}~0.\+001
 \begin{DoxyCompactList}\small\item\em Global epsilons to be used when comparing floating-\/point values. If you need to change how precise the comparisons should be, change it here. Used in the following functions \+\_\+find() \+\_\+cmp() \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{DynamiC_8h_af4973b3c510aebce805cc83c65def4ef}\label{DynamiC_8h_af4973b3c510aebce805cc83c65def4ef}} 
 \#define {\bfseries DBEPSILON}~0.\+000001
 \item 
-\#define {\bfseries min}(a,  b)
-\end{DoxyCompactItemize}
+\#define \mbox{\hyperlink{DynamiC_8h_ac6afabdc09a49a433ee19d8a9486056d}{min}}(a,  b)
+\begin{DoxyCompactList}\small\item\em A small macro to determine the smaller of two numbers. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
@@ -107,27 +108,14 @@ Kevin Pluas (\href{mailto:kpluas21@gmail.com}{\texttt{ kpluas21@gmail.\+com}})
 \begin{DoxyCopyright}{Copyright}
 Copyright (c) 2023
 \end{DoxyCopyright}
-This structure uses mostly void pointers and regular arrays. It handles ints, chars, doubles and floats. Strings are to be implemented soonish... Everything you need should be in this one header file. Simply include it and call the \+\_\+init function. Make sure to include what type you are gonna use the array for. This was not tested for every outcome, for instance, if one should init an array of chars while labeling it as a float. Its up to YOU to know what you\textquotesingle{}re doing.
+This structure uses void pointers and regular arrays. It handles ints, chars, doubles and floats. Strings are to be implemented soonish... Everything you need should be in this one header file. Simply include it and call the \+\_\+init function. Make sure to include what type you are gonna use the array for. This was not tested for every outcome yet.
 
 Because this was created using LOTS of void pointers, expect to see and use a lot of casting, again, it should work if you\textquotesingle{}re casting appropriately.
 
 Dynami\+Cs are zero-\/based and are designed with fast insertion in mind. Appending should occur in constant time unless capacity was reached in which case it will automatically resize and attempt to append the element again. 
 
 \doxysubsection{Macro Definition Documentation}
-\mbox{\Hypertarget{DynamiC_8h_a523d971724d531776bd68b46b1d9ac09}\label{DynamiC_8h_a523d971724d531776bd68b46b1d9ac09}} 
-\index{DynamiC.h@{DynamiC.h}!FLTEPSILON@{FLTEPSILON}}
-\index{FLTEPSILON@{FLTEPSILON}!DynamiC.h@{DynamiC.h}}
-\doxysubsubsection{\texorpdfstring{FLTEPSILON}{FLTEPSILON}}
-{\footnotesize\ttfamily \#define FLTEPSILON~0.\+001}
-
-
-
-Global epsilons to be used when comparing floating-\/point values. If you need to change how precise the comparisons should be, change it here. Used in the following functions \+\_\+find() \+\_\+cmp() 
-
-
-\begin{DoxyItemize}
-\item 1) remove \+: Removes an element from the array , everything will have to be stitched together 
-\end{DoxyItemize}\mbox{\Hypertarget{DynamiC_8h_ac6afabdc09a49a433ee19d8a9486056d}\label{DynamiC_8h_ac6afabdc09a49a433ee19d8a9486056d}} 
+\mbox{\Hypertarget{DynamiC_8h_ac6afabdc09a49a433ee19d8a9486056d}\label{DynamiC_8h_ac6afabdc09a49a433ee19d8a9486056d}} 
 \index{DynamiC.h@{DynamiC.h}!min@{min}}
 \index{min@{min}!DynamiC.h@{DynamiC.h}}
 \doxysubsubsection{\texorpdfstring{min}{min}}
@@ -140,6 +128,10 @@ Global epsilons to be used when comparing floating-\/point values. If you need t
 \DoxyCodeLine{        \_a < \_b ? \_a : \_b; \})}
 
 \end{DoxyCode}
+
+
+A small macro to determine the smaller of two numbers. 
+
 
 
 \doxysubsection{Function Documentation}
@@ -252,7 +244,7 @@ Initializes our dynamic array.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-Dynami\+C$\ast$ A pointer to your newly created dynamic array. 
+A \mbox{\hyperlink{structDynamiC}{DynamiC}} pointer to a newly created array. 
 \end{DoxyReturn}
 \mbox{\Hypertarget{DynamiC_8h_aa6f27a0dc3df28f051c09aca0695d112}\label{DynamiC_8h_aa6f27a0dc3df28f051c09aca0695d112}} 
 \index{DynamiC.h@{DynamiC.h}!DynamiC\_insert@{DynamiC\_insert}}

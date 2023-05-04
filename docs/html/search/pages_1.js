@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['dynamic_158',['DynamiC',['../md_Data_Structures_DynamiC_README.html',1,'']]]
+  ['dynamic_172',['DynamiC',['../md_Data_Structures_DynamiC_README.html',1,'']]]
 ];

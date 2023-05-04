@@ -110,13 +110,15 @@ Data Structures</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a523d971724d531776bd68b46b1d9ac09"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="DynamiC_8h.html#a523d971724d531776bd68b46b1d9ac09">FLTEPSILON</a>&#160;&#160;&#160;0.001</td></tr>
-<tr class="memdesc:a523d971724d531776bd68b46b1d9ac09"><td class="mdescLeft">&#160;</td><td class="mdescRight">Global epsilons to be used when comparing floating-point values. If you need to change how precise the comparisons should be, change it here. Used in the following functions _find() _cmp()  <a href="DynamiC_8h.html#a523d971724d531776bd68b46b1d9ac09">More...</a><br /></td></tr>
+<tr class="memitem:a523d971724d531776bd68b46b1d9ac09"><td class="memItemLeft" align="right" valign="top"><a id="a523d971724d531776bd68b46b1d9ac09"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="DynamiC_8h.html#a523d971724d531776bd68b46b1d9ac09">FLTEPSILON</a>&#160;&#160;&#160;0.001</td></tr>
+<tr class="memdesc:a523d971724d531776bd68b46b1d9ac09"><td class="mdescLeft">&#160;</td><td class="mdescRight">Global epsilons to be used when comparing floating-point values. If you need to change how precise the comparisons should be, change it here. Used in the following functions _find() _cmp() <br /></td></tr>
 <tr class="separator:a523d971724d531776bd68b46b1d9ac09"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af4973b3c510aebce805cc83c65def4ef"><td class="memItemLeft" align="right" valign="top"><a id="af4973b3c510aebce805cc83c65def4ef"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>DBEPSILON</b>&#160;&#160;&#160;0.000001</td></tr>
 <tr class="separator:af4973b3c510aebce805cc83c65def4ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac6afabdc09a49a433ee19d8a9486056d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><b>min</b>(a,  b)</td></tr>
+<tr class="memitem:ac6afabdc09a49a433ee19d8a9486056d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="DynamiC_8h.html#ac6afabdc09a49a433ee19d8a9486056d">min</a>(a,  b)</td></tr>
+<tr class="memdesc:ac6afabdc09a49a433ee19d8a9486056d"><td class="mdescLeft">&#160;</td><td class="mdescRight">A small macro to determine the smaller of two numbers.  <a href="DynamiC_8h.html#ac6afabdc09a49a433ee19d8a9486056d">More...</a><br /></td></tr>
 <tr class="separator:ac6afabdc09a49a433ee19d8a9486056d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
@@ -190,29 +192,10 @@ Functions</h2></td></tr>
 <dl class="section version"><dt>Version</dt><dd>0.1 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2023-04-02</dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>Copyright (c) 2023</dd></dl>
-<p>This structure uses mostly void pointers and regular arrays. It handles ints, chars, doubles and floats. Strings are to be implemented soonish... Everything you need should be in this one header file. Simply include it and call the _init function. Make sure to include what type you are gonna use the array for. This was not tested for every outcome, for instance, if one should init an array of chars while labeling it as a float. Its up to YOU to know what you're doing.</p>
+<p>This structure uses void pointers and regular arrays. It handles ints, chars, doubles and floats. Strings are to be implemented soonish... Everything you need should be in this one header file. Simply include it and call the _init function. Make sure to include what type you are gonna use the array for. This was not tested for every outcome yet.</p>
 <p>Because this was created using LOTS of void pointers, expect to see and use a lot of casting, again, it should work if you're casting appropriately.</p>
 <p>DynamiCs are zero-based and are designed with fast insertion in mind. Appending should occur in constant time unless capacity was reached in which case it will automatically resize and attempt to append the element again. </p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a523d971724d531776bd68b46b1d9ac09"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a523d971724d531776bd68b46b1d9ac09">&#9670;&nbsp;</a></span>FLTEPSILON</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define FLTEPSILON&#160;&#160;&#160;0.001</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Global epsilons to be used when comparing floating-point values. If you need to change how precise the comparisons should be, change it here. Used in the following functions _find() _cmp() </p>
-<ul>
-<li>1) remove : Removes an element from the array , everything will have to be stitched together </li>
-</ul>
-
-</div>
-</div>
 <a id="ac6afabdc09a49a433ee19d8a9486056d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac6afabdc09a49a433ee19d8a9486056d">&#9670;&nbsp;</a></span>min</h2>
 
@@ -242,6 +225,8 @@ Functions</h2></td></tr>
 <div class="line">        __typeof__ (b) _b = (b); \</div>
 <div class="line">        _a &lt; _b ? _a : _b; })</div>
 </div><!-- fragment -->
+<p>A small macro to determine the smaller of two numbers. </p>
+
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
@@ -458,7 +443,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>DynamiC* A pointer to your newly created dynamic array. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="structDynamiC.html" title="Our main struct that contains all the data and metainfo about our dynamic array.">DynamiC</a> pointer to a newly created array. </dd></dl>
 
 </div>
 </div>

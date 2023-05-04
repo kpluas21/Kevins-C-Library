@@ -76,31 +76,65 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:ad3f3e13f30a45bf7445ce8363d5e4e59"><td class="memItemLeft" align="right" valign="top"><a id="ad3f3e13f30a45bf7445ce8363d5e4e59"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>data_size</b></td></tr>
-<tr class="separator:ad3f3e13f30a45bf7445ce8363d5e4e59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2da736ccf5ab953e9f1af33853d7a05"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structDynamiC.html#ae2da736ccf5ab953e9f1af33853d7a05">data_size</a></td></tr>
+<tr class="separator:ae2da736ccf5ab953e9f1af33853d7a05"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a38afcc2a2c7773d20b0dda84f0c1a8c1"><td class="memItemLeft" align="right" valign="top"><a id="a38afcc2a2c7773d20b0dda84f0c1a8c1"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>capacity</b></td></tr>
 <tr class="separator:a38afcc2a2c7773d20b0dda84f0c1a8c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a03c097abd67c3ecfdecddf8cf04b222a"><td class="memItemLeft" align="right" valign="top"><a id="a03c097abd67c3ecfdecddf8cf04b222a"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>alloc_data</b></td></tr>
-<tr class="separator:a03c097abd67c3ecfdecddf8cf04b222a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4672fe8439a7a8818f94ba4252bb2039"><td class="memItemLeft" align="right" valign="top"><a id="a4672fe8439a7a8818f94ba4252bb2039"></a>
-void *&#160;</td><td class="memItemRight" valign="bottom"><b>data</b></td></tr>
-<tr class="separator:a4672fe8439a7a8818f94ba4252bb2039"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbe6b45d16f1eb037816b8af56acd361"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structDynamiC.html#adbe6b45d16f1eb037816b8af56acd361">alloc_data</a></td></tr>
+<tr class="separator:adbe6b45d16f1eb037816b8af56acd361"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ba49a2d1beea074f46e94943e478c30"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structDynamiC.html#a9ba49a2d1beea074f46e94943e478c30">data</a></td></tr>
+<tr class="separator:a9ba49a2d1beea074f46e94943e478c30"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Our main struct that contains all the data and metainfo about our dynamic array. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">data_size</td><td>How large, in bytes, each element is </td></tr>
-    <tr><td class="paramname">capacity</td><td>Current max size of the array </td></tr>
-    <tr><td class="paramname">alloc_data</td><td>Amount of data currently allocated with actual data, in bytes </td></tr>
-    <tr><td class="paramname">data</td><td>The void pointer to our actual data </td></tr>
-  </table>
-  </dd>
-</dl>
-</div><hr/>The documentation for this struct was generated from the following file:<ul>
+</div><h2 class="groupheader">Field Documentation</h2>
+<a id="adbe6b45d16f1eb037816b8af56acd361"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbe6b45d16f1eb037816b8af56acd361">&#9670;&nbsp;</a></span>alloc_data</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DynamiC::alloc_data</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The amount of data, in bytes, currently allocated and written to with actual data. </p>
+
+</div>
+</div>
+<a id="a9ba49a2d1beea074f46e94943e478c30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ba49a2d1beea074f46e94943e478c30">&#9670;&nbsp;</a></span>data</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DynamiC::data</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>A pointer to the first element of our array. </p>
+
+</div>
+</div>
+<a id="ae2da736ccf5ab953e9f1af33853d7a05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2da736ccf5ab953e9f1af33853d7a05">&#9670;&nbsp;</a></span>data_size</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DynamiC::data_size</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>How large, in bytes, each element is. </p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
 <li>Data_Structures/DynamiC/src/<a class="el" href="DynamiC_8h_source.html">DynamiC.h</a></li>
 </ul>
 </div><!-- contents -->

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['readme_75',['README',['../md_Data_Structures_GraphC_README.html',1,'(Global Namespace)'],['../md_Data_Structures_lib_README.html',1,'(Global Namespace)']]]
+  ['min_78',['min',['../DynamiC_8h.html#ac6afabdc09a49a433ee19d8a9486056d',1,'DynamiC.h']]]
 ];

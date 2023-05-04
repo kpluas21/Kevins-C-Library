@@ -35,6 +35,12 @@
 *.i*86
 *.x86_64
 *.hex
+Data_Structures/LinkC/LinkCTest
+Data_Structures/bstC/bstCTest
+Data_Structures/HashC/HashCTest
+Data_Structures/GraphC/GraphC
+Data_Structures/DynamiC/DynamiCTest
+
 
 # Debug files
 *.dSYM/
@@ -50,11 +56,12 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+#JSON files
 .vscode/tasks.json
 .vscode/settings.json
-Data_Structures/DynamiC/DynamiCTest
 .vscode/c_cpp_properties.json
-Data_Structures/LinkC/LinkCTest
-Data_Structures/bstC/bstCTest
-Data_Structures/HashC/HashCTest
-Data_Structures/GraphC/GraphC
+
+#Doxygen generated source files
+/docs/html/
+/docs/latex/

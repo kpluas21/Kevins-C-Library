@@ -27,8 +27,6 @@ int \mbox{\hyperlink{GraphC_8c_ae49f35e372dbcf8550e2a70af3c757b0}{Graph\+C\+\_\+
 \begin{DoxyCompactList}\small\item\em Removes vertex x from the graph if it exists. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{GraphC_8c_a87f99e5233f567db38ec08e304ffc3aa}{Graph\+C\+\_\+add\+\_\+edge}} (\mbox{\hyperlink{structGraphC}{GraphC}} $\ast$graph, char x, char y)
 \begin{DoxyCompactList}\small\item\em Adds an edge from vertex x to vertex y if it does not exist already. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{GraphC_8c_a783c66022d78558dfcdde5de4fd7febd}{Graph\+C\+\_\+remove\+\_\+edge}} (\mbox{\hyperlink{structGraphC}{GraphC}} $\ast$graph, char x, char y)
-\begin{DoxyCompactList}\small\item\em Removes the edge from x to y, if it exists. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{GraphC_8c_a143f6aa1fab10cdcc1aac7df2f8930ad}{Graph\+C\+\_\+vertex\+\_\+exists}} (\mbox{\hyperlink{structGraphC}{GraphC}} $\ast$graph, char key)
 \begin{DoxyCompactList}\small\item\em Searches for the vertex in the graph, returning its index in the list, -\/1 otherwise. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{GraphC_8c_a794c53f45eec26fccf57be99f8d8fd54}{Graph\+C\+\_\+print}} (\mbox{\hyperlink{structGraphC}{GraphC}} $\ast$graph)
@@ -137,28 +135,6 @@ Prints a list of all vertices and their adjacent neighbors.
 {\em graph} & \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{GraphC_8c_a783c66022d78558dfcdde5de4fd7febd}\label{GraphC_8c_a783c66022d78558dfcdde5de4fd7febd}} 
-\index{GraphC.c@{GraphC.c}!GraphC\_remove\_edge@{GraphC\_remove\_edge}}
-\index{GraphC\_remove\_edge@{GraphC\_remove\_edge}!GraphC.c@{GraphC.c}}
-\doxysubsubsection{\texorpdfstring{GraphC\_remove\_edge()}{GraphC\_remove\_edge()}}
-{\footnotesize\ttfamily int Graph\+C\+\_\+remove\+\_\+edge (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGraphC}{GraphC}} $\ast$}]{graph,  }\item[{char}]{x,  }\item[{char}]{y }\end{DoxyParamCaption})}
-
-
-
-Removes the edge from x to y, if it exists. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em graph} & \\
-\hline
-{\em x} & \\
-\hline
-{\em y} & \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-int 0 if successful, Non zero otherwise. 
-\end{DoxyReturn}
 \mbox{\Hypertarget{GraphC_8c_ae49f35e372dbcf8550e2a70af3c757b0}\label{GraphC_8c_ae49f35e372dbcf8550e2a70af3c757b0}} 
 \index{GraphC.c@{GraphC.c}!GraphC\_remove\_vertex@{GraphC\_remove\_vertex}}
 \index{GraphC\_remove\_vertex@{GraphC\_remove\_vertex}!GraphC.c@{GraphC.c}}
