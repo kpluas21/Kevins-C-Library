@@ -1,0 +1,4 @@
+<map id="HashC_table" name="HashC_table">
+<area shape="rect" id="node1" title="Our main table struct which contains our pairs. This is the main object that users will interact with..." alt="" coords="5,95,109,121"/>
+<area shape="rect" id="node2" href="$structHashC__pair.html" title="Our table will be made out of pairs which is our main data unit. Contains a string as its key and an ..." alt="" coords="9,5,105,32"/>
+</map>

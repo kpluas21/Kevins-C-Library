@@ -1,0 +1,4 @@
+<map id="GraphC" name="GraphC">
+<area shape="rect" id="node1" title="The main data structure used to interact and interface with the graph." alt="" coords="5,95,76,121"/>
+<area shape="rect" id="node2" href="$structVertex.html" title="The main nodes that make up the graph. Contains a pointer to another vertex as it&#39;s neighbor,..." alt="" coords="9,5,73,32"/>
+</map>

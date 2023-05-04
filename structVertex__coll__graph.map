@@ -1,0 +1,3 @@
+<map id="Vertex" name="Vertex">
+<area shape="rect" id="node1" title="The main nodes that make up the graph. Contains a pointer to another vertex as it&#39;s neighbor,..." alt="" coords="5,5,69,32"/>
+</map>
