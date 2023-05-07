@@ -18,7 +18,7 @@
 
 static const char *status_string;
 
-LinkC *LinkC_init(size_t dataSize, void *data) {
+LinkC *LinkC_init(size_t data_size, void *data) {
     LinkC *list = malloc(sizeof(LinkC));
     LinkCNode *head = malloc(sizeof(LinkCNode));
 
@@ -27,16 +27,16 @@ LinkC *LinkC_init(size_t dataSize, void *data) {
         return NULL;
     }
 
-    head->data = malloc(dataSize);
+    head->data = malloc(data_size);
 
     if(head->data == NULL) {
         LinkC_error_report(E_OUT_OF_MEMORY);
         return NULL;
     }
-    memcpy(head->data, data, dataSize);
+    memcpy(head->data, data, data_size);
 
-    list->dataSize = dataSize;
-    list->alloc_Data = dataSize;
+    list->data_size = data_size;
+    list->alloc_Data = data_size;
 
     list->head = head;
     list->tail = head;
@@ -47,7 +47,7 @@ LinkC *LinkC_init(size_t dataSize, void *data) {
 }
 
 size_t LinkC_size(LinkC *list) {
-    return list->alloc_Data / list->dataSize;
+    return list->alloc_Data / list->data_size;
 }
 
 void LinkC_insert_at_end(LinkC *list, void* data) {
@@ -59,21 +59,21 @@ void LinkC_insert_at_end(LinkC *list, void* data) {
         return;
     }
 
-    newNode->data = malloc(list->dataSize);
+    newNode->data = malloc(list->data_size);
     if(newNode->data == NULL) {
         free(newNode);
         LinkC_error_report(E_OUT_OF_MEMORY);
         return;
     }
     
-    memcpy(newNode->data, data, list->dataSize);
+    memcpy(newNode->data, data, list->data_size);
 
     current->next = newNode;
     newNode->prev = current;
     newNode->next = NULL;
     list->tail = newNode;
 
-    list->alloc_Data += list->dataSize;
+    list->alloc_Data += list->data_size;
     
 }
 
@@ -96,7 +96,7 @@ int LinkC_find(LinkC *list, void *data) {
     int index = 0;
 
     while(current != NULL) {
-        if(memcmp(current->data, data, list->dataSize) == 0) {
+        if(memcmp(current->data, data, list->data_size) == 0) {
             return index;
         }
         current = current->next;
@@ -163,7 +163,7 @@ void LinkC_remove_at_middle(LinkC *list, size_t index) {
     free(temp->data);
     free(temp);
 
-    list->alloc_Data -= list->dataSize;
+    list->alloc_Data -= list->data_size;
 
     return;
 }
@@ -188,7 +188,7 @@ void LinkC_remove_head(LinkC *list) {
         
     }
 
-    list->alloc_Data -= list->dataSize;
+    list->alloc_Data -= list->data_size;
     return;
 }
 
@@ -209,7 +209,7 @@ void LinkC_remove_tail(LinkC *list) {
         free(temp);
     }
 
-    list->alloc_Data -= list->dataSize;
+    list->alloc_Data -= list->data_size;
     return;
 }
 
@@ -221,14 +221,14 @@ void LinkC_insert_at_start(LinkC *list, void *data)
         return;
     }
     
-    newNode->data = malloc(list->dataSize);
+    newNode->data = malloc(list->data_size);
     if(newNode->data == NULL) {
         free(newNode);
         LinkC_error_report(E_OUT_OF_MEMORY);
         return;
     }
 
-    memcpy(newNode->data, data, list->dataSize);
+    memcpy(newNode->data, data, list->data_size);
 
     newNode->next = list->head;
     newNode->prev = NULL;
@@ -236,7 +236,7 @@ void LinkC_insert_at_start(LinkC *list, void *data)
     list->head->prev = newNode;
     list->head = newNode;
     
-    list->alloc_Data += list->dataSize;
+    list->alloc_Data += list->data_size;
     return;
 }
 
@@ -262,14 +262,14 @@ void LinkC_insert_at_index(LinkC *list, void *data, size_t index) {
         return;
     }
 
-    newNode->data = malloc(list->dataSize);
+    newNode->data = malloc(list->data_size);
     if(newNode->data == NULL) {
         free(newNode);
         LinkC_error_report(E_OUT_OF_MEMORY);
         return;
     }
 
-    memcpy(newNode->data, data, list->dataSize);
+    memcpy(newNode->data, data, list->data_size);
 
     size_t currIndex = 0;
     while(currIndex != index) {
