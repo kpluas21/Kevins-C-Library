@@ -1,5 +1,5 @@
-#ifndef _LINKC_H
-#define _LINKC_H
+#ifndef LINKC_H
+#define LINKC_H
 /**
  * @file LinkC.h
  * @author Kevin Pluas (kpluas21@gmail.com)
@@ -58,15 +58,22 @@ typedef struct LinkCNode LinkCNode;
 
 /**
  * @struct LinkC
- * @brief The main struct that contains essential information about our linked list
- * @param type The data type of the elements
- * @param size The number of elements in our list
- * @param head A pointer to the first node in the list
- * @param tail A pointer to the last node in the list
+ * @brief The main object that users will use to interact with the linked list.
  * 
+ * @var LinkC::data_size
+ * The size, in bytes, each element is.
+ * 
+ * @var LinkC::alloc_data
+ * The amount of bytes used by the elements overall. Used for determining the amount of elements.
+ * 
+ * @var LinkC::head
+ * A pointer to the head, or the first element, of the linked list.
+ * 
+ * @var LinkC::tail
+ * A pointer to the tail, or the last element, of the linked list.
  */
 typedef struct LinkC {
-    size_t     dataSize;
+    size_t     data_size;
     size_t     alloc_Data;   
     LinkCNode *head;
     LinkCNode *tail;
@@ -74,10 +81,16 @@ typedef struct LinkC {
 
 /**
  * @struct LinkCNode
- * @brief The nodes that make up our linked list.
- * @param prev A pointer to the previous node in the list. NULL if the head node.
- * @param next A pointer to the next node in the list. NULL if the tail node.
- * @param data A pointer to the data contained in this node.
+ * @brief The nodes that make up our linked list. These are considered the actual "elements" of the linked list.
+ * 
+ * @var LinkCNode::prev
+ * A pointer to the previous node in the linked list
+ * 
+ * @var LinkCNode::next
+ * A pointer to the next node in the linked list
+ * 
+ * @var LinkCNode::data
+ * A pointer to the actual data contained in the node.
  * 
  */
 typedef struct LinkCNode {
@@ -90,11 +103,11 @@ typedef struct LinkCNode {
 /**
  * @brief Initializes our linked list. 
  * 
- * @param dataSize The size, in bytes, of each elements.
+ * @param data_size The size, in bytes, of each elements.
  * @param data A pointer to our initial data.
  * @return LinkC* 
  */
-LinkC *LinkC_init(size_t dataSize, void *data);
+LinkC *LinkC_init(size_t data_size, void *data);
 
 /**
  * @brief Returns the number of elements in the array
@@ -186,4 +199,4 @@ void LinkC_insert_at_index(LinkC *list, void *data, size_t index);
  */
 void LinkC_error_report(ErrorCode code);
 
-#endif //_LINK_C
+#endif //LINK_C
