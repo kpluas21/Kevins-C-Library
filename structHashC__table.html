@@ -68,36 +68,75 @@ $(function() {
 <div class="title">HashC_table Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>Our main table struct which contains our pairs. This is the main object that users will interact with.  
- <a href="structHashC__table.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="HashC_8h_source.html">HashC.h</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for HashC_table:</div>
 <div class="dyncontent">
 <div class="center"><img src="structHashC__table__coll__graph.png" border="0" usemap="#aHashC__table_coll__map" alt="Collaboration graph"/></div>
 <map name="aHashC__table_coll__map" id="aHashC__table_coll__map">
-<area shape="rect" title="Our main table struct which contains our pairs. This is the main object that users will interact with..." alt="" coords="5,95,109,121"/>
-<area shape="rect" href="structHashC__pair.html" title="Our table will be made out of pairs which is our main data unit. Contains a string as its key and an ..." alt="" coords="9,5,105,32"/>
+<area shape="rect" title=" " alt="" coords="5,95,109,121"/>
+<area shape="rect" href="structHashC__pair.html" title=" " alt="" coords="9,5,105,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a72dfaa931d004d510c8d3703d52d5316"><td class="memItemLeft" align="right" valign="top"><a id="a72dfaa931d004d510c8d3703d52d5316"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>max_size</b></td></tr>
-<tr class="separator:a72dfaa931d004d510c8d3703d52d5316"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a87fd80e77780859323a1ce1a3525e4ea"><td class="memItemLeft" align="right" valign="top"><a id="a87fd80e77780859323a1ce1a3525e4ea"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>size</b></td></tr>
-<tr class="separator:a87fd80e77780859323a1ce1a3525e4ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa7aa5baaab81b95a022a7f64b45053eb"><td class="memItemLeft" align="right" valign="top"><a id="aa7aa5baaab81b95a022a7f64b45053eb"></a>
-<a class="el" href="structHashC__pair.html">HashC_pair</a> **&#160;</td><td class="memItemRight" valign="bottom"><b>table</b></td></tr>
-<tr class="separator:aa7aa5baaab81b95a022a7f64b45053eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c02696556e9f3f22928d2fb93d34756"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structHashC__table.html#a7c02696556e9f3f22928d2fb93d34756">max_size</a></td></tr>
+<tr class="memdesc:a7c02696556e9f3f22928d2fb93d34756"><td class="mdescLeft">&#160;</td><td class="mdescRight">The main hash table object which contains our pairs. This is the main object that users will interact with.  <a href="structHashC__table.html#a7c02696556e9f3f22928d2fb93d34756">More...</a><br /></td></tr>
+<tr class="separator:a7c02696556e9f3f22928d2fb93d34756"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36cb1e8b55ede7a64fe13ef76e324feb"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structHashC__table.html#a36cb1e8b55ede7a64fe13ef76e324feb">size</a></td></tr>
+<tr class="separator:a36cb1e8b55ede7a64fe13ef76e324feb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63035b27c8b4c67dab2a1eb4b6cb28d8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structHashC__pair.html">HashC_pair</a> **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structHashC__table.html#a63035b27c8b4c67dab2a1eb4b6cb28d8">table</a></td></tr>
+<tr class="separator:a63035b27c8b4c67dab2a1eb4b6cb28d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Our main table struct which contains our pairs. This is the main object that users will interact with. </p>
-</div><hr/>The documentation for this struct was generated from the following file:<ul>
+<h2 class="groupheader">Field Documentation</h2>
+<a id="a7c02696556e9f3f22928d2fb93d34756"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c02696556e9f3f22928d2fb93d34756">&#9670;&nbsp;</a></span>max_size</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">HashC_table::max_size</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The main hash table object which contains our pairs. This is the main object that users will interact with. </p>
+<p>The maximum amount of key-value pairs allowed in the hash table. The default is 300 and this can be changed by modifying the DEFAULT_SIZE variable. </p>
+
+</div>
+</div>
+<a id="a36cb1e8b55ede7a64fe13ef76e324feb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36cb1e8b55ede7a64fe13ef76e324feb">&#9670;&nbsp;</a></span>size</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">HashC_table::size</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The amount of key-value pairs currently in the table </p>
+
+</div>
+</div>
+<a id="a63035b27c8b4c67dab2a1eb4b6cb28d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63035b27c8b4c67dab2a1eb4b6cb28d8">&#9670;&nbsp;</a></span>table</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">HashC_table::table</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Pointer to a pointer of a <a class="el" href="structHashC__pair.html">HashC_pair</a> object, in other words, it's a pointer to an array of HashC_pairs. </p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
 <li>Data_Structures/HashC/src/<a class="el" href="HashC_8h_source.html">HashC.h</a></li>
 </ul>
 </div><!-- contents -->

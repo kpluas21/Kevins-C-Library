@@ -72,7 +72,7 @@ Installation</h1>
 <p>Simply include the header file and make sure your build system points to the header and source file. </p><div class="fragment"><div class="line">#include&quot;HashC.h&quot;</div>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md8"></a>
 How to Use</h1>
-<p>To start using the hash table, you'll need to initialize a pointer to the <a class="el" href="structHashC__table.html" title="Our main table struct which contains our pairs. This is the main object that users will interact with...">HashC_table</a> struct like so </p><div class="fragment"><div class="line">HashC_table *hash_table = HashC_init();</div>
+<p>To start using the hash table, you'll need to initialize a pointer to the <a class="el" href="structHashC__table.html">HashC_table</a> struct like so </p><div class="fragment"><div class="line">HashC_table *hash_table = HashC_init();</div>
 </div><!-- fragment --><p> It will either return a valid pointer to a HashC table or NULL if anything goes wrong. The default size is 300 key-value pairs however that can be changed easily by simply changing the constant in the source file </p><div class="fragment"><div class="line">#define DEFAULT_SIZE 300</div>
 </div><!-- fragment --><p> From there, simply call the functions as needed. More information can be found in the header file as they are rather straight-forward. </p>
 </div></div><!-- contents -->
