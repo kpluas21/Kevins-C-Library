@@ -11,5 +11,6 @@ var searchData=
   ['hashc_5ftable_55',['HashC_table',['../HashC_8h.html#a59621cc0a60df85ea355cc49ddf95c77',1,'HashC_table():&#160;HashC.h'],['../structHashC__table.html',1,'HashC_table']]],
   ['hashc_5ftable_5fsize_56',['HashC_table_size',['../HashC_8c.html#a651e2556f957fce86fd6eebed13ad9a8',1,'HashC_table_size(HashC_table *table):&#160;HashC.c'],['../HashC_8h.html#a651e2556f957fce86fd6eebed13ad9a8',1,'HashC_table_size(HashC_table *table):&#160;HashC.c']]],
   ['hashctest_2ec_57',['HashCTest.c',['../HashCTest_8c.html',1,'']]],
-  ['helper_5ffunctions_2eh_58',['helper_functions.h',['../helper__functions_8h.html',1,'']]]
+  ['head_58',['head',['../structLinkC.html#a009ca2b630320c2ee7c5ce74e400b324',1,'LinkC']]],
+  ['helper_5ffunctions_2eh_59',['helper_functions.h',['../helper__functions_8h.html',1,'']]]
 ];

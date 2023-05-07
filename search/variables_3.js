@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['next_5fadj_5fvertex_160',['next_adj_vertex',['../structVertex.html#a667860d10597220af4e5a04fa724c839',1,'Vertex']]],
-  ['num_5fof_5fedges_161',['num_of_edges',['../structGraphC.html#a7a2f6afd77c6cfb59f7161874e559298',1,'GraphC']]],
-  ['num_5fof_5fvertices_162',['num_of_vertices',['../structGraphC.html#a67858fc48fce3a3aa2f426eb5f66099b',1,'GraphC']]]
+  ['key_164',['key',['../structVertex.html#af787dc3fe26d50e1a278578b462863d6',1,'Vertex']]]
 ];

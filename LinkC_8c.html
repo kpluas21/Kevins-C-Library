@@ -73,7 +73,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Implementation of <a class="el" href="structLinkC.html" title="The main struct that contains essential information about our linked list.">LinkC</a>.  
+<p>Implementation of <a class="el" href="structLinkC.html" title="The main object that users will use to interact with the linked list.">LinkC</a>.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
@@ -97,9 +97,9 @@ Include dependency graph for LinkC.c:</div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aa74e6b8524f2f902ff7a8854047e81b6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structLinkC.html">LinkC</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="LinkC_8c.html#aa74e6b8524f2f902ff7a8854047e81b6">LinkC_init</a> (size_t dataSize, void *data)</td></tr>
-<tr class="memdesc:aa74e6b8524f2f902ff7a8854047e81b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes our linked list.  <a href="LinkC_8c.html#aa74e6b8524f2f902ff7a8854047e81b6">More...</a><br /></td></tr>
-<tr class="separator:aa74e6b8524f2f902ff7a8854047e81b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa55bf28bc2a1462ed63092eaf97e140"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structLinkC.html">LinkC</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="LinkC_8c.html#afa55bf28bc2a1462ed63092eaf97e140">LinkC_init</a> (size_t data_size, void *data)</td></tr>
+<tr class="memdesc:afa55bf28bc2a1462ed63092eaf97e140"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes our linked list.  <a href="LinkC_8c.html#afa55bf28bc2a1462ed63092eaf97e140">More...</a><br /></td></tr>
+<tr class="separator:afa55bf28bc2a1462ed63092eaf97e140"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeeb832dcba0f0a2dd8542694b5e4b92f"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="LinkC_8c.html#aeeb832dcba0f0a2dd8542694b5e4b92f">LinkC_size</a> (<a class="el" href="structLinkC.html">LinkC</a> *list)</td></tr>
 <tr class="memdesc:aeeb832dcba0f0a2dd8542694b5e4b92f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of elements in the array.  <a href="LinkC_8c.html#aeeb832dcba0f0a2dd8542694b5e4b92f">More...</a><br /></td></tr>
 <tr class="separator:aeeb832dcba0f0a2dd8542694b5e4b92f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -135,7 +135,7 @@ Functions</h2></td></tr>
 <tr class="separator:aaed849d45a2b181c592ca705583cabe5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Implementation of <a class="el" href="structLinkC.html" title="The main struct that contains essential information about our linked list.">LinkC</a>. </p>
+<div class="textblock"><p>Implementation of <a class="el" href="structLinkC.html" title="The main object that users will use to interact with the linked list.">LinkC</a>. </p>
 <dl class="section author"><dt>Author</dt><dd>Kevin Pluas (<a href="#" onclick="location.href='mai'+'lto:'+'kpl'+'ua'+'s21'+'@g'+'mai'+'l.'+'com'; return false;">kplua<span style="display: none;">.nosp@m.</span>s21@<span style="display: none;">.nosp@m.</span>gmail<span style="display: none;">.nosp@m.</span>.com</a>) </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>0.1 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2023-04-10</dd></dl>
@@ -160,7 +160,7 @@ Functions</h2></td></tr>
 <p>Frees up all memory used by our list and their respective pointers. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">list</td><td><a class="el" href="structLinkC.html" title="The main struct that contains essential information about our linked list.">LinkC</a> pointer to our list </td></tr>
+    <tr><td class="paramname">list</td><td><a class="el" href="structLinkC.html" title="The main object that users will use to interact with the linked list.">LinkC</a> pointer to our list </td></tr>
   </table>
   </dd>
 </dl>
@@ -223,7 +223,7 @@ Functions</h2></td></tr>
 <p>Attempts to find the specified data in our list. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">list</td><td><a class="el" href="structLinkC.html" title="The main struct that contains essential information about our linked list.">LinkC</a> pointer to our list </td></tr>
+    <tr><td class="paramname">list</td><td><a class="el" href="structLinkC.html" title="The main object that users will use to interact with the linked list.">LinkC</a> pointer to our list </td></tr>
     <tr><td class="paramname">data</td><td>Void pointer to the item we want to find </td></tr>
   </table>
   </dd>
@@ -261,7 +261,7 @@ Functions</h2></td></tr>
 <p>Retrieves the data at the index specified. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">list</td><td><a class="el" href="structLinkC.html" title="The main struct that contains essential information about our linked list.">LinkC</a> pointer to our list </td></tr>
+    <tr><td class="paramname">list</td><td><a class="el" href="structLinkC.html" title="The main object that users will use to interact with the linked list.">LinkC</a> pointer to our list </td></tr>
     <tr><td class="paramname">indexOfElem</td><td>Index to search for our data </td></tr>
   </table>
   </dd>
@@ -270,8 +270,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aa74e6b8524f2f902ff7a8854047e81b6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa74e6b8524f2f902ff7a8854047e81b6">&#9670;&nbsp;</a></span>LinkC_init()</h2>
+<a id="afa55bf28bc2a1462ed63092eaf97e140"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa55bf28bc2a1462ed63092eaf97e140">&#9670;&nbsp;</a></span>LinkC_init()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -280,7 +280,7 @@ Functions</h2></td></tr>
           <td class="memname"><a class="el" href="structLinkC.html">LinkC</a>* LinkC_init </td>
           <td>(</td>
           <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>dataSize</em>, </td>
+          <td class="paramname"><em>data_size</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -299,7 +299,7 @@ Functions</h2></td></tr>
 <p>Initializes our linked list. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">dataSize</td><td>The size, in bytes, of each elements. </td></tr>
+    <tr><td class="paramname">data_size</td><td>The size, in bytes, of each elements. </td></tr>
     <tr><td class="paramname">data</td><td>A pointer to our initial data. </td></tr>
   </table>
   </dd>
@@ -337,7 +337,7 @@ Functions</h2></td></tr>
 <p>Inserts a single element at the end of the list. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">list</td><td><a class="el" href="structLinkC.html" title="The main struct that contains essential information about our linked list.">LinkC</a> pointer to our list </td></tr>
+    <tr><td class="paramname">list</td><td><a class="el" href="structLinkC.html" title="The main object that users will use to interact with the linked list.">LinkC</a> pointer to our list </td></tr>
     <tr><td class="paramname">data</td><td>Void pointer to our data </td></tr>
   </table>
   </dd>
@@ -380,7 +380,7 @@ Functions</h2></td></tr>
 <p>Inserts a single element at the specified index. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">list</td><td><a class="el" href="structLinkC.html" title="The main struct that contains essential information about our linked list.">LinkC</a> pointer to our list </td></tr>
+    <tr><td class="paramname">list</td><td><a class="el" href="structLinkC.html" title="The main object that users will use to interact with the linked list.">LinkC</a> pointer to our list </td></tr>
     <tr><td class="paramname">data</td><td>Void pointer to our data to be inserted </td></tr>
     <tr><td class="paramname">index</td><td>The index where the data is to be inserted </td></tr>
   </table>
@@ -418,7 +418,7 @@ Functions</h2></td></tr>
 <p>Inserts a single element at the end of the list. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">list</td><td><a class="el" href="structLinkC.html" title="The main struct that contains essential information about our linked list.">LinkC</a> pointer to our list </td></tr>
+    <tr><td class="paramname">list</td><td><a class="el" href="structLinkC.html" title="The main object that users will use to interact with the linked list.">LinkC</a> pointer to our list </td></tr>
     <tr><td class="paramname">data</td><td>Void pointer to our data to be inserted </td></tr>
   </table>
   </dd>
@@ -534,7 +534,7 @@ Functions</h2></td></tr>
 <p>Returns the number of elements in the array. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">list</td><td><a class="el" href="structLinkC.html" title="The main struct that contains essential information about our linked list.">LinkC</a> pointer to our list </td></tr>
+    <tr><td class="paramname">list</td><td><a class="el" href="structLinkC.html" title="The main object that users will use to interact with the linked list.">LinkC</a> pointer to our list </td></tr>
   </table>
   </dd>
 </dl>

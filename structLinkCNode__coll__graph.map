@@ -1,3 +1,3 @@
 <map id="LinkCNode" name="LinkCNode">
-<area shape="rect" id="node1" title="The nodes that make up our linked list." alt="" coords="5,7,97,33"/>
+<area shape="rect" id="node1" title="The nodes that make up our linked list. These are considered the actual &quot;elements&quot; of the linked list..." alt="" coords="5,7,97,33"/>
 </map>

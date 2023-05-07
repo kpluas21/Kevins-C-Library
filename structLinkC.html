@@ -69,7 +69,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>The main struct that contains essential information about our linked list.  
+<p>The main object that users will use to interact with the linked list.  
  <a href="structLinkC.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="LinkC_8h_source.html">LinkC.h</a>&gt;</code></p>
@@ -78,38 +78,72 @@ Collaboration diagram for LinkC:</div>
 <div class="dyncontent">
 <div class="center"><img src="structLinkC__coll__graph.png" border="0" usemap="#aLinkC_coll__map" alt="Collaboration graph"/></div>
 <map name="aLinkC_coll__map" id="aLinkC_coll__map">
-<area shape="rect" title="The main struct that contains essential information about our linked list." alt="" coords="22,112,81,139"/>
-<area shape="rect" href="structLinkCNode.html" title="The nodes that make up our linked list." alt="" coords="5,7,97,33"/>
+<area shape="rect" title="The main object that users will use to interact with the linked list." alt="" coords="22,112,81,139"/>
+<area shape="rect" href="structLinkCNode.html" title="The nodes that make up our linked list. These are considered the actual &quot;elements&quot; of the linked list..." alt="" coords="5,7,97,33"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:ae3baff9d0e54a82b3631aa7ea0c21d76"><td class="memItemLeft" align="right" valign="top"><a id="ae3baff9d0e54a82b3631aa7ea0c21d76"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>dataSize</b></td></tr>
-<tr class="separator:ae3baff9d0e54a82b3631aa7ea0c21d76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9b41f375b707fa4c2457a8fab927f21"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structLinkC.html#ad9b41f375b707fa4c2457a8fab927f21">data_size</a></td></tr>
+<tr class="separator:ad9b41f375b707fa4c2457a8fab927f21"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9347b5051c1eec80b0717bd65ebd170c"><td class="memItemLeft" align="right" valign="top"><a id="a9347b5051c1eec80b0717bd65ebd170c"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>alloc_Data</b></td></tr>
 <tr class="separator:a9347b5051c1eec80b0717bd65ebd170c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a69f675fe4f488875409a3e91b5ec6a55"><td class="memItemLeft" align="right" valign="top"><a id="a69f675fe4f488875409a3e91b5ec6a55"></a>
-<a class="el" href="structLinkCNode.html">LinkCNode</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>head</b></td></tr>
-<tr class="separator:a69f675fe4f488875409a3e91b5ec6a55"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aace9f36328266e5c35c256116fb3c163"><td class="memItemLeft" align="right" valign="top"><a id="aace9f36328266e5c35c256116fb3c163"></a>
-<a class="el" href="structLinkCNode.html">LinkCNode</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>tail</b></td></tr>
-<tr class="separator:aace9f36328266e5c35c256116fb3c163"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a009ca2b630320c2ee7c5ce74e400b324"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structLinkCNode.html">LinkCNode</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structLinkC.html#a009ca2b630320c2ee7c5ce74e400b324">head</a></td></tr>
+<tr class="separator:a009ca2b630320c2ee7c5ce74e400b324"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87627ca498a390fe775cee7d72cdde61"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structLinkCNode.html">LinkCNode</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structLinkC.html#a87627ca498a390fe775cee7d72cdde61">tail</a></td></tr>
+<tr class="separator:a87627ca498a390fe775cee7d72cdde61"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The main struct that contains essential information about our linked list. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">type</td><td>The data type of the elements </td></tr>
-    <tr><td class="paramname">size</td><td>The number of elements in our list </td></tr>
-    <tr><td class="paramname">head</td><td>A pointer to the first node in the list </td></tr>
-    <tr><td class="paramname">tail</td><td>A pointer to the last node in the list </td></tr>
-  </table>
-  </dd>
-</dl>
-</div><hr/>The documentation for this struct was generated from the following file:<ul>
+<div class="textblock"><p>The main object that users will use to interact with the linked list. </p>
+</div><h2 class="groupheader">Field Documentation</h2>
+<a id="ad9b41f375b707fa4c2457a8fab927f21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9b41f375b707fa4c2457a8fab927f21">&#9670;&nbsp;</a></span>data_size</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">LinkC::data_size</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The size, in bytes, each element is. </p>
+
+</div>
+</div>
+<a id="a009ca2b630320c2ee7c5ce74e400b324"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a009ca2b630320c2ee7c5ce74e400b324">&#9670;&nbsp;</a></span>head</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">LinkC::head</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>A pointer to the head, or the first element, of the linked list. </p>
+
+</div>
+</div>
+<a id="a87627ca498a390fe775cee7d72cdde61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87627ca498a390fe775cee7d72cdde61">&#9670;&nbsp;</a></span>tail</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">LinkC::tail</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>A pointer to the tail, or the last element, of the linked list. </p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
 <li>Data_Structures/LinkC/src/<a class="el" href="LinkC_8h_source.html">LinkC.h</a></li>
 </ul>
 </div><!-- contents -->

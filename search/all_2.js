@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['data_15',['data',['../structDynamiC.html#a9ba49a2d1beea074f46e94943e478c30',1,'DynamiC']]],
-  ['data_5fsize_16',['data_size',['../structDynamiC.html#ae2da736ccf5ab953e9f1af33853d7a05',1,'DynamiC']]],
+  ['data_15',['data',['../structDynamiC.html#a9ba49a2d1beea074f46e94943e478c30',1,'DynamiC::data()'],['../structLinkCNode.html#ad80feb149c1d6d5d6215eb33c626aab7',1,'LinkCNode::data()']]],
+  ['data_5fsize_16',['data_size',['../structDynamiC.html#ae2da736ccf5ab953e9f1af33853d7a05',1,'DynamiC::data_size()'],['../structLinkC.html#ad9b41f375b707fa4c2457a8fab927f21',1,'LinkC::data_size()']]],
   ['datatype_17',['DataType',['../LinkC_8h.html#ad8ed01ff3ff33333d8e19db4d2818bb6',1,'LinkC.h']]],
   ['dynamic_18',['DynamiC',['../structDynamiC.html',1,'DynamiC'],['../md_Data_Structures_DynamiC_README.html',1,'(Global Namespace)']]],
   ['dynamic_2ec_19',['DynamiC.c',['../DynamiC_8c.html',1,'']]],
