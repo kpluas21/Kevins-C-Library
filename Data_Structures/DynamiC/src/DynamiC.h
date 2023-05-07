@@ -102,14 +102,6 @@ size_t DynamiC_size(DynamiC *array);
  */
 void DynamiC_append(DynamiC *array, void *elem);
 
-// /**
-//  * @brief Displays the meta info about our dynamic array such as size, capacity, type, and contents so long as the size does
-//  * not exceed 1000.
-//  * 
-//  * @param array The DynamiC pointer
-//  */
-// void DynamiC_debug_info(DynamiC *array);
-
 /**
  * @brief Frees up all memory used by the array including the struct itself.
  * Pass a reference to the DynamiC pointer, that way everything will be 
@@ -136,16 +128,6 @@ void DynamiC_remove(DynamiC *array, size_t index);
 void DynamiC_empty(DynamiC *array);
 
 // /**
-//  * @brief Compares two elements in the array.
-//  * 
-//  * @param elem1 The first element
-//  * @param elem2 The second element
-//  * @return int 0 if elements are equal, <0 if x is less than y, 
-//  *         >0 if x is greater than y;
-//  */
-// int DynamiC_cmp(void *elem1, void *elem2);
-
-// /**
 //  * @brief Swaps the contents of two elements.
 //  * 
 //  * @param type The data type of the elements
@@ -159,7 +141,7 @@ void DynamiC_empty(DynamiC *array);
  * 
  * @param array The DynamiC pointer
  * @param index Index of the element
- * @return void* A void pointer that points to the result of this function call.
+ * @return A void pointer that points to the result of this function call. Remember to properly cast it before dereferencing it!
  */
 void *DynamiC_get(DynamiC *array, size_t index);
 
@@ -188,11 +170,9 @@ void *DynamiC_get(DynamiC *array, size_t index);
  * @param array The DynamiC pointer
  * @param elem The element to be inserted
  * @param index The location where the element is to be inserted
- * @return int Returns 0 if successful, <0 if error encountered.
+ * @return 0 if successful or a value less than 0 if error encountered.
  */
 int DynamiC_insert(DynamiC *array, void *elem, size_t index);
-
-
 
 /**
  * @brief Attempts to linearly search through the array for the given data. Because of 
@@ -202,7 +182,7 @@ int DynamiC_insert(DynamiC *array, void *elem, size_t index);
  * @param array The DynamiC pointer
  * @param data The data to search for 
  * @param DynamiC_cmp A pointer to a comparator function
- * @return size_t The index where the data is located.
+ * @return The index where the data is located.
  */
 size_t DynamiC_find(DynamiC *array, void *data, 
                     int (*DynamiC_cmp) (const void *elem1, const void *elem2));
@@ -211,8 +191,7 @@ size_t DynamiC_find(DynamiC *array, void *data,
  * @brief Attempts to resize the array by doubling the current capacity and realloc'ing 
  * the pointer
  * 
- * @param array The DynamiC pointer
- * @return DynamiC* A pointer to the struct with the newly realloc'd data pointer. 
+ * @param array The DynamiC pointer 
  */
 void DynamiC_resize(DynamiC *array);
 
