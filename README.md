@@ -8,7 +8,7 @@ More information on the programs can be found in their respective folders. Each 
 
 To view the most updated documentation, click on this [link](https://kpluas21.github.io/Kevins-C-Library/).  
 
-Alternatively, if you have doxygen installed you can your own nice looking documentation using a single command.
+Alternatively, if you have doxygen installed you can generate your own nice looking documentation using a single command.
 From the main directory, simply type 
 ```
 doxygen Doxyfile
