@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['value_178',['value',['../structHashC__pair.html#aad7ed25e6777be6b85a556bc4437772e',1,'HashC_pair']]],
-  ['vertices_179',['vertices',['../structGraphC.html#aee8ae1a7b1a4c9a67887ad5eb14ec6bb',1,'GraphC']]]
+  ['size_191',['size',['../structHashC__table.html#a36cb1e8b55ede7a64fe13ef76e324feb',1,'HashC_table']]]
 ];
