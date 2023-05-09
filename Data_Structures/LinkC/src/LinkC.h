@@ -40,19 +40,6 @@ static const char* const ERROR_STRINGS[] = {
     "E_UNKNOWN_ERROR",
 };
 
-/**
- * @enum DataType
- * @brief Constants used to label the data type of the elements in our linked list
- */
-typedef enum DataType {
-    INT,
-    CHAR,
-    FLOAT,
-    DOUBLE,
-    STRING,
-
-}DataType;
-
 //Forward declaration
 typedef struct LinkCNode LinkCNode;
 
