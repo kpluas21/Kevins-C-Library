@@ -14,12 +14,11 @@
 #include<stdio.h>
 
 StringC *StringC_init(const char *inital_string) {
-    StringC *string = malloc(sizeof(StringC));
-    if(!string) {
+    StringC *stringc = malloc(sizeof(StringC));
+    if(!stringc) {
         fprintf(stderr, "Error: Cannot allocate for StringC\n");
         return NULL;
-    }
+    }   
 
     
-
 }
