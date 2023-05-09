@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['key_182',['key',['../structVertex.html#af787dc3fe26d50e1a278578b462863d6',1,'Vertex::key()'],['../structHashC__pair.html#a7e253a8d26033580de85732d508e52ab',1,'HashC_pair::key()']]]
+  ['max_5fsize_169',['max_size',['../structHashC__table.html#a7c02696556e9f3f22928d2fb93d34756',1,'HashC_table']]]
 ];
