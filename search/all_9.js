@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['max_5fsize_79',['max_size',['../structHashC__table.html#a7c02696556e9f3f22928d2fb93d34756',1,'HashC_table']]],
-  ['min_80',['min',['../DynamiC_8h.html#ac6afabdc09a49a433ee19d8a9486056d',1,'DynamiC.h']]]
+  ['next_78',['next',['../structLinkCNode.html#a8f67a89b5892918e45a1633744a33e48',1,'LinkCNode']]],
+  ['next_5fadj_5fvertex_79',['next_adj_vertex',['../structVertex.html#a667860d10597220af4e5a04fa724c839',1,'Vertex']]],
+  ['num_5fof_5fedges_80',['num_of_edges',['../structGraphC.html#a7a2f6afd77c6cfb59f7161874e559298',1,'GraphC']]],
+  ['num_5fof_5fvertices_81',['num_of_vertices',['../structGraphC.html#a67858fc48fce3a3aa2f426eb5f66099b',1,'GraphC']]]
 ];

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['bstc_94',['BstC',['../structBstC.html',1,'']]],
-  ['bstcnode_95',['BstCNode',['../structBstCNode.html',1,'']]]
+  ['bstc_91',['BstC',['../structBstC.html',1,'']]],
+  ['bstcnode_92',['BstCNode',['../structBstCNode.html',1,'']]]
 ];
