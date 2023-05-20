@@ -13,24 +13,23 @@
 #include<stdlib.h>
 #include<string.h>
 #include<math.h>
+#include<errno.h>
 
 #include"LinkC.h"
-
-static const char *status_string;
 
 LinkC *LinkC_init(size_t data_size, void *data) {
     LinkC *list = malloc(sizeof(LinkC));
     LinkCNode *head = malloc(sizeof(LinkCNode));
 
     if(list == NULL || head == NULL) {
-        LinkC_error_report(E_OUT_OF_MEMORY);
+        errno = ENOMEM;
         return NULL;
     }
 
     head->data = malloc(data_size);
 
     if(head->data == NULL) {
-        LinkC_error_report(E_OUT_OF_MEMORY);
+        errno = ENOMEM;
         return NULL;
     }
     memcpy(head->data, data, data_size);
@@ -50,20 +49,20 @@ size_t LinkC_size(LinkC *list) {
     return list->alloc_Data / list->data_size;
 }
 
-void LinkC_insert_at_end(LinkC *list, void* data) {
+int LinkC_insert_at_end(LinkC *list, void* data) {
     LinkCNode *current = list->tail;
 
     LinkCNode *newNode = malloc(sizeof(LinkCNode));
     if(newNode == NULL) {
-        LinkC_error_report(E_OUT_OF_MEMORY);
-        return;
+        errno = ENOMEM;
+        return -1;
     }
 
     newNode->data = malloc(list->data_size);
     if(newNode->data == NULL) {
         free(newNode);
-        LinkC_error_report(E_OUT_OF_MEMORY);
-        return;
+        errno = ENOMEM;
+        return -1;
     }
     
     memcpy(newNode->data, data, list->data_size);
@@ -75,6 +74,7 @@ void LinkC_insert_at_end(LinkC *list, void* data) {
 
     list->alloc_Data += list->data_size;
     
+    return 0;
 }
 
 void *LinkC_get(LinkC *list, size_t indexOfElem) {
@@ -107,7 +107,7 @@ int LinkC_find(LinkC *list, void *data) {
 
 void LinkC_delete(LinkC **list) {
     if(list == NULL || (*list) == NULL) {
-        LinkC_error_report(E_INVALID_ARGUMENT);
+        errno = EINVAL;
         return; //Prevents double free's
     }
     
@@ -126,49 +126,49 @@ void LinkC_delete(LinkC **list) {
     
 }
 
-void LinkC_remove_at_middle(LinkC *list, size_t index) {
-    size_t curr_list_size = LinkC_size(list);
-    if(index >= curr_list_size) {
-        LinkC_error_report(E_OUT_OF_BOUNDS_INDEX);
-        return;
-    }
+// void LinkC_remove_at_middle(LinkC *list, size_t index) {
+//     size_t curr_list_size = LinkC_size(list);
+//     if(index >= curr_list_size) {
+//         errno = EINVAL;
+//         return;
+//     }
 
-    //if beginning or ending index is provided, simply use those dedicated
-    //functions.
+//     //if beginning or ending index is provided, simply use those dedicated
+//     //functions.
 
-    //REMOVE HEAD
-    else if(index == 0) {
-        LinkC_remove_head(list);
-        return;
-    }
-    //REMOVE TAIL
-    else if(index == curr_list_size - 1) {
-        LinkC_remove_tail(list);
-        return;
-    }
+//     //REMOVE HEAD
+//     else if(index == 0) {
+//         LinkC_remove_first(list);
+//         return;
+//     }
+//     //REMOVE TAIL
+//     else if(index == curr_list_size - 1) {
+//         LinkC_remove_last(list);
+//         return;
+//     }
 
-    //Now we remove a node at the middle. There should be a valid node
-    //on both sides of the one to be removed.
-    LinkCNode *traversal_ptr = list->head;
+//     //Now we remove a node at the middle. There should be a valid node
+//     //on both sides of the one to be removed.
+//     LinkCNode *traversal_ptr = list->head;
 
-    //Traverse until we reach right before the node to be removed.
-    for (size_t i = 0; i < index; i++) {
-        traversal_ptr = traversal_ptr->next;
-    }
-    //This node will be the one to be free'd
-    LinkCNode *temp = traversal_ptr->next;
+//     //Traverse until we reach right before the node to be removed.
+//     for (size_t i = 0; i < index; i++) {
+//         traversal_ptr = traversal_ptr->next;
+//     }
+//     //This node will be the one to be free'd
+//     LinkCNode *temp = traversal_ptr->next;
 
-    temp->prev->next = temp->next;
-    temp->next->prev = temp->prev;
-    free(temp->data);
-    free(temp);
+//     temp->prev->next = temp->next;
+//     temp->next->prev = temp->prev;
+//     free(temp->data);
+//     free(temp);
 
-    list->alloc_Data -= list->data_size;
+//     list->alloc_Data -= list->data_size;
 
-    return;
-}
+//     return;
+// }
 
-void LinkC_remove_head(LinkC *list) {
+void LinkC_remove_first(LinkC *list) {
     if(list->head == list->tail) {
         //Only one element in the list
         free(list->head->data);
@@ -192,7 +192,7 @@ void LinkC_remove_head(LinkC *list) {
     return;
 }
 
-void LinkC_remove_tail(LinkC *list) {
+void LinkC_remove_last(LinkC *list) {
     if(list->head == list->tail) {
         //Only one element in the list
         free(list->head->data);
@@ -213,19 +213,19 @@ void LinkC_remove_tail(LinkC *list) {
     return;
 }
 
-void LinkC_insert_at_start(LinkC *list, void *data)
+int LinkC_insert_at_start(LinkC *list, void *data)
 {
     LinkCNode *newNode = malloc(sizeof(LinkCNode));
     if(newNode == NULL) {
-        LinkC_error_report(E_OUT_OF_MEMORY);
-        return;
+        errno = ENOMEM;
+        return -1;
     }
     
     newNode->data = malloc(list->data_size);
     if(newNode->data == NULL) {
         free(newNode);
-        LinkC_error_report(E_OUT_OF_MEMORY);
-        return;
+        errno = ENOMEM;
+        return -1;
     }
 
     memcpy(newNode->data, data, list->data_size);
@@ -237,58 +237,5 @@ void LinkC_insert_at_start(LinkC *list, void *data)
     list->head = newNode;
     
     list->alloc_Data += list->data_size;
-    return;
-}
-
-void LinkC_insert_at_index(LinkC *list, void *data, size_t index) {
-    if(index == 0) {
-        LinkC_insert_at_start(list, data);
-        return;
-    }
-
-    if(index == LinkC_size(list)) {
-        LinkC_insert_at_end(list, data);
-        return;
-    }
-
-    if(index > LinkC_size(list)) {
-        return;
-    } 
-    LinkCNode *current = list->head;
-
-    LinkCNode *newNode = malloc(sizeof(LinkCNode));
-    if(newNode == NULL) {
-        LinkC_error_report(E_OUT_OF_MEMORY);
-        return;
-    }
-
-    newNode->data = malloc(list->data_size);
-    if(newNode->data == NULL) {
-        free(newNode);
-        LinkC_error_report(E_OUT_OF_MEMORY);
-        return;
-    }
-
-    memcpy(newNode->data, data, list->data_size);
-
-    size_t currIndex = 0;
-    while(currIndex != index) {
-        current = current->next;
-    }
-
-    newNode->next = current;
-    current->prev->next = newNode;
-    current->prev = newNode;
-
-    return;
-}
-
-void LinkC_error_report(ErrorCode code) {
-    const char *error_string = NULL;
-    if(code >= E_ERROR_COUNT) {
-        status_string = NULL;
-    }
-
-    error_string = ERROR_STRINGS[code];
-    status_string = error_string;
+    return 0;
 }

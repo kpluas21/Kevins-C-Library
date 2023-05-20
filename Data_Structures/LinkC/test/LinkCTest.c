@@ -90,16 +90,15 @@ void test_LinkC_remove(void) {
     }
     TEST_ASSERT_EQUAL_size_t(100, LinkC_size(intList));
     //Testing head removal
-    LinkC_remove_at_middle(intList, 0);
-
-    //Testing middle removal
-    LinkC_remove_at_middle(intList, LinkC_size(intList)/2);
+    LinkC_remove_first(intList);
+    
+    TEST_ASSERT_EQUAL_size_t(99, LinkC_size(intList));
 
     //Testing tail removal
-    LinkC_remove_at_middle(intList, LinkC_size(intList) - 1);
+    LinkC_remove_last(intList);
 
-    TEST_ASSERT_EQUAL_size_t(97, LinkC_size(intList));
-    
+    TEST_ASSERT_EQUAL_size_t(98, LinkC_size(intList));
+
 }
 
 void test_LinkC_insert_at_index(void) {
