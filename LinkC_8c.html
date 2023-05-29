@@ -105,6 +105,9 @@ Functions</h2></td></tr>
 <tr class="memitem:aeeb832dcba0f0a2dd8542694b5e4b92f"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="LinkC_8c.html#aeeb832dcba0f0a2dd8542694b5e4b92f">LinkC_size</a> (<a class="el" href="structLinkC.html">LinkC</a> *list)</td></tr>
 <tr class="memdesc:aeeb832dcba0f0a2dd8542694b5e4b92f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of elements in the array.  <a href="LinkC_8c.html#aeeb832dcba0f0a2dd8542694b5e4b92f">More...</a><br /></td></tr>
 <tr class="separator:aeeb832dcba0f0a2dd8542694b5e4b92f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ac552b4da131576ee0d978f9ee2e4c5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="LinkC_8c.html#a7ac552b4da131576ee0d978f9ee2e4c5">LinkC_insert_at_start</a> (<a class="el" href="structLinkC.html">LinkC</a> *list, void *data)</td></tr>
+<tr class="memdesc:a7ac552b4da131576ee0d978f9ee2e4c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserts a single element at the end of the list.  <a href="LinkC_8c.html#a7ac552b4da131576ee0d978f9ee2e4c5">More...</a><br /></td></tr>
+<tr class="separator:a7ac552b4da131576ee0d978f9ee2e4c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2287161a5ff90e115272a14797ece6af"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="LinkC_8c.html#a2287161a5ff90e115272a14797ece6af">LinkC_insert_at_end</a> (<a class="el" href="structLinkC.html">LinkC</a> *list, void *data)</td></tr>
 <tr class="memdesc:a2287161a5ff90e115272a14797ece6af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserts a single element at the end of the list.  <a href="LinkC_8c.html#a2287161a5ff90e115272a14797ece6af">More...</a><br /></td></tr>
 <tr class="separator:a2287161a5ff90e115272a14797ece6af"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -123,9 +126,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a63ce22b7e44840df71bf139536b9e016"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="LinkC_8c.html#a63ce22b7e44840df71bf139536b9e016">LinkC_remove_last</a> (<a class="el" href="structLinkC.html">LinkC</a> *list)</td></tr>
 <tr class="memdesc:a63ce22b7e44840df71bf139536b9e016"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the last node at the tail of the list.  <a href="LinkC_8c.html#a63ce22b7e44840df71bf139536b9e016">More...</a><br /></td></tr>
 <tr class="separator:a63ce22b7e44840df71bf139536b9e016"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7ac552b4da131576ee0d978f9ee2e4c5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="LinkC_8c.html#a7ac552b4da131576ee0d978f9ee2e4c5">LinkC_insert_at_start</a> (<a class="el" href="structLinkC.html">LinkC</a> *list, void *data)</td></tr>
-<tr class="memdesc:a7ac552b4da131576ee0d978f9ee2e4c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserts a single element at the end of the list.  <a href="LinkC_8c.html#a7ac552b4da131576ee0d978f9ee2e4c5">More...</a><br /></td></tr>
-<tr class="separator:a7ac552b4da131576ee0d978f9ee2e4c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad74ca037cd69adf2bafa5d56c95c7a7c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="LinkC_8c.html#ad74ca037cd69adf2bafa5d56c95c7a7c">LinkC_print</a> (<a class="el" href="structLinkC.html">LinkC</a> *list, void(*LinkC_print_data)(void *data))</td></tr>
+<tr class="memdesc:ad74ca037cd69adf2bafa5d56c95c7a7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Traverses through the list and calls a user provided function pointer to print the data.  <a href="LinkC_8c.html#ad74ca037cd69adf2bafa5d56c95c7a7c">More...</a><br /></td></tr>
+<tr class="separator:ad74ca037cd69adf2bafa5d56c95c7a7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Implementation of <a class="el" href="structLinkC.html" title="The main object that users will use to interact with the linked list.">LinkC</a>. </p>
@@ -342,6 +345,43 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">list</td><td><a class="el" href="structLinkC.html" title="The main object that users will use to interact with the linked list.">LinkC</a> pointer to our list </td></tr>
     <tr><td class="paramname">data</td><td>Void pointer to our data to be inserted </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ad74ca037cd69adf2bafa5d56c95c7a7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad74ca037cd69adf2bafa5d56c95c7a7c">&#9670;&nbsp;</a></span>LinkC_print()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LinkC_print </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structLinkC.html">LinkC</a> *&#160;</td>
+          <td class="paramname"><em>list</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void(*)(void *data)&#160;</td>
+          <td class="paramname"><em>LinkC_print_data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Traverses through the list and calls a user provided function pointer to print the data. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">list</td><td>A pointer to a valid <a class="el" href="structLinkC.html" title="The main object that users will use to interact with the linked list.">LinkC</a> object </td></tr>
+    <tr><td class="paramname">LinkC_print_data</td><td>A function pointer to a print function </td></tr>
   </table>
   </dd>
 </dl>
