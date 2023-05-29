@@ -139,6 +139,7 @@ void LinkC_remove_last(LinkC *list);
  * @brief Traverses through the list and calls a user provided function pointer to print the data.
  * 
  * @param list A pointer to a valid LinkC object
+ * @param LinkC_print_data A function pointer to a print function
  */
 void LinkC_print(LinkC *list, 
                 void (*LinkC_print_data) (void *data));

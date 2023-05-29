@@ -18,12 +18,14 @@
 #include"../../lib/unity.h"
 
 
+void LinkC_print_data(void *data);
+
 void test_LinkC_init(void);
 
 void test_LinkC_get(void);
 
 void test_LinkC_insert_at_end(void);
-void test_LinkC_insert_at_index(void);
+void test_LinkC_print(void);
 
 void test_LinkC_find(void);
 
@@ -44,6 +46,7 @@ int main(void) {
     RUN_TEST(test_LinkC_init);
     RUN_TEST(test_LinkC_get);
     RUN_TEST(test_LinkC_insert_at_end);
+    RUN_TEST(test_LinkC_print);
     RUN_TEST(test_LinkC_find);
     RUN_TEST(test_LinkC_remove);
     return UNITY_END();
@@ -69,8 +72,16 @@ void test_LinkC_insert_at_end(void) {
     TEST_ASSERT_EQUAL_size_t(100, LinkC_size(intList));
 }
 
-void test_LinkC_find(void) {
+void test_LinkC_print(void) {
     for (int i = 2; i < 101; i++) {
+        LinkC_insert_at_end(intList, &i);
+    }
+    
+    LinkC_print(intList, LinkC_print_data);
+}
+
+void test_LinkC_find(void) {
+    for (int i = 1; i < 101; i++) {
         LinkC_insert_at_end(intList, &i);
     }
     
@@ -101,10 +112,6 @@ void test_LinkC_remove(void) {
 
 }
 
-void test_LinkC_insert_at_index(void) {
-    
-}
-
 void setUp(void) {
     int i = 0;
 
@@ -116,4 +123,6 @@ void tearDown(void) {
     LinkC_delete(&intList);
 }
 
-
+void LinkC_print_data(void *data) {
+    printf("%d, ", *(int*)(data));
+}

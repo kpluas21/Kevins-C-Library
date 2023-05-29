@@ -49,6 +49,34 @@ size_t LinkC_size(LinkC *list) {
     return list->alloc_Data / list->data_size;
 }
 
+int LinkC_insert_at_start(LinkC *list, void *data)
+{
+    LinkCNode *newNode = malloc(sizeof(LinkCNode));
+    if(newNode == NULL) {
+        errno = ENOMEM;
+        return -1;
+    }
+    
+    newNode->data = malloc(list->data_size);
+    if(newNode->data == NULL) {
+        free(newNode);
+        errno = ENOMEM;
+        return -1;
+    }
+
+    memcpy(newNode->data, data, list->data_size);
+
+    newNode->next = list->head;
+    newNode->prev = NULL;
+
+    list->head->prev = newNode;
+    list->head = newNode;
+    
+    list->alloc_Data += list->data_size;
+    return 0;
+}
+
+
 int LinkC_insert_at_end(LinkC *list, void* data) {
     LinkCNode *current = list->tail;
 
@@ -126,47 +154,6 @@ void LinkC_delete(LinkC **list) {
     
 }
 
-// void LinkC_remove_at_middle(LinkC *list, size_t index) {
-//     size_t curr_list_size = LinkC_size(list);
-//     if(index >= curr_list_size) {
-//         errno = EINVAL;
-//         return;
-//     }
-
-//     //if beginning or ending index is provided, simply use those dedicated
-//     //functions.
-
-//     //REMOVE HEAD
-//     else if(index == 0) {
-//         LinkC_remove_first(list);
-//         return;
-//     }
-//     //REMOVE TAIL
-//     else if(index == curr_list_size - 1) {
-//         LinkC_remove_last(list);
-//         return;
-//     }
-
-//     //Now we remove a node at the middle. There should be a valid node
-//     //on both sides of the one to be removed.
-//     LinkCNode *traversal_ptr = list->head;
-
-//     //Traverse until we reach right before the node to be removed.
-//     for (size_t i = 0; i < index; i++) {
-//         traversal_ptr = traversal_ptr->next;
-//     }
-//     //This node will be the one to be free'd
-//     LinkCNode *temp = traversal_ptr->next;
-
-//     temp->prev->next = temp->next;
-//     temp->next->prev = temp->prev;
-//     free(temp->data);
-//     free(temp);
-
-//     list->alloc_Data -= list->data_size;
-
-//     return;
-// }
 
 void LinkC_remove_first(LinkC *list) {
     if(list->head == list->tail) {
@@ -213,29 +200,59 @@ void LinkC_remove_last(LinkC *list) {
     return;
 }
 
-int LinkC_insert_at_start(LinkC *list, void *data)
-{
-    LinkCNode *newNode = malloc(sizeof(LinkCNode));
-    if(newNode == NULL) {
-        errno = ENOMEM;
-        return -1;
-    }
+void LinkC_print(LinkC *list, void (*LinkC_print_data)(void *data)) {
+    LinkCNode *traversal_node = list->head;
     
-    newNode->data = malloc(list->data_size);
-    if(newNode->data == NULL) {
-        free(newNode);
-        errno = ENOMEM;
-        return -1;
+    while(traversal_node != NULL) {
+        (*LinkC_print_data) (traversal_node->data);
+        traversal_node = traversal_node->next;
     }
 
-    memcpy(newNode->data, data, list->data_size);
-
-    newNode->next = list->head;
-    newNode->prev = NULL;
-
-    list->head->prev = newNode;
-    list->head = newNode;
-    
-    list->alloc_Data += list->data_size;
-    return 0;
+    return;
 }
+
+
+//Archived. After implementing this, I was told it probably not a good idea since the whole thing with linked lists is iterating through a list, not necessarily 
+//indexing. So I ended up only implementing insertion/removal from the ends of the list. 
+
+// void LinkC_remove_at_middle(LinkC *list, size_t index) {
+//     size_t curr_list_size = LinkC_size(list);
+//     if(index >= curr_list_size) {
+//         errno = EINVAL;
+//         return;
+//     }
+
+//     //if beginning or ending index is provided, simply use those dedicated
+//     //functions.
+
+//     //REMOVE HEAD
+//     else if(index == 0) {
+//         LinkC_remove_first(list);
+//         return;
+//     }
+//     //REMOVE TAIL
+//     else if(index == curr_list_size - 1) {
+//         LinkC_remove_last(list);
+//         return;
+//     }
+
+//     //Now we remove a node at the middle. There should be a valid node
+//     //on both sides of the one to be removed.
+//     LinkCNode *traversal_ptr = list->head;
+
+//     //Traverse until we reach right before the node to be removed.
+//     for (size_t i = 0; i < index; i++) {
+//         traversal_ptr = traversal_ptr->next;
+//     }
+//     //This node will be the one to be free'd
+//     LinkCNode *temp = traversal_ptr->next;
+
+//     temp->prev->next = temp->next;
+//     temp->next->prev = temp->prev;
+//     free(temp->data);
+//     free(temp);
+
+//     list->alloc_Data -= list->data_size;
+
+//     return;
+// }
